@@ -1,0 +1,20 @@
+Family,Condition,Phase,Mean HR (bpm),RMSSD (ms),SDNN (ms),Total Power (ms²),LF/HF,Validity note,Synthesis note
+E4A paced,E4A_3pm,steady_state,58.13553830161477,55.26239295824691,131.37822603054363,10493.096098484459,17.468912394194806,"Slow breathing: LF/HF is band-shifted, use RMSSD / total power","Slow paced breathing: total power rises, LF/HF inflated by band migration"
+E4A paced,E4A_6pm,steady_state,60.148811520377805,60.4253738627376,91.27616482827868,6086.692990012851,11.54232888916748,"Slow breathing: LF/HF is band-shifted, use RMSSD / total power","Slow paced breathing: total power rises, LF/HF inflated by band migration"
+E1 posture,E1PRE,steady_state,52.95827349947825,106.69791209037056,93.95810518582344,4354.832101942713,0.23771585153298366,Standard steady-state HRV,Baseline vagal state
+E1 posture,E1A,steady_state,54.02286682939932,99.09840756552283,81.52357818851932,4321.925293073944,0.2788501905903505,Standard steady-state HRV,Baseline vagal state
+E1 posture,E1B,steady_state,56.097233543911905,61.111173606537335,56.614037327834495,2016.6289894429797,0.5356487634778364,Standard steady-state HRV,Posture-matched seated anchor
+E4A paced,E4A_12pm,steady_state,59.39980504515553,47.74217019381099,48.68421465365421,1754.315532172204,0.22483695139805304,Standard steady-state HRV,Respiratory control expands oscillation amplitude with stable mean HR
+E4A paced,E4A_9pm,steady_state,57.0150669670892,64.8574239150246,77.97812370985055,2380.6243946593368,0.84444098709773,"Slow breathing: LF/HF is band-shifted, use RMSSD / total power",Respiratory control expands oscillation amplitude with stable mean HR
+E4A paced,E4A_5pm,steady_state,59.88565512736016,53.93102590861364,95.93043345471422,8240.46687914613,17.45044203891334,"Slow breathing: LF/HF is band-shifted, use RMSSD / total power","Slow paced breathing: total power rises, LF/HF inflated by band migration"
+E1 posture,E1C,steady_state,79.67736782548256,25.19955796276965,41.78933381759084,1047.7489585113026,1.4416401179435634,Standard steady-state HRV,"Orthostatic load: HR up, RMSSD down"
+E2 breath-hold,Inspiratory,pre,58.68273423814124,49.365943917985405,,,,Short segment: no frequency-domain HRV reported,Transient response
+E2 breath-hold,Inspiratory,hold,70.2221976041057,44.443794783659335,,,,Short segment: no frequency-domain HRV reported,Inspiratory hold raises HR strongly
+E2 breath-hold,Inspiratory,recovery,71.96859843560998,46.10131228019401,,,,Short segment: no frequency-domain HRV reported,Transient response
+E2 breath-hold,Expiratory,pre,57.85009710089189,47.10341243516953,,,,Short segment: no frequency-domain HRV reported,Transient response
+E2 breath-hold,Expiratory,hold,59.29946102466397,57.23718043230062,,,,Short segment: no frequency-domain HRV reported,Transient response
+E2 breath-hold,Expiratory,recovery,58.313299644893334,86.20932101127835,,,,Short segment: no frequency-domain HRV reported,Expiratory recovery shows vagal rebound
+E3 walking,E3_walk,seated,60.84473038752776,54.396535283485264,,,,Transient seated/walk/recovery segment,Pre-walk seated baseline
+E3 walking,E3_walk,walking,83.04728504981964,41.06062966689594,,,,Walking RMSSD is motion-sensitive,Exercise tachycardia
+E3 walking,E3_walk,recovery,70.28436030024788,46.87263037488796,,,,Transient seated/walk/recovery segment,Rapid recovery; tau = 6.8 s
+E4B sleep,E4B_sleep,partial_recording,52.73485679711874,,,,,Partial recording: HR trend only,Delta HR +2.6 bpm over 14.3 min relative to E1PRE anchor 53.0 bpm

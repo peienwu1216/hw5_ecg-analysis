@@ -1,0 +1,16 @@
+key,folder,n_hours,total_samples,actual_duration_s,analysis_window_s,duration_ok,ch0_eq_ch1,peak_abs,clip_fraction,note
+E1PRE,20260424_145813_E1PRE,2,167300,334.6,10.0-310.0 (300s),True,True,25.0,0.0,"supine, pre-sleep (pipeline validation)"
+E1A,20260424_165939_E1A,2,161000,322.0,10.0-310.0 (300s),True,True,3.0,0.0,"supine, post-sleep (repeat supine)"
+E1B,20260424_170710_E1B,1,160900,321.8,10.0-310.0 (300s),True,True,3.3,0.0,"sitting, 5 min (HF reference for E2/E3)"
+E1C,20260424_171501_E1C,1,160700,321.4,10.0-310.0 (300s),True,True,3.2,0.0,"standing, 5 min"
+E2A_insp_1,20260424_172248_E2A_insp_1,1,60600,121.2,0.0-120.0 (120s),True,True,6.5,0.0,inspiratory hold trial 1
+E2A_insp_2,20260424_172917_E2A_insp_2,1,60700,121.4,0.0-120.0 (120s),True,True,6.5,0.0,inspiratory hold trial 2
+E2B_exp_1,20260424_173443_E2B_exp_1,1,60800,121.6,0.0-120.0 (120s),True,True,6.0,0.0,expiratory hold trial 1
+E2B_exp_2,20260424_174141_E2B_exp_2,1,60600,121.2,0.0-120.0 (120s),True,True,5.5,0.0,expiratory hold trial 2
+E3_walk,20260424_174736_E3_walk_1,1,90300,180.6,0.0-180.0 (180s),True,True,4.0,0.0,"0-60s seated, 60-120s walk, 120-180s recovery"
+E4A_12pm,20260424_175610_E4A_12pm,2,120000,240.0,10.0-230.0 (220s),True,True,5.3,0.0,12/min paced breathing
+E4A_9pm,20260424_180659_E4A_9pm,1,120400,240.8,10.0-230.0 (220s),True,True,5.7,0.0,9/min paced breathing
+E4A_6pm,20260424_181454_E4A_6pm,1,120800,241.6,10.0-230.0 (220s),True,True,5.9,0.0,6/min paced breathing (resonance)
+E4A_5pm,20260424_182226_E4A_5pm,1,120200,240.4,10.0-230.0 (220s),True,True,6.2,0.0,5/min paced breathing
+E4A_3pm,20260424_182930_E4A_3pm,1,150600,301.2,10.0-290.0 (280s),True,True,5.9,0.0,"3/min paced breathing (extended window, 14 cycles)"
+E4B_sleep,20260424_155332_E4B,2,431100,862.2,0.0-860.0 (860s),True,True,19.6,0.0,partial sleep-onset recording (exploratory only)

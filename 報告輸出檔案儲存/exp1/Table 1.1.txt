@@ -1,0 +1,29 @@
+\usepackage{booktabs}
+\usepackage{siunitx} % 建議加入此套件以精確對齊數字
+
+\begin{table}[htbp]
+\centering
+\caption{Summary of HRV Metrics Across Postural Baseline Conditions}
+\label{tab:postural_hrv}
+\small % 稍微縮小字體以適應更多指標
+\begin{tabular}{l s[table-format=2.1] s[table-format=2.1] s[table-format=2.1]}
+\toprule
+\textbf{Metric} & {\textbf{Supine}} & {\textbf{Sitting}} & {\textbf{Standing}} \\
+\midrule
+\textit{Time Domain} & & & \\
+Mean HR (bpm)       & 54.0 & 56.1 & 79.7 \\
+SDNN (ms)           & 81.5 & 56.6 & 41.8 \\
+RMSSD (ms)          & 99.1 & 61.2 & 25.2 \\
+\midrule
+\textit{Frequency Domain} & & & \\
+Total Power ($ms^2$) & 4161.0 & 1725.0 & 759.0 \\
+LF ($ms^2$)         & 907.0 & 601.0 & 448.0 \\
+HF ($ms^2$)         & 3254.0 & 1124.0 & 311.0 \\
+LF (n.u.)           & 21.8  & 34.8  & 59.0  \\
+HF (n.u.)           & 78.2  & 65.2  & 41.0  \\
+LF/HF Ratio         & 0.28  & 0.53  & 1.44  \\
+\bottomrule
+\addlinespace[1ex]
+\multicolumn{4}{p{0.85\linewidth}}{\footnotesize \textit{Note:} Frequency domain metrics were computed via Welch's method (LF: 0.04--0.15~Hz, HF: 0.15--0.40~Hz). Normalised units (n.u.) were calculated as $LF/(Total Power - VLF)$. The artifact rate remained below 0.4\% across all conditions (Supine: 0.37\%, Sitting/Standing: 0.0\%).}
+\end{tabular}
+\end{table}

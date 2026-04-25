@@ -1,0 +1,36 @@
+\begin{table}[htbp]
+\centering
+\caption{Autonomic Indices During Breath-Hold Trials (Condition $\times$ Effort)}
+\label{tab:e2_summary}
+\small
+\begin{tabular}{ll S[table-format=2.1] c S[table-format=4.1] S[table-format=4.1] S[table-format=2.2]}
+\toprule
+& & \multicolumn{2}{c}{\textbf{Time Domain}} & \multicolumn{3}{c}{\textbf{Frequency Domain}} \\
+\cmidrule(lr){3-4} \cmidrule(lr){5-7}
+\textbf{Condition} & \textbf{Effort}
+  & {\textbf{Hold HR}} & \textbf{Slope}
+  & {\textbf{Pre HF}} & {\textbf{Hold HF}} & {\textbf{LF/HF}} \\
+& & {(bpm)} & {(bpm/s)} & {(ms$^2$)} & {(ms$^2$)} & \\
+\midrule
+\textit{Baseline} & (E1B) & 56.1 & {---} & {---} & 1122.6 & 0.54 \\
+\midrule
+\multirow{2}{*}{Inspiratory}
+  & Effortful & 66.9 & {$-$0.188} &  625.6 &  43.7 & 27.04 \\
+  & Relaxed   & 73.5 & {$+$0.176} & 1523.7 &  39.1 & 25.06 \\
+\midrule
+\multirow{2}{*}{Expiratory}
+  & Effortful & 57.8 & {$-$0.098} &  889.9 & 111.3 &  4.79 \\
+  & Relaxed   & 60.8 & {$-$0.113} &  438.5 & 230.9 &  6.87 \\
+\bottomrule
+\addlinespace[0.8ex]
+\multicolumn{7}{p{0.92\columnwidth}}{\footnotesize
+  \textit{Note.}
+  Hold-phase metrics span the 40\,s apnea window (30--70\,s);
+  Pre~HF was computed over the preceding 25\,s baseline (5--30\,s).
+  Comparing Pre~HF to Hold~HF reveals $>$90\% HF collapse in
+  inspiratory trials, confirming RSA abolition.
+  Elevated LF/HF during inspiratory holds ($>$25) versus
+  expiratory holds ($<$7) indicates Valsalva-like sympathetic
+  activation driven by increased intrathoracic pressure.} \\
+\end{tabular}
+\end{table}

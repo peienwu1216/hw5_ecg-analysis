@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+*.manifest
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Env & local secrets
+.env
+.env.*
+*.pem
+
+# Local agent / IDE (drop these lines if you want them in the repo)
+.claude/
+.cursor/
+
+# Raw session CSVs under data-new/ (~tens of MB; health-related).
+# Remove the next line if you use a private repo and want data versioned, or use Git LFS.
+data-new/

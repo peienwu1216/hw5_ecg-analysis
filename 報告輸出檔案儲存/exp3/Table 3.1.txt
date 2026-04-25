@@ -1,0 +1,25 @@
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{multirow}
+
+\begin{table}[htbp]
+\centering
+\caption{Ambulatory HRV Metrics and Signal Quality Across Locomotor Phases}
+\label{tab:e3_ambulatory_metrics}
+\small
+\begin{tabular}{ll cccc c}
+\toprule
+\multicolumn{2}{c}{\textbf{Experimental Phase}} & \textbf{Mean HR} & \textbf{RMSSD} & \textbf{HF Power} & \textbf{LF/HF} & \textbf{Artifacts} \\
+\textbf{Session} & \textbf{Segment} & \textbf{(bpm)} & \textbf{(ms)} & \textbf{($ms^2$)} & \textbf{Ratio} & \textbf{(\%)} \\
+\midrule
+\textit{Anchor} & E1B Baseline (5 min)   & 56.1  & 61.1 & 1122.6 & 0.54 & 0.0 \\
+\midrule
+\multirow{3}{*}{E3 Walk} 
+& Pre-walk Seated (0--60 s)   & 60.8 & 54.4 & 818.6 & 0.20 & 0.0 \\
+& Walking (60--120 s)         & 83.0 & 41.1 & 166.7 & 1.89 & 0.0 \\
+& Recovery (120--180 s)       & 70.3 & 46.9 & 1388.5 & 0.41 & 0.0 \\
+\bottomrule
+\addlinespace[1ex]
+\multicolumn{7}{p{\linewidth}}{\footnotesize Metrics calculated per 60-s segment for Experiment 3. Walking results show expected sympathetic dominance and HF suppression relative to seated baseline. The 0.0\% artifact rate across all segments reflects the high fidelity of the E1-derived peak detection algorithm and subsequent manual-validated interpolation logic, effectively isolating physiological HRV from motion-induced baseline wander.} \\
+\end{tabular}
+\end{table}
