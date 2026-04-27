@@ -1,6 +1,7 @@
 """Shared matplotlib style + reusable publication plots."""
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Iterable
 
 import numpy as np
@@ -18,6 +19,9 @@ def apply_style() -> None:
     plt.rcParams.update({
         'figure.dpi':        120,
         'savefig.dpi':       140,
+        'savefig.format':    'pdf',
+        'pdf.fonttype':      42,
+        'ps.fonttype':       42,
         'font.size':          10,
         'axes.titlesize':     11,
         'axes.labelsize':     10,
@@ -37,8 +41,7 @@ def apply_style() -> None:
 
 # Colour scheme keyed by experiment / condition
 STYLE_COLORS = {
-    # Experiment 1 — E1PRE pre-sleep supine; E1A–C postural ramp
-    'E1PRE': '#4C72B0',  # supine pre-sleep (validation)
+    # Experiment 1 — E1A–C postural ramp
     'E1A': '#5A9BD5',    # supine post-sleep
     'E1B': '#55A868',    # sitting
     'E1C': '#C44E52',    # standing
@@ -237,7 +240,7 @@ def plot_rr_psd_stacked(items, bands: dict | None = None,
     Parameters
     ----------
     items : list of dict, each with
-        'key'       — short id (e.g. 'E1PRE', 'E1A')
+        'key'       — short id (e.g. 'E1A', 'E1B')
         'subtitle'  — posture/condition string
         'f', 'p'    — frequency axis and PSD (ms²/Hz)
         'color'     — line color
@@ -882,10 +885,26 @@ def plot_duration_sweep(df_sweep, metrics=('sdnn_ms', 'lf_ms2', 'hf_ms2'),
     return fig
 
 
+def save_figure(fig, filename: str, fig_dir: str | Path | None = None) -> Path:
+    """Unified helper to save figures as PDF in the canonical outputs folder."""
+    if fig_dir is None:
+        from src.config import FIGURES_DIR
+        fig_dir = FIGURES_DIR
+
+    path = Path(fig_dir) / filename
+    if path.suffix.lower() != '.pdf':
+        path = path.with_suffix('.pdf')
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(path, format='pdf', dpi=300, bbox_inches='tight')
+    return path
+
+
 __all__ = [
     'apply_style', 'STYLE_COLORS', 'BAND_COLORS', 'BAND_COLORS_JOURNAL',
     'plot_rr_tachogram', 'plot_rr_psd_pub', 'plot_rr_psd_stacked',
     'plot_rr_tachogram_psd_grid',
     'plot_ecg_psd_with_harmonics',
     'plot_spectrogram_rr', 'plot_duration_sweep',
+    'save_figure',
 ]

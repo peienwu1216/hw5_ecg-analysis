@@ -1,5 +1,4 @@
 key,folder,n_hours,total_samples,actual_duration_s,analysis_window_s,duration_ok,ch0_eq_ch1,peak_abs,clip_fraction,note
-E1PRE,20260424_145813_E1PRE,2,167300,334.6,10.0-310.0 (300s),True,True,25.0,0.0,"supine, pre-sleep (pipeline validation)"
 E1A,20260424_165939_E1A,2,161000,322.0,10.0-310.0 (300s),True,True,3.0,0.0,"supine, post-sleep (repeat supine)"
 E1B,20260424_170710_E1B,1,160900,321.8,10.0-310.0 (300s),True,True,3.3,0.0,"sitting, 5 min (HF reference for E2/E3)"
 E1C,20260424_171501_E1C,1,160700,321.4,10.0-310.0 (300s),True,True,3.2,0.0,"standing, 5 min"
