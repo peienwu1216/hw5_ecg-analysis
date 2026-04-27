@@ -69,8 +69,8 @@ Walking elevated HR to 83.0~bpm with rapid post-exercise recovery
 ($\tau = 6.8$~s), but motion artifacts limited fine-scale HRV
 interpretation.
 Paced breathing entrained the RR spectral peak with high fidelity
-($R^{2} = 0.998$); LF/HF inflated from 0.22 to 17.47 without parallel
-RMSSD collapse, indicating spectral-band migration rather than
+($R^{2} = 0.998$); LF/HF inflated from 0.22 to 17.47 while RMSSD
+remained stable (47.7--64.9~ms), indicating spectral-band migration rather than
 sympathovagal reversal.
 We summarize the task-specific validity of standard HRV metrics in a
 unified table and demonstrate that HRV indices must be interpreted
@@ -79,7 +79,7 @@ within the validity bounds imposed by the specific physiological task.
 
 \begin{IEEEkeywords}
 Heart rate variability, single-lead ECG, paced breathing, breath-hold,
-spectral band migration, biomedical sensor lab
+spectral band migration, autonomic nervous system
 \end{IEEEkeywords}
 
 % ============================================================
@@ -332,6 +332,14 @@ RR intervals outside the 300--2000~ms physiological range were
 rejected.
 For steady-state conditions (E1, E4A), the full analysis window
 ($\geq$220~s) was used.
+Window-length sensitivity on the E1A supine recording (Appendix,
+Fig.~\ref{fig:app_duration}) showed that sliding-window coefficient of
+variation fell below 10\% for SDNN and below 5\% for HF once segment
+duration reached $\sim$180~s, whereas 30--60~s windows exhibited much
+higher variability; this supports our use of full multi-minute
+windows---including 5-min postural baselines (E1) and the
+$\geq$220~s steady-state segments for paced breathing---for stable
+time- and frequency-domain HRV estimation.
 
 \textbf{Time domain.}
 Mean HR, SDNN, RMSSD, and pNN50 were computed from the edited
@@ -507,10 +515,10 @@ observable.}
 \end{figure}
 
 % NOTE: If the accented filename causes compilation issues, rename the
-% source file to nb02_fig05_e1_poincare_plots.pdf (no accent).
+% Exported as nb02_fig05_poincare_plot.pdf (ASCII filename).
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{nb02_fig05_e1_Poincaré_plots.pdf}
+\includegraphics[width=\columnwidth]{nb02_fig05_poincare_plot.pdf}
 \caption{Poincar\'e return maps ($\text{RR}_{n+1}$ vs.\
 $\text{RR}_{n}$) for supine, sitting, and standing conditions.  The
 scatter cloud contracts progressively from supine to standing,
@@ -586,7 +594,7 @@ Recovery HF (ms$^{2}$) & — & 1207 & — & 1213 \\
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{nb03_fig02_e2_effort_comparison.pdf}
+\includegraphics[width=\columnwidth]{nb03_fig02_e2_effort_vs_relaxed.pdf}
 \caption{Breath-hold effort comparison.  Inspiratory hold (top panels)
 produces larger HR excursions and more variable response shapes than
 expiratory hold (bottom panels), indicating that conscious effort
@@ -642,19 +650,18 @@ Critically, the accelerometer-derived step frequency
 precludes reliable separation of cardiac and locomotor components
 by linear filtering alone.
 
-Magnitude-squared coherence between the ECG and accelerometer
-signals was low both at the step peak ($C_{xy} = 0.04$) and across
-the 1--3~Hz cadence band (mean $C_{xy} = 0.06$, max~0.20);
-Pearson correlation between $|\Delta\text{RR}|$ and accelerometer
-magnitude was likewise weak ($r = 0.26$).
-These low values are \emph{expected} rather than exculpatory:
-the dominant artifact pathways (contact impedance changes,
-baseline wander) are broadband and stochastic,
-and therefore couple poorly with the quasi-periodic step signal
-measured by the accelerometer.
-Low linear coherence thus does not imply artifact-free RR intervals;
-it indicates that the contamination is non-linear and cannot be
-removed by coherence-guided spectral subtraction.
+We computed magnitude-squared coherence to test for phase-locked,
+linear coupling between locomotor mechanics and the cardiac signal.
+Coherence was low both at the step peak ($C_{xy} = 0.04$) and across
+the 1--3~Hz cadence band (mean $C_{xy} = 0.06$, max~0.20), ruling out a
+stable linear contamination pathway; Pearson correlation between
+$|\Delta\text{RR}|$ and accelerometer magnitude was likewise weak
+($r = 0.26$).
+Low coherence does not, however, exclude non-linear artifacts such as
+broadband baseline wander or stochastic fiducial-point jitter.
+Combined with the cadence-proximate spectral energy in 1--3~Hz
+(Fig.~\ref{fig:walk_ecg_psd}), we therefore flag walking-phase
+fine-scale HRV as motion-limited.
 
 In summary, mean HR and recovery kinetics---which depend on
 slow trends robust to fiducial jitter---remain physiologically
@@ -744,7 +751,7 @@ this study and yielded three principal findings.
 \subsubsection{Frequency Entrainment Was Quantitatively Verified}
 
 The measured RR spectral peak tracked the imposed breathing frequency
-with near-perfect fidelity (Fig.~\ref{fig:psd_overlay}, inset).
+with near-perfect fidelity (Fig.~\ref{fig:psd_overlay}).
 Linear regression yielded slope~$= 1.022$ (95\% CI: 0.947--1.097),
 intercept~$= -0.002$~Hz (95\% CI: $-$0.012 to 0.008),
 $R^{2} = 0.998$, and residual SD~$= 0.003$~Hz.
@@ -823,7 +830,7 @@ $|\Delta f|$ (Hz)  & 0.003  & 0.002  & 0.002  & 0.003  & 0.003 \\
 \midrule
 HR (bpm)           & 59.4  & 57.0  & 60.2  & 59.9  & 58.1 \\
 SDNN (ms)          & 48.7  & 78.0  & 91.3  & 95.9  & 131.4 \\
-RMSSD (ms)         & 47.7  & 78.0  & 60.4  & 53.9  & 55.3 \\
+RMSSD (ms)         & 47.7  & 64.9  & 60.4  & 53.9  & 55.3 \\
 TP (ms$^{2}$)      & 1754  & 2381  & 6087  & 8240  & 10{,}493 \\
 LF (ms$^{2}$)      & 279   & 953   & 5470  & 7634  & 8980 \\
 HF (ms$^{2}$)      & 1242  & 1129  & 474   & 437   & 514 \\
@@ -1049,13 +1056,18 @@ Fourth, walking-phase HRV is motion-contaminated, and fine-scale
 beat-to-beat metrics during ambulation should be interpreted with
 explicit motion-limited validity caveats.
 Magnitude-squared coherence between the walking ECG and accelerometer
-was low ($C_{xy} = 0.04$ at the step peak), suggesting that motion
-contamination was intermittent rather than phase-locked; nonetheless,
-the combination of high accelerometer motion and cadence-proximate
-spectral energy warrants caution for fine-scale HRV indices.
+was low ($C_{xy} = 0.04$ at the step peak), consistent with absence of
+strong phase-locked linear coupling but not excluding broadband or
+non-linear artifact; the combination of high accelerometer motion and
+cadence-proximate spectral energy warrants caution for fine-scale HRV
+indices.
 
 Fifth, the sleep-onset recording (E4B) was incomplete (14.3~min) and
 supports only appendix-level exploratory trend reporting.
+
+Despite these limitations, the within-subject design provides a
+controlled demonstration of context-dependent HRV metric behavior
+across four physiologically distinct paradigms.
 
 
 % ============================================================
@@ -1085,7 +1097,7 @@ power---not LF/HF---provide the most robust cross-condition summary.
 % ============================================================
 % REFERENCES
 % ============================================================
-\begin{thebibliography}{13}
+\begin{thebibliography}{99}
 
 \bibitem{taskforce1996}
 Task Force of the European Society of Cardiology and the North
@@ -1134,17 +1146,6 @@ P.~Virtanen \emph{et~al.},
 ``SciPy 1.0: Fundamental algorithms for scientific computing in
 Python,''
 \emph{Nature Methods}, vol.~17, no.~3, pp.~261--272, 2020.
-
-\bibitem{eckberg2003}
-D.~L.~Eckberg,
-``The human respiratory gate,''
-\emph{J.\ Physiol.}, vol.~548, no.~2, pp.~339--352, 2003.
-
-\bibitem{bernardi2001}
-L.~Bernardi \emph{et~al.},
-``Effect of rosary prayer and yoga mantras on autonomic
-cardiovascular rhythms: Comparative study,''
-\emph{BMJ}, vol.~323, no.~7327, pp.~1446--1449, 2001.
 
 \bibitem{eckberg1997}
 D.~L.~Eckberg,
@@ -1272,7 +1273,7 @@ The trajectory is shown in Fig.~\ref{fig:sleep}.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{nb06_fig04_e4b_sleep_trajectory.pdf}
+\includegraphics[width=\columnwidth]{nb06_fig04_e4b_partial_sleep_trajectory.pdf}
 \caption{Partial sleep-onset HR trajectory.  The smoothed HR trace
 shows a gradual decline toward the supine baseline, consistent with
 increasing vagal tone during sleep onset.  This recording is

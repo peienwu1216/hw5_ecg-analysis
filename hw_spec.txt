@@ -1,0 +1,30 @@
+EEEC 1099 Introduction to Biomedical Sensors Spring 2026
+Homework 5
+
+1.	At-home lab logistics 
+
+This homework is a group assignment for at-home labs.  You are encouraged to do your at-home lab with another two students and submit a joint report, although you can opt to perform all steps by yourself, and submit your own report. However, many measurements are more appropriate to be done mutually. You will first submit your work online on the due date.  The file name should be (modified accordingly): hw4_LastName1_LastName2_Lastname3. I will then post all submissions on E3 where you can view the other reports to make a revision on your own. You will then make revision and comments on either pdf or paper and submit a revised version within a week. As this is a lab, there is no standard answer. As long as you have finished all steps following instructions, you will receive a full grade on this homework.  Omission in steps will receive point deduction though.
+
+Each group will get a set of single-lead ECG as a chest patch, which can download the estimate of waveforms in 500 sps (samples per second).  You will need to provide your own analysis, using whatever tools you are most familiar with (Python, Matlab, C/C++, Java or Excel). In addition to the required measurements, you can try out your own variations to cause interferences and noises.  
+
+2.	The ECG sensor
+
+Go to the VitalSigns web page and learn to download the ECG recording by VS-ECG: https://www.vsigntek.com/vs_product_vsh101_zh/ and https://www.vsigntek.com/vs_support_zh/.
+
+You need basic programming skills to understand the interface, but the code requires minimal modification (mostly in the filename specification).
+
+3.	Required analyses
+
+For the following analyses, keep all of your .csv files in a folder and then submit on E3.  Your report should contain concise analyses such as tables of average and standard deviation (no raw-data tables), and figures with clear axis labels, legends and caption.  Do NOT give a data dump just to show that you have followed the procedure. Write your report with your observation and analysis.
+
+1)	Normal baseline: 30-s recording after rest in the postures of supine, sitting and standing.  Keep yourself still with normal breathing.  Download the .csv for the baseline.  Give a meaningful file name such as base_supine_1.csv. Perform peak detection and determine the heartbeat intervals.  Plot the heartbeat intervals (in s) and the variation in successive heartbeats (in s) with the x-axis as the heartbeat index (the first to the last heartbeat during the recording).  Plot the data for all three postures in one figure, with each posture in its own marker. What difference do you observe for the three postures?  Perform a Fourier transform and show the spectral density between 0.05 – 5 Hz.  Can you see the main heartbeat frequency?  Can you see its harmonics?  Can you the breathing frequency?
+2)	Transpulmonary effects: Use a watch or phone for timing.  Start ECG measurements, and take a breath hold for 20 s after maximum inhalation.  Resume normal breathing for an extended 40 s before stopping recording. Stop and resume normal breathing if you feel any discomfort during the breath hold. After sufficient rest, repeat the 1-min routine one more time.  Repeat the steps for breath hold after maximum exhalation.  Perform similar analyses of heartbeat intervals, heartbeat variation (HRV), and spectral density.
+3)	Ambulatory recording: Find a place that you can walk back and forth within the range of the Bluetooth connection.  Record your heartbeat during 30-s walking, followed by 30-s resting.  Perform similar analyses of heartbeat intervals, and spectral density.  Do you observe the motion interference for recording during walking?  Do you observe the increasing heartbeat intervals during rest after walking? 
+
+4.	Your own design of variations
+
+Knowing the interference effects in ECG, make one design of experiments to show the ECG output variation from interference or from skin contact conditions. Formulate your hypothesis before the experiments, and confirm if your hypothesis is correct.
+
+5.	Format of your report
+
+There is no fixed format.  You are encouraged to present your results as concise as possible.  This lab is a representative exercise for biosensor characterization.  Focus on learning and understanding, instead of following the given procedure blindly. Similar procedures and analyses are expected in your final project.

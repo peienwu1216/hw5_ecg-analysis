@@ -16,4 +16,4 @@ E2 breath-hold,Expiratory,recovery,58.31350071821606,86.27664830360635,,,,Short 
 E3 walking,E3_walk,seated,60.84473038752776,54.396535283485264,,,,Transient seated/walk/recovery segment,Pre-walk seated baseline
 E3 walking,E3_walk,walking,83.04728504981964,41.06062966689594,,,,Walking RMSSD is motion-sensitive,Exercise tachycardia
 E3 walking,E3_walk,recovery,70.28436030024788,46.87263037488796,,,,Transient seated/walk/recovery segment,Rapid recovery; tau = 6.8 s
-E4B sleep,E4B_sleep,partial_recording,52.73484130246212,,,,,Partial recording: HR trend only,Delta HR +2.6 bpm over 14.3 min relative to E1PRE anchor 54.0 bpm
+E4B sleep,E4B_sleep,partial_recording,52.73484130246212,,,,,Partial recording: HR trend only,Delta HR +2.6 bpm over 14.3 min relative to E1A anchor 54.0 bpm
