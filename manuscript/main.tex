@@ -55,8 +55,8 @@
 % ============================================================
 \begin{abstract}
 Heart rate variability (HRV) is widely used to assess autonomic
-regulation, but standard metrics can change meaning across
-physiological tasks.
+regulation, but the physiological interpretation of standard metrics
+is context-dependent.
 This single-participant lab study analyzed 14~single-lead ECG recordings
 (500~Hz) across four experimental conditions: postural
 baseline (supine/sitting/standing), voluntary breath-hold (inspiratory
@@ -75,10 +75,9 @@ matched the imposed breathing frequency
 ($R^{2} = 0.998$); LF/HF inflated from 0.22 to 17.47 while RMSSD
 remained stable (47.7--64.9~ms), indicating spectral-band migration rather than
 sympathovagal reversal.
-We report a condition-by-condition summary of which HRV metrics remained
-interpretable in this dataset. These results indicate that HRV metrics
-should be interpreted with reference to task physiology and signal-quality
-constraints.
+A condition-by-condition validity summary identifies which metrics
+remained interpretable and which became misleading, underscoring the
+need to match HRV interpretation to task physiology and signal quality.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -101,7 +100,7 @@ oscillations~\cite{taskforce1996}.
 The HF band primarily reflects respiratory sinus arrhythmia (RSA),
 the phasic vagal modulation of heart rate coupled to the breathing
 cycle~\cite{hirsch1981}.
-HRV has become a standard noninvasive tool in cardiovascular research
+HRV is now a standard noninvasive tool in cardiovascular research
 and clinical risk stratification~\cite{berntson1997,shaffer2017}.
 
 Although HRV is widely used, the physiological interpretation of a
@@ -129,9 +128,9 @@ We acquired 14~single-lead ECG recordings (500~Hz) from one participant
 using a unified analysis pipeline spanning (1)~postural baseline,
 (2)~voluntary breath-hold, (3)~ambulatory walking with recovery,
 (4)~paced breathing at five rates.
-This design removes between-subject variability from the comparison
-and allows within-participant assessment of how the \emph{same} HRV
-indices behave under different physiological demands.
+This within-subject design eliminates inter-individual variability,
+allowing direct assessment of how the \emph{same} HRV indices behave
+under different physiological demands.
 
 We formulated five hypotheses prior to data collection:
 \begin{enumerate}
@@ -156,10 +155,10 @@ We formulated five hypotheses prior to data collection:
     inflation reflects spectral-band migration, not sympathovagal shift,
     and therefore dissociates from RMSSD.
 \end{enumerate}
-Note that successful entrainment of the RR spectral peak by paced
+Successful entrainment of the RR spectral peak by paced
 breathing (verified by linear regression of measured vs.\ imposed
-frequency) is treated as a manipulation check rather than a hypothesis,
-since respiratory entrainment of the cardiac cycle is
+frequency) was treated as a manipulation check rather than a hypothesis,
+given that respiratory entrainment of the cardiac cycle is
 well-established.
 
 The analysis has three components.
@@ -216,7 +215,7 @@ All 14~recordings were acquired in a single session on April~24,
 2026, under quiet indoor conditions.
 Because every recording came from the same acquisition chain and was
 processed with a unified pipeline, between-condition differences
-are less likely to reflect changes in instrumentation.
+are unlikely to reflect instrumentation variability.
 
 The protocol comprised four experiment families
 (Table~\ref{tab:protocol}):
@@ -323,12 +322,12 @@ followed by a 0.5--40~Hz fourth-order Butterworth bandpass
 R-peak detection followed two parallel paths to assess agreement
 between detection approaches (Fig.~\ref{fig:pipeline_overview}):
 \begin{itemize}
-\item \emph{Teaching path}: a Pan--Tompkins-style detector implemented
-  in SciPy~\cite{pan1985}, providing a transparent, interpretable
-  reference.
-\item \emph{Reference path}: NeuroKit2 \texttt{ecg\_peaks} with
-  Kubios-style artifact correction~\cite{makowski2021}, serving as
-  the primary path for reported results because it includes
+\item \emph{Independent validation pipeline}: a Pan--Tompkins-style
+  detector implemented in SciPy~\cite{pan1985}, providing a
+  transparent, interpretable cross-check.
+\item \emph{Primary analysis pipeline}: NeuroKit2 \texttt{ecg\_peaks}
+  with Kubios-style artifact correction~\cite{makowski2021}, serving
+  as the primary source for all reported results because it includes
   established artifact-correction routines for transient segments.
 \end{itemize}
 Pipeline validation on a 5-min steady-state recording (E1A)
@@ -341,8 +340,8 @@ mean RR difference $<$1.0~ms and RMSSD difference $<$2.7~ms.
 \caption{Unified single-lead ECG processing and analysis workflow. Raw
 500-Hz ECG recordings were cropped, stabilized, baseline-corrected,
 notch-filtered, and bandpass-filtered before dual-path R-peak detection.
-NeuroKit2 served as the reference detector, while the SciPy/Pan--Tompkins
-path provided an independent agreement check. The validated RR series was
+NeuroKit2 served as the primary analysis pipeline, while the
+SciPy/Pan--Tompkins pipeline provided independent validation. The validated RR series was
 then used for task-specific HRV analyses across posture, breath-hold,
 walking, and paced breathing.}
 \label{fig:pipeline_overview}
@@ -500,15 +499,6 @@ The sitting baseline (E1B) was subsequently used as the
 posture-matched anchor for the seated breath-hold and walking
 experiments, reducing confounding by posture in between-experiment spectral
 comparisons.
-
-For the ECG spectral analysis: (1)~the main
-heartbeat frequency ($f_{0}$) and its harmonics ($2f_{0}$,
-$3f_{0}$) are clearly visible in the ECG PSD across all three
-postures (Fig.~\ref{fig:ecg_psd}); (2)~the breathing frequency is
-identifiable as a low-frequency modulation peak; (3)~successive
-heartbeat interval differences (Fig.~\ref{fig:posture}) show clearly
-larger amplitude in supine than in standing, visualizing the postural
-reduction in vagal modulation.
 
 \begin{table}[!t]
 \centering
@@ -722,22 +712,12 @@ motion-limited.
 The walking-phase HRV was accordingly flagged as
 \textbf{unreliable~(motion)} in the summary table, consistent with \textbf{H3}.
 
-For completeness: (1)~motion
-interference is observable in the walking-phase RR series and ECG
-PSD, manifesting as elevated spectral energy in the 1--3~Hz band
-coincident with the walking cadence identified independently from the
-accelerometer (Fig.~\ref{fig:walk_ecg_psd},
-Fig.~\ref{fig:walk_motion}); (2)~the post-walking rest segment
-showed progressive lengthening of RR intervals with
-$\tau = 6.8$~s, consistent with parasympathetic reactivation
-following low-intensity exercise.
-
 \begin{table}[!t]
 \centering
 \caption{Walking Challenge Segment Metrics}
 \label{tab:walking}
 \footnotesize
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabularx}{\columnwidth}{@{}lccc>{\raggedright\arraybackslash}X@{}}
 \toprule
 Segment & HR (bpm) & RMSSD (ms) & HR slope & Note \\
 \midrule
@@ -747,10 +727,10 @@ Recovery  & 70.3 & 46.9 & $-$0.13 & $\tau = 6.8$~s \\
 \midrule
 E1B anchor & 56.1 & 61.1 & --- & Seated ref. \\
 \bottomrule
-\multicolumn{5}{@{}l}{\footnotesize $^\dagger$Walking-phase fine-scale
+\multicolumn{5}{@{}p{\columnwidth}@{}}{\footnotesize $^\dagger$Walking-phase fine-scale
   HRV is motion-limited; mean HR and recovery kinetics remain
   interpretable.}
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{figure}[!t]
@@ -800,8 +780,7 @@ motion-limited.}
 LF/HF Band Migration (\textbf{H5}), and Resonance (\textbf{H4})}
 \label{ssec:paced}
 
-Experiment~4A provided the most structured manipulation in this
-study and yielded three observations.
+The paced-breathing experiment yielded three main observations.
 
 \subsubsection{Frequency Entrainment Was Quantitatively Verified}
 
@@ -953,8 +932,8 @@ not observed in this participant under the fixed-order protocol.}
 Task-Specific Metrics}
 \label{ssec:integration}
 
-When all experiments are viewed together
-(Fig.~\ref{fig:integration}), two distinct patterns were observed.
+Viewed together (Fig.~\ref{fig:integration}), the four experiments
+reveal two distinct response patterns.
 \emph{Posture} primarily shifted the autonomic operating point along
 a trajectory of increasing HR and decreasing RMSSD (supine
 $\to$ standing), with total power declining monotonically.
@@ -1011,21 +990,19 @@ pathological intervention.
 
 \subsection{Paced Breathing: Amplitude, Not Rate}
 
-In this dataset, the most prominent effect of slow breathing was
-amplitude expansion of the
-respiratory sinus arrhythmia, not reduction of mean heart rate.
-In our data, mean HR varied by only 3.1~bpm across the five paced
-conditions (57.0--60.1~bpm), whereas peak-to-trough RR amplitude
-increased by 159\% (157--406~ms).
-This finding is consistent with the view that slow breathing
-amplifies the gain of the cardiorespiratory coupling
-loop---the baroreflex, respiratory gating of vagal
+The most prominent effect of slow breathing was amplitude expansion
+of respiratory sinus arrhythmia rather than reduction of mean heart
+rate: mean HR varied by only 3.1~bpm across the five paced conditions
+(57.0--60.1~bpm), whereas peak-to-trough RR amplitude increased by
+159\% (157--406~ms).
+Slow breathing thus amplifies the gain of the cardiorespiratory
+coupling loop---baroreflex modulation, respiratory gating of vagal
 efferents~\cite{hirsch1981}, and mechanical intrathoracic pressure
-oscillations---without a large change in mean
+oscillations---without substantially shifting mean
 HR~\cite{berntson1997,penttila2001}.
 
 The absence of a 6-breaths/min resonance maximum in this participant
-warrants cautious interpretation.
+requires qualification.
 Classical resonance theory~\cite{lehrer2014} predicts that RR
 oscillation amplitude peaks when breathing frequency matches the
 cardiovascular system's natural resonance, typically near 0.1~Hz.
@@ -1091,7 +1068,7 @@ Paced $\leq$6/min (E4) & Band-shifted & RMSSD, TP, RR ampl., resp.-centered powe
 \section{Limitations}
 \label{sec:limitations}
 
-This lab study has five limitations.
+This lab study has four limitations.
 First, it is a single-participant within-subject investigation; the
 findings illustrate metric-behavior principles under controlled
 within-subject manipulation but cannot claim population
@@ -1122,8 +1099,9 @@ non-linear artifact; the combination of high accelerometer motion and
 cadence-proximate spectral energy warrants caution for fine-scale HRV
 indices.
 
-Taken as a methodological demonstration, the within-subject design
-shows how HRV metrics changed across four task contexts.
+Despite these constraints, the controlled within-subject design
+isolates task-dependent changes in metric behavior, which was the
+primary aim of this methodological demonstration.
 
 
 % ============================================================
@@ -1136,14 +1114,14 @@ across posture, breath-hold, walking, and paced breathing.
 Posture shifts the autonomic operating point (\textbf{H1}).
 Breath-hold reveals asymmetric inspiratory--expiratory dynamics
 (\textbf{H2}).
-Walking increased cardiovascular load but limits fine-scale
+Walking increased cardiovascular load but limited fine-scale
 HRV interpretability (\textbf{H3}).
 Within the tested range of paced breathing, no classical
 6-breaths/min resonance maximum was observed (\textbf{H4}).
 Slow paced breathing showed that LF/HF can reflect band migration
 rather than a sympathovagal index (\textbf{H5}).
-Overall, the results support a task-specific interpretation of HRV
-metrics. Under slow paced breathing, mean~HR, RMSSD, and total
+Collectively, these findings argue for task-specific interpretation
+of HRV metrics: under slow paced breathing, mean~HR, RMSSD, and total
 power provided the most interpretable cross-condition summary in
 this dataset.
 
@@ -1235,8 +1213,9 @@ Upper Saddle River, NJ: Prentice-Hall, 1999.
 
 \subsection{Dual-Path R-Peak Detection Agreement}
 
-Dual-path R-peak detection (SciPy teaching path vs.\ NeuroKit2
-reference path) was validated on the E1A 5-min supine recording.
+Dual-path R-peak detection (SciPy independent validation pipeline
+vs.\ NeuroKit2 primary analysis pipeline) was validated on the E1A
+5-min supine recording.
 Peak count agreement was 99.6\% (269 vs.\ 268 peaks). The mean RR
 difference was 0.96~ms (0.09\%), SDNN difference was 1.65~ms (2.1\%),
 and RMSSD difference was 2.69~ms (2.7\%). Across all 8~steady-state
@@ -1248,8 +1227,9 @@ sessions (E1A--C, E4 12--3~breaths/min), peak-count agreement exceeded
 \includegraphics[width=\columnwidth]{appendixA_bland_altman.pdf}
 \caption{Dual-path R-peak detection validation. Panel~A summarizes
 artifact-correction burden across recordings. Panels~B and~C show
-Bland--Altman agreement between the SciPy teaching path and NeuroKit2
-reference path for mean NN interval and RMSSD. The small mean
+Bland--Altman agreement between the SciPy independent validation
+pipeline and NeuroKit2 primary analysis pipeline for mean NN interval
+and RMSSD. The small mean
 differences support use of the NeuroKit2-derived RR series for
 downstream HRV analysis.}
 \label{fig:bland_altman}

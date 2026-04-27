@@ -23,6 +23,12 @@ latexmk -pdf main.tex
 
 `latexmkrc` sends auxiliary and PDF output into `manuscript/build/`.
 
+## Git: what to track
+
+**Commit:** `main.tex`, `latexmkrc`, this `README`, and anything you add under `notes/` (or other source-only assets you intend to share).
+
+**Do not commit:** anything under `manuscript/build/`, or stray `main.pdf` / `*.aux` / `*.log` in `manuscript/` (e.g. from running `pdflatex` without `-output-directory=build`). Those patterns are listed in the repo root `.gitignore`.
+
 ## Refresh figure manifest
 
 From the repo root:

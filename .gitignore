@@ -8,6 +8,7 @@ __pycache__/
 *.egg-info/
 .eggs/
 dist/
+# Python/setuptools; also matches any other `build/` dir (e.g. manuscript/build for LaTeX).
 build/
 *.manifest
 
@@ -38,3 +39,22 @@ Thumbs.db
 # Raw session CSVs under data-new/ (~tens of MB; health-related).
 # Remove the next line if you use a private repo and want data versioned, or use Git LFS.
 data-new/
+
+# --- LaTeX (manuscript/) ---
+# Track: main.tex, latexmkrc, README.md, notes/**
+# Ignore: PDF + aux from latexmk / pdflatex (primary: manuscript/build/ via `build/` above).
+manuscript/build/
+manuscript/*.aux
+manuscript/*.log
+manuscript/*.pdf
+manuscript/*.synctex.gz
+manuscript/*.fdb_latexmk
+manuscript/*.fls
+manuscript/*.out
+manuscript/*.toc
+manuscript/*.lof
+manuscript/*.lot
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/*.bcf
+manuscript/*.run.xml
