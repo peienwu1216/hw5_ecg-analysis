@@ -326,8 +326,8 @@ RR intervals outside the 300--2000~ms physiological range were
 rejected.
 For steady-state conditions (E1, E4), the full analysis window
 ($\geq$220~s) was used.
-Window-length sensitivity on the E1A supine recording (Appendix,
-Fig.~\ref{fig:app_duration}) showed that sliding-window coefficient of
+Window-length sensitivity on the E1A supine recording (Appendix A,
+Fig.~\ref{fig:duration_effect}) showed that sliding-window coefficient of
 variation fell below 10\% for SDNN and below 5\% for HF once segment
 duration reached $\sim$180~s, whereas 30--60~s windows exhibited much
 higher variability; this supports our use of full multi-minute
@@ -635,7 +635,7 @@ impedance fluctuations, trunk EMG, and cable sway---that
 cause random R-peak fiducial-point shifts and artificially inflate
 beat-to-beat variability indices.
 The raw walking ECG confirmed visible waveform degradation
-(Fig.~\ref{fig:app_ecg_snapshots} in Appendix), and the walking-segment
+(Appendix D, Fig.~\ref{fig:walking_ecg_processing}), and the walking-segment
 ECG spectrum showed elevated broadband energy in the 1--3~Hz
 locomotor band (Fig.~\ref{fig:walk_ecg_psd}).
 Critically, the accelerometer-derived step frequency
@@ -784,7 +784,7 @@ an inverted-U shape centered at 6~breaths/min.
 Sensitivity analysis using $\pm$0.010~Hz and $\pm$0.020~Hz
 integration windows confirmed that the absence of an isolated
 6-breaths/min peak was robust to the choice of bandwidth
-(Appendix, Fig.~\ref{fig:app_sensitivity}).
+(Appendix E, Fig.~\ref{fig:resonance_sensitivity}).
 A classical 6-breaths/min resonance maximum was therefore
 \emph{not observed} in this participant under the present
 fixed-order protocol (\textbf{H4} supported).
@@ -1165,51 +1165,130 @@ vagal outflow: Effects of various respiratory patterns,''
 \section{Data Quality and Pipeline Validation}
 \label{app:quality}
 
+\subsection{Dual-Path R-Peak Detection Agreement}
+
 Dual-path R-peak detection (SciPy teaching path vs.\ NeuroKit2
 reference path) was validated on the E1A 5-min supine recording.
-Peak count agreement was 99.6\% (269 vs.\ 268 peaks).
-The mean RR difference was 0.96~ms (0.09\%), SDNN difference was
-1.65~ms (2.1\%), and RMSSD difference was 2.69~ms (2.7\%).
-Across all 8~steady-state sessions, peak-count agreement
-exceeded 99.5\%.
+Peak count agreement was 99.6\% (269 vs.\ 268 peaks). The mean RR
+difference was 0.96~ms (0.09\%), SDNN difference was 1.65~ms (2.1\%),
+and RMSSD difference was 2.69~ms (2.7\%). Across all 8~steady-state
+sessions (E1A--C, E4 12--3~breaths/min), peak-count agreement exceeded
+99.5\%.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{nb06_fig03_pipeline_validation.pdf}
-\caption{Pipeline validation across all steady-state recordings:
-artifact rate and dual-path agreement metrics.}
-\label{fig:app_pipeline}
+\includegraphics[width=\columnwidth]{appendixA_bland_altman.pdf}
+\caption{Dual-path validation summary. (a)~Per-session artifact rate.
+(b)~Bland--Altman comparison of mean NN intervals between the SciPy
+teaching path and the NeuroKit2 reference path. (c)~Bland--Altman
+comparison of RMSSD between the two paths.}
+\label{fig:bland_altman}
 \end{figure}
 
+Bland--Altman analysis on mean NN intervals (Fig.~\ref{fig:bland_altman}b)
+yielded a bias of $-0.43$~ms with 95\% limits of agreement of
+$[-1.86, +1.00]$~ms, well below the temporal resolution required for
+HRV interpretation. RMSSD showed a slightly larger bias
+(Fig.~\ref{fig:bland_altman}c, $\Delta = 1.24$~ms; 95\% limits
+$[-2.21, +4.68]$~ms), reflecting RMSSD's higher sensitivity to
+single-beat detection differences. Per-session artifact rates
+(Fig.~\ref{fig:bland_altman}a) remained below 2.5\% in all recordings,
+with the highest values concentrated in the breath-hold (E2) sessions
+where transient HR shifts mildly increase the proportion of corrected
+beats; steady-state sessions remained below 1\%.
 
+\subsection{Analysis-Window Duration Sensitivity}
 
-\section{Postural Detail Figures}
-\label{app:posture_detail}
+Figure~\ref{fig:duration_effect} reports the coefficient of variation
+(CV) of SDNN, LF, and HF as a function of sliding-window duration on
+the E1A supine recording (75\% overlap). SDNN stabilized rapidly: CV
+fell from 26.4\% at 50~s to 5.8\% at 250~s. HF was even more robust,
+dropping to 3.6\% CV by 250~s. LF remained the noisiest band
+(CV $>$ 27\% even at 250~s), reflecting its sensitivity to slow trends
+and sub-band drift. These results justify our use of full multi-minute
+windows---5~min for postural baselines (E1) and $\geq$220~s for
+steady-state paced breathing (E4)---rather than the shorter 30--60~s
+windows commonly used for transient analyses.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb02_fig04_duration_effect.pdf}
-\caption{Effect of analysis window duration on HRV metric stability
-across postural conditions.}
-\label{fig:app_duration}
+\caption{Effect of analysis-window duration on HRV metric stability in
+the E1A supine recording. SDNN and HF stabilize substantially by
+$\sim$180--250~s, whereas LF remains comparatively variable.}
+\label{fig:duration_effect}
 \end{figure}
 
+\subsection{Recording Inventory and Artifact Burden}
+
+All 14~recordings used in this study passed quality control. The
+peak-correction burden distribution (Fig.~\ref{fig:bland_altman}a)
+shows a clear separation between steady-state recordings (artifact rate
+$<$1\%), transient breath-hold trials ($\sim$1--2.5\%), and the
+walking segment ($\sim$1.5\%, expected given motion artifacts). No
+recording required exclusion.
+
+\setcounter{section}{2}
 
 \section{Breath-Hold Trial-Level Detail}
 \label{app:breathhold_detail}
 
+The main-text Fig.~\ref{fig:breathhold} shows the two inspiratory
+trials to highlight the effort/relaxation contrast central to the H2
+argument. This appendix provides the complementary
+inspiratory-vs.-expiratory overlay restricted to the relaxed trial,
+thereby isolating the pure respiratory-cessation effect without the
+additional voluntary-strain confound present in Trial~1.
+
+Figure~\ref{fig:breath_hold_pure_phys} overlays the relaxed
+inspiratory trial (Trial~2) against the relaxed expiratory trial,
+time-aligned to hold onset. The inspiratory trace reaches a peak HR of
+82~bpm ($+27$ above pre-hold), whereas the expiratory trace reaches
+only 70~bpm ($+12$). The earlier and larger HR rise in the
+inspiratory condition is consistent with elevated intrathoracic
+pressure compressing venous return during sustained lung inflation,
+complementing the spectral evidence shown in main-text
+Fig.~\ref{fig:hf_collapse}.
+
+The figure also clarifies the temporal asymmetry of recovery. After
+release, both traces relax toward baseline over the subsequent
+recovery window, but the inspiratory hold shows a steeper immediate
+descent from its higher peak. This reinforces the interpretation from
+Table~\ref{tab:breathhold} that the dominant difference between the
+two relaxed holds is not hold duration, but the magnitude of the
+circulatory perturbation induced by lung volume at the onset and
+during sustained apnea.
+
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb03_fig03_e2_pure_physiology.pdf}
-\caption{Trial-level breath-hold physiological responses, showing
-individual HR trajectories for each inspiratory and expiratory
-trial.}
-\label{fig:app_pure_physiology}
+\caption{Inspiratory vs.\ expiratory relaxed-trial breath-hold overlay,
+time-aligned to hold onset. The inspiratory hold produces the earlier
+and larger HR excursion, isolating the physiological effect of lung
+inflation apart from voluntary effort.}
+\label{fig:breath_hold_pure_phys}
 \end{figure}
 
 
 \section{Walking Detail Figures}
 \label{app:walking_detail}
+
+This appendix provides supplementary views of the walking experiment
+(E3) data. The main-text Figs.~\ref{fig:walk_motion}--\ref{fig:walk_ecg_psd}
+cover the autonomic response, recovery kinetics, and
+cadence-coincident ECG spectral contamination. The figures below add
+signal-quality context needed to interpret why mean HR and recovery
+remain trustworthy while walking-phase fine-scale HRV should be treated
+cautiously.
+
+Figure~\ref{fig:walking_ecg_processing} shows a representative 10-s
+window of walking-phase ECG before and after preprocessing,
+demonstrating that despite visible motion artifacts and baseline
+wander in the raw signal, the bandpass-filtered output still supports
+reliable R-peak detection. This verifies that the motion-limited HRV
+interpretation in Section~\ref{ssec:walking} reflects genuine
+physiological measurement uncertainty under ambulation, not detector
+failure.
 
 \begin{figure}[!t]
 \centering
@@ -1222,18 +1301,62 @@ low-frequency drift.
 (c)~R-peak detection on the filtered signal.  Despite visible motion
 contamination, the NeuroKit2 detector successfully identified all QRS
 complexes in this segment.}
-\label{fig:app_ecg_snapshots}
+\label{fig:walking_ecg_processing}
 \end{figure}
+
+Figure~\ref{fig:walking_psd_contrast} compares the seated-baseline
+(E1B) and walking RR power spectra on a common axis. The walking
+spectrum shows strongly attenuated HF power and a broadened LF region,
+consistent with autonomic ``locked-in'' behavior under elevated
+sympathetic drive combined with motion-induced spectral spreading. In
+that sense, the figure complements Fig.~\ref{fig:walk_ecg_psd}: the
+main-text panel shows where locomotor contamination enters the ECG
+spectrum, while the appendix contrast shows the resulting flattening
+of physiologically interpretable RR structure.
+
+Taken together, these two panels support a bounded conclusion for E3:
+walking still permits robust extraction of average rate and recovery
+timing, but it degrades the assumptions required for high-confidence
+interpretation of short-lag variability metrics. This is why the
+walking-phase RMSSD value is reported for completeness but not used as
+a cross-condition autonomic comparator.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb04_fig06_e3_rr_psd_contrast.pdf}
-\caption{Walking vs.\ recovery RR power spectral density contrast.}
-\label{fig:app_rr_psd_contrast}
+\caption{Walking vs.\ seated-baseline RR power spectral density
+contrast. Walking shows near-collapse of HF power together with
+broadening of the LF region, consistent with sympathetic activation
+plus motion-related spectral spreading.}
+\label{fig:walking_psd_contrast}
 \end{figure}
 
 \section{Paced Breathing Resonance: Sensitivity Analysis}
 \label{app:resonance}
+
+The respiratory-centered RR spectral power metric introduced in
+Section~\ref{ssec:paced} depends on the choice of integration
+bandwidth around each imposed breathing frequency. To verify that our
+central conclusion---absence of a 6-breaths/min resonance
+maximum---is not an artifact of bandwidth selection, we repeated the
+analysis with three integration windows: $\pm$0.010, $\pm$0.015
+(primary), and $\pm$0.020~Hz.
+
+Figure~\ref{fig:resonance_sensitivity} shows that all three bandwidths
+yield the same monotonic decrease in respiratory-centered power from 3
+to 12~breaths/min, with no isolated peak at 6~breaths/min. The
+narrower $\pm$0.010~Hz window shows slightly lower absolute power
+because some respiratory-band energy falls outside the integration
+limits at higher breathing rates where peaks are broader, but the
+qualitative shape---and critically, the absence of an inverted-U---is
+preserved.
+
+This robustness check supports the interpretation that the negative
+result is a genuine property of this participant's response under the
+fixed-order protocol, not a methodological artifact. It therefore
+strengthens the main-text argument that the paced-breathing
+manipulation produced frequency tracking and large amplitude changes
+without revealing a classical resonance maximum at 6~breaths/min.
 
 \begin{figure}[!t]
 \centering
@@ -1241,14 +1364,13 @@ complexes in this segment.}
 \caption{Sensitivity analysis of respiratory-centered RR spectral
 power across three integration windows ($\pm$0.010, $\pm$0.015,
 $\pm$0.020~Hz) around each imposed breathing frequency.
-Across all three bandwidths, power increases monotonically from
-12 to 3~breaths/min; no isolated peak appears at 6~breaths/min
-(dashed vertical line).
-The consistency across bandwidths indicates that the absence of a
-classical 6-breaths/min resonance maximum is not an artifact of
-integration-window choice.}
-\label{fig:app_sensitivity}
+All three bandwidths show monotonic increase from 12 to 3~breaths/min
+with no isolated peak at 6~breaths/min (dashed vertical line).}
+\label{fig:resonance_sensitivity}
 \end{figure}
 
+% Clear pending floats so appendix captions/labels are written; otherwise refs
+% like fig:app_ecg_snapshots stay undefined.
+\clearpage
 \balance
 \end{document}
