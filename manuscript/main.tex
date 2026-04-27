@@ -224,12 +224,35 @@ The protocol comprised four experiment families
   After a 5-min rest, three consecutive 5-min recordings were obtained
   in supine (E1A), sitting (E1B), and standing (E1C) postures.
   The participant maintained relaxed spontaneous breathing throughout.
+  Although the assignment specification requires only 30-s recordings
+  per posture, this duration is fundamentally inadequate for
+  frequency-domain HRV analysis.
+  With Welch's method and a Hann window, the effective spectral
+  resolution is $\Delta f \approx 1.6/T$~\cite{oppenheim1999}; for
+  $T = 30$~s this yields $\Delta f \approx 0.053$~Hz, placing only
+  $\sim$2 resolvable frequency bins within the entire LF band
+  (0.04--0.15~Hz) and rendering LF power estimation unreliable.
+  The Task Force guidelines explicitly recommend recordings of
+  $\geq$5~min for short-term frequency-domain
+  analysis~\cite{taskforce1996}.
+  We therefore extended each postural condition to 5~min (300~s),
+  providing $\Delta f \approx 0.005$~Hz and $\sim$22 bins across the
+  LF band, sufficient for stable Welch-based spectral estimation.
+  The empirical effect of window duration on metric stability is
+  quantified in Appendix~A (Fig.~\ref{fig:duration_effect}).
 
 \item \textbf{Voluntary breath-hold (E2).}
   In a seated position, the participant performed two trials of
-  maximum inspiratory breath-hold ($\sim$20~s each) followed by 40~s
+  maximum inspiratory breath-hold ($\sim$40~s each) followed by 40~s
   of recovery breathing, and two trials of maximum expiratory
   breath-hold with the same protocol.
+  The assignment specifies 20-s breath-holds; we extended the
+  target hold duration to $\sim$40~s to approximately double the
+  number of cardiac cycles available during the apnoeic phase,
+  thereby improving the statistical stability of hold-phase
+  time-domain metrics (HR slope, RMSSD) and increasing the spectral
+  prominence of apnoea-related HRV changes within the per-trial
+  PSD~\cite{taskforce1996}.
   Inter-trial rest was provided until baseline HR was restored.
 
 \item \textbf{Walking challenge (E3).}
@@ -249,10 +272,12 @@ The protocol comprised four experiment families
   Each condition lasted approximately 4~min; the 3-breaths/min
   condition was extended to $\sim$5~min to ensure $\geq$14 complete
   breathing cycles.
-  \emph{Limitation}: the five rates were presented in fixed
-  descending order (12$\to$3), so progressive relaxation, training,
-  or fatigue effects cannot be fully separated from the
-  breathing-rate manipulation.
+  Inter-condition rest periods of $\geq$3~min were enforced to
+  allow autonomic recovery and mitigate cumulative fatigue.
+  \emph{Limitation}: despite these rest periods, the five rates were
+  presented in fixed descending order (12$\to$3), so progressive
+  relaxation or training effects cannot be fully excluded without
+  counterbalanced presentation.
 
 \end{enumerate}
 
@@ -336,8 +361,31 @@ $\geq$220~s steady-state segments for paced breathing---for stable
 time- and frequency-domain HRV estimation.
 
 \textbf{Time domain.}
-Mean HR, SDNN, RMSSD, and pNN50 were computed from the edited
-RR series.
+The following time-domain indices were computed from the edited NN
+interval series following Task Force
+definitions~\cite{taskforce1996}:
+\begin{itemize}
+  \item \textbf{SDNN}: the standard deviation of all NN intervals,
+    reflecting total HRV encompassing both sympathetic and
+    parasympathetic contributions.  Because SDNN is algebraically
+    dependent on recording length, values are comparable only across
+    segments of equal duration~\cite{taskforce1996}.
+  \item \textbf{RMSSD}: the root mean square of successive NN
+    interval differences, selectively capturing short-term,
+    beat-to-beat variability mediated predominantly by vagal
+    (parasympathetic) efferent
+    activity~\cite{taskforce1996,shaffer2017}.  Unlike
+    frequency-domain HF power, RMSSD is insensitive to spectral-band
+    boundary definitions and therefore provides a robust vagal proxy
+    even when breathing frequency migrates across the LF/HF boundary.
+  \item \textbf{pNN50}: the proportion of successive NN interval
+    pairs differing by more than 50~ms, a complementary
+    parasympathetic index highly correlated with RMSSD but employing
+    a threshold criterion rather than a continuous
+    measure~\cite{taskforce1996}.
+\end{itemize}
+Mean heart rate (HR) in beats per minute was computed as
+$60 / \overline{\text{NN}}$.
 
 \textbf{Frequency domain.}
 The RR series was linearly detrended and resampled at 4~Hz via cubic
@@ -352,7 +400,7 @@ $\text{LF}_\text{n.u.} = \text{LF} / (\text{TP} - \text{VLF})
 
 \textbf{Transient conditions (E2, E3).}
 Because individual phases (hold, walk, recovery) lasted only
-20--60~s, standard frequency-domain HRV was not computed
+40--60~s, standard frequency-domain HRV was not computed
 per-phase~\cite{taskforce1996}.
 Instead, we reported regime-based mean~HR, RMSSD, HR~range, and
 HR~slope.
@@ -464,7 +512,7 @@ reduction in vagal modulation.
 Metric & Supine & Sitting & Standing \\
 \midrule
 Mean HR (bpm)           & 54.0  & 56.1  & 79.7 \\
-SDNN (ms)               & 81.5  & 56.6  & 41.8 \\
+SDNN (ms)$^\ast$        & 81.5  & 56.6  & 41.8 \\
 RMSSD (ms)              & 99.1  & 61.1  & 25.2 \\
 pNN50 (\%)              & 62.2  & 43.5  & 2.8 \\
 Total Power (ms$^{2}$)  & 4321.9 & 2016.6 & 1047.8 \\
@@ -474,6 +522,9 @@ LF n.u.\ (\%)           & 21.8  & 34.9  & 59.0 \\
 HF n.u.\ (\%)           & 78.2  & 65.1  & 41.0 \\
 LF/HF                   & 0.28  & 0.54  & 1.44 \\
 \bottomrule
+\multicolumn{4}{@{}l}{\footnotesize $^\ast$SDNN is
+  duration-dependent~\cite{taskforce1996}; all three conditions used
+  equal 300-s windows.}
 \end{tabular}
 \end{table}
 
@@ -823,7 +874,7 @@ Measured (Hz)      & 0.203  & 0.148  & 0.102  & 0.086  & 0.047 \\
 $|\Delta f|$ (Hz)  & 0.003  & 0.002  & 0.002  & 0.003  & 0.003 \\
 \midrule
 HR (bpm)           & 59.4  & 57.0  & 60.2  & 59.9  & 58.1 \\
-SDNN (ms)          & 48.7  & 78.0  & 91.3  & 95.9  & 131.4 \\
+SDNN (ms)$^\ast$   & 48.7  & 78.0  & 91.3  & 95.9  & 131.4 \\
 RMSSD (ms)         & 47.7  & 64.9  & 60.4  & 53.9  & 55.3 \\
 TP (ms$^{2}$)      & 1754  & 2381  & 6087  & 8240  & 10{,}493 \\
 LF (ms$^{2}$)      & 279   & 953   & 5470  & 7634  & 8980 \\
@@ -831,6 +882,9 @@ HF (ms$^{2}$)      & 1242  & 1129  & 474   & 437   & 514 \\
 LF/HF              & 0.22  & 0.84  & 11.54 & 17.45 & 17.47 \\
 RR amp.\ (ms)      & 157   & 240   & 293   & 297   & 406 \\
 \bottomrule
+\multicolumn{6}{@{}l}{\footnotesize $^\ast$SDNN is
+  duration-dependent~\cite{taskforce1996}; condition durations ranged
+  from 220 to 280~s.}
 \end{tabular}
 \end{table}
 
@@ -1036,9 +1090,11 @@ We deliberately framed this as a methodological lab demonstration
 rather than an inferential study.
 
 Second, the paced-breathing conditions were presented in fixed
-descending order (12$\to$3~breaths/min), so progressive relaxation,
-training, or fatigue effects cannot be fully separated from the
-breathing-rate manipulation.
+descending order (12$\to$3~breaths/min).
+Inter-condition rest periods of $\geq$3~min were enforced to allow
+autonomic recovery, but progressive relaxation or training effects
+cannot be fully excluded without counterbalanced or randomized
+presentation order.
 
 Third, no direct respiratory signal (respiratory belt or impedance
 pneumography) was recorded.
@@ -1155,6 +1211,11 @@ J.~Penttil\"a, A.~Helminen, T.~Jartti, \emph{et~al.},
 vagal outflow: Effects of various respiratory patterns,''
 \emph{Clin.\ Physiol.}, vol.~21, no.~3, pp.~365--376, 2001.
 
+\bibitem{oppenheim1999}
+A.~V.~Oppenheim, R.~W.~Schafer, and J.~R.~Buck,
+\emph{Discrete-Time Signal Processing}, 2nd~ed.\
+Upper Saddle River, NJ: Prentice-Hall, 1999.
+
 \end{thebibliography}
 
 % ============================================================
@@ -1209,6 +1270,12 @@ and sub-band drift. These results justify our use of full multi-minute
 windows---5~min for postural baselines (E1) and $\geq$220~s for
 steady-state paced breathing (E4)---rather than the shorter 30--60~s
 windows commonly used for transient analyses.
+This empirical observation is consistent with the theoretical
+spectral-resolution constraint discussed in
+Section~\ref{ssec:protocol}: a 30-s Hann window yields
+$\Delta f \approx 0.053$~Hz, placing only $\sim$2 bins inside the LF
+band and precluding reliable LF power
+estimation~\cite{oppenheim1999}.
 
 \begin{figure}[!t]
 \centering
