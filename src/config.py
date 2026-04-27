@@ -16,7 +16,7 @@ from pathlib import Path
 # =============================================================================
 FS = 500                          # ECG sampling rate [Hz]
 FS_GSEN = 25                      # 3-axis accelerometer sampling rate [Hz]
-NOTCH_FREQ = 50.0                 # Taiwan power line interference [Hz]
+NOTCH_FREQ = 60.0                 # confirmed mains interference peak [Hz]
 NOTCH_Q = 30.0                    # notch quality factor
 BANDPASS = (0.5, 40.0)            # ECG bandpass cutoffs [Hz]
 FILTER_ORDER = 4                  # Butterworth order (4th, applied as SOS + filtfilt)
@@ -55,11 +55,18 @@ BANDS = {
 # =============================================================================
 # Data paths
 # =============================================================================
-DATA_ROOT = Path(__file__).resolve().parent.parent / 'data-new'
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATA_ROOT = REPO_ROOT / 'data-new'
+OUTPUTS_ROOT = REPO_ROOT / 'outputs'
+FIGURES_DIR = OUTPUTS_ROOT / 'figures'
+TABLES_DIR = OUTPUTS_ROOT / 'tables'
+MANUSCRIPT_DIR = REPO_ROOT / 'manuscript'
+MANUSCRIPT_NOTES_DIR = MANUSCRIPT_DIR / 'notes'
+MANUSCRIPT_BUILD_DIR = MANUSCRIPT_DIR / 'build'
+FIGURE_EXPORT_EXT = '.pdf'
 
 # short key -> session folder under data-new/ (E1 folders use the same suffix as the key).
 SESSION_MAP = {
-    'E1PRE':       '20260424_145813_E1PRE',
     'E1A':         '20260424_165939_E1A',
     'E1B':         '20260424_170710_E1B',
     'E1C':         '20260424_171501_E1C',
@@ -81,8 +88,7 @@ SESSION_MAP = {
 # cleanest contiguous steady-state period. Durations are chosen based on
 # actual recording lengths (verified 2026-04-24).
 FILE_INVENTORY = {
-    # Experiment 1 — E1PRE = pre-sleep supine (validation); E1A–C = postural ramp
-    'E1PRE':      {'window': (10.0, 310.0), 'note': 'supine, pre-sleep (pipeline validation)'},
+    # Experiment 1 — E1A–C = postural ramp
     'E1A':        {'window': (10.0, 310.0), 'note': 'supine, post-sleep (repeat supine)'},
     'E1B':        {'window': (10.0, 310.0), 'note': 'sitting, 5 min (HF reference for E2/E3)'},
     'E1C':        {'window': (10.0, 310.0), 'note': 'standing, 5 min'},
@@ -133,22 +139,21 @@ E3_SEG = {
 # Each transient / short-segment key is anchored to a posture-matched steady-state
 # recording. E2 and E3 are seated -> anchor to E1B (sitting). Using E1A (supine)
 # would inflate the hold HF-drop ratio because HF is higher supine than sitting, and
-# would distort Finding 1 in Table 2.1. E4B is supine -> anchor to E1PRE
-# (pre-sleep supine baseline).
+# would distort Finding 1 in Table 2.1. E4B is supine -> anchor to E1A
+# (post-sleep supine baseline).
 ANCHOR_KEYS = {
     'E2A_insp_1': 'E1B',
     'E2A_insp_2': 'E1B',
     'E2B_exp_1':  'E1B',
     'E2B_exp_2':  'E1B',
     'E3_walk':    'E1B',
-    'E4B_sleep':  'E1PRE',
+    'E4B_sleep':  'E1A',
 }
 
 # =============================================================================
 # Orchestrator dispatch
 # =============================================================================
 EXPERIMENT_TYPE = {
-    'E1PRE': 'steady_state',
     'E1A': 'steady_state',  'E1B': 'steady_state',
     'E1C': 'steady_state',
     'E4A_12pm': 'steady_state', 'E4A_9pm': 'steady_state',
@@ -165,7 +170,7 @@ EXPERIMENT_TYPE = {
 # =============================================================================
 CONDITION_ORDER = [
     'E4A_3pm', 'E4A_6pm',               # slow paced - most parasympathetic
-    'E1PRE', 'E1A',                     # supine: pre-sleep + postural supine
+    'E1A',                              # supine: postural supine
     'E1B',                              # sitting baseline
     'E4A_12pm', 'E4A_9pm', 'E4A_5pm',   # other paced conditions
     'E1C',                              # standing
@@ -180,8 +185,8 @@ def get_session_path(key: str) -> Path:
     """Return path to the <session>/20260424/ directory (parent of hour folders).
 
     Example:
-        get_session_path('E1PRE') ->
-            data-new/20260424_145813_E1PRE/20260424/
+        get_session_path('E1A') ->
+            data-new/20260424_165939_E1A/20260424/
     """
     if key not in SESSION_MAP:
         raise KeyError(f"Unknown session key: {key!r}. "
@@ -210,7 +215,9 @@ __all__ = [
     'FS', 'FS_GSEN', 'NOTCH_FREQ', 'NOTCH_Q', 'BANDPASS', 'FILTER_ORDER',
     'BASELINE_MED1_MS', 'BASELINE_MED2_MS',
     'REFRACTORY_MS', 'RR_MIN_MS', 'RR_MAX_MS', 'INTERP_FREQ', 'BANDS',
-    'DATA_ROOT', 'SESSION_MAP', 'FILE_INVENTORY',
+    'REPO_ROOT', 'DATA_ROOT', 'OUTPUTS_ROOT', 'FIGURES_DIR', 'TABLES_DIR',
+    'MANUSCRIPT_DIR', 'MANUSCRIPT_NOTES_DIR', 'MANUSCRIPT_BUILD_DIR',
+    'FIGURE_EXPORT_EXT', 'SESSION_MAP', 'FILE_INVENTORY',
     'E4A_EXPECTED_BREATHING_HZ', 'E2_SEG', 'E3_SEG',
     'ANCHOR_KEYS', 'EXPERIMENT_TYPE', 'CONDITION_ORDER',
     'get_session_path', 'check_freq_match',

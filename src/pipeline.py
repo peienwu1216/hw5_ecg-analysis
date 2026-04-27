@@ -4,7 +4,7 @@ Design principles:
 ---
 1. **`filter_ecg` is the single source of filtering truth**. Every downstream
    step consumes the already-filtered signal. In particular, NK2 helpers do
-   NOT call `nk.ecg_clean` (it would re-apply a 50 Hz notch on top of ours).
+   NOT call `nk.ecg_clean` (it would re-apply a 60 Hz notch on top of ours).
 1b. The first `config.RR_DROP_LEADING` R-R intervals are removed after
    `compute_rr` in each orchestrator (spurious beats at device capture start).
    NK2 `compute_hrv_full` uses `peaks[RR_DROP_LEADING:]` so HRV and exported
@@ -97,7 +97,7 @@ def load_ecg(key: str, ch: int = 1, apply_window: bool = True,
 
     Parameters
     ----------
-    key : session key such as 'E1PRE' or 'E1A' (see config.SESSION_MAP)
+    key : session key such as 'E1A' or 'E4A_3pm' (see config.SESSION_MAP)
     ch  : 0 or 1 (chN.csv). Default is 1 per legend convention; new dataset has ch0==ch1.
     apply_window : if True, crop to FILE_INVENTORY[key]['window'] = (start_s, end_s).
 
@@ -243,12 +243,12 @@ def remove_baseline_drift(ecg: np.ndarray, fs: float = FS,
 def filter_ecg(ecg: np.ndarray, fs: float = FS,
                notch_freq: float = NOTCH_FREQ,
                bandpass: tuple[float, float] = BANDPASS) -> np.ndarray:
-    """Baseline drift removal + 50 Hz notch + 0.5-40 Hz bandpass.
+    """Baseline drift removal + 60 Hz notch + 0.5-40 Hz bandpass.
 
     Pipeline order:
       1. Two-stage median filter removes baseline drift (data-adaptive,
          does not distort QRS morphology).
-      2. 50 Hz notch (iirnotch, Q=30).
+      2. 60 Hz notch (iirnotch, Q=30).
       3. 0.5-40 Hz Butterworth bandpass (4th order, SOS filtfilt) — the
          high-pass leg now acts as a safety net rather than primary drift
          removal, so edge effects are minimal.
@@ -431,6 +431,28 @@ def time_domain_hrv(rr_ms: np.ndarray) -> dict[str, float]:
         'pnn50_pct':   float(np.mean(np.abs(d) > 50.0) * 100.0),
         'min_hr_bpm':  float(np.min(hr)),
         'max_hr_bpm':  float(np.max(hr)),
+    }
+
+
+def nk_hrv_time_from_rr_ms(rr_ms: np.ndarray, fs: float = FS) -> dict[str, float]:
+    """NeuroKit2 time-domain HRV on a *given* R–R series (ms), same input as
+    :func:`time_domain_hrv`.
+
+    Converts intervals to sample indices via :func:`neurokit2.intervals_to_peaks`
+    then :func:`neurokit2.hrv_time`. For identical ``rr_ms``, MeanNN/RMSSD match
+    :func:`time_domain_hrv` to numerical precision; use that check when you need
+    to isolate software parity from *different* R–R (two end-to-end pipelines).
+    """
+    rr_ms = np.asarray(rr_ms, dtype=float)
+    if rr_ms.size < 2:
+        return {'HRV_MeanNN': float('nan'), 'HRV_RMSSD': float('nan')}
+    with warnings.catch_warnings():
+        warnings.filterwarnings('ignore', category=Warning)
+        peaks = nk.intervals_to_peaks(rr_ms, sampling_rate=fs)
+        df = nk.hrv_time(peaks, sampling_rate=fs, show=False)
+    return {
+        'HRV_MeanNN': float(df['HRV_MeanNN'].iloc[0]) if 'HRV_MeanNN' in df else float('nan'),
+        'HRV_RMSSD':  float(df['HRV_RMSSD'].iloc[0]) if 'HRV_RMSSD' in df else float('nan'),
     }
 
 
@@ -962,7 +984,7 @@ def _load_and_filter(key: str) -> tuple[np.ndarray, np.ndarray, np.ndarray, bool
 
 
 def analyze_steady_state(key: str) -> AnalysisResult:
-    """Full scipy + NK2 pipeline for E1PRE / E1A–C, E4A_*."""
+    """Full scipy + NK2 pipeline for E1A / E1A–C, E4A_*."""
     t, ecg_raw, ecg_f, ch_eq = _load_and_filter(key)
 
     # scipy path
@@ -1133,7 +1155,7 @@ __all__ = [
     'compute_rr', 'reject_artifacts', 'drop_leading_rr_intervals',
     'flatten_leading_baseline_to_local_mean', 'interpolate_rr',
     # HRV (scipy)
-    'time_domain_hrv', 'frequency_domain_hrv', 'rr_psd', 'ecg_psd',
+    'time_domain_hrv', 'nk_hrv_time_from_rr_ms', 'frequency_domain_hrv', 'rr_psd', 'ecg_psd',
     # HRV (NK2)
     'compute_hrv_full', 'derive_respiration_from_ecg', 'hrv_rsa_full',
     # pooling / spectrograms / sweeps

@@ -1,5 +1,5 @@
 Condition,Effort,Hold HR (bpm),Slope (bpm/s),Pre HF (ms²),Hold HF (ms²),LF/HF
-Baseline,E1B,56.1,—,—,1122.6,0.54
+Baseline,E1B,56.1,—,—,1123.4,0.53
 Inspiratory,Effortful,66.9,-0.188,625.6,43.7,27.04
 Inspiratory,Relaxed,73.5,+0.176,1523.7,39.1,25.06
 Expiratory,Effortful,57.8,-0.098,889.9,111.3,4.79

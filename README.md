@@ -47,7 +47,7 @@ NK2 0.2.x and is handled accordingly in `src/pipeline.py`).
 ```
 hw5_ecg-analysis/
 ├── data-new/                        # raw CSV sessions (one folder per session)
-│   └── 20260424_HHMMSS_<KEY>/       # e.g. E1PRE → …_E1PRE folder (see SESSION_MAP)
+│   └── 20260424_HHMMSS_<KEY>/       # e.g. E1A → …_E1A folder (see SESSION_MAP)
 │       └── 00/                      # hour-folders, each with ecgh.csv, gsen.csv, deviceatr.csv
 ├── src/
 │   ├── config.py                    # FS, BANDS, SESSION_MAP, FILE_INVENTORY, ANCHOR_KEYS, …
@@ -59,26 +59,26 @@ hw5_ecg-analysis/
 │   ├── 02_experiment_1.ipynb
 │   ├── 03_experiment_2.ipynb
 │   ├── 04_experiment_3.ipynb
-│   ├── 05_experiment_4A.ipynb
+│   ├── 05_experiment_4.ipynb
 │   └── 06_integration.ipynb
 ├── outputs/
-│   ├── figures/                     # all PNGs produced by notebooks
+│   ├── figures/                     # PDF exports from notebooks / scripts
 │   └── tables/                      # all CSVs (HRV tables + ANALYSIS_LOG)
 ├── scripts/
 │   ├── preflight_check.py           # verify NK2 API against pipeline assumptions
 │   ├── preflight_report.md          # notes from the preflight run
-│   └── build_notebooks.py           # regenerates the seven notebook skeletons
+│   └── collect_paper_figures.py     # write manuscript/notes/FIGURE_INDEX* from outputs/figures
 └── requirements.txt
 ```
 
 ### Session map
 
-Sessions are referenced by short keys (`E1PRE`, `E1A`, `E1B`, `E1C`,
+Sessions are referenced by short keys (`E1A`, `E1B`, `E1C`,
 `E2A_insp_1`, `E2A_insp_2`, `E2B_exp_1`, `E2B_exp_2`, `E3_walk`,
-`E4A_12pm/9pm/6pm/5pm/3pm`, `E4B_sleep`). **E1PRE** is pre-sleep supine
-(pipeline validation); **E1A–E1C** are the postural ramp (supine → sitting →
-standing). Experiment 1 folders use the same suffix as the key (`…_E1PRE`,
-`…_E1A`, …); other experiments keep their original naming. `SESSION_MAP` in
+`E4A_12pm/9pm/6pm/5pm/3pm`, `E4B_sleep`). **E1A–E1C** are the postural ramp
+(supine → sitting → standing). **E1A** (post-sleep supine) is used for pipeline
+validation. Experiment 1 folders use the same suffix as the key (`…_E1A`,
+`…_E1B`, …); other experiments keep their original naming. `SESSION_MAP` in
 `src/config.py` lists the exact directory name for each key.
 
 Each session folder contains one or more hour directories (`00/`, `01/`, …)
@@ -112,11 +112,11 @@ The notebooks are self-contained but share `src/`:
 | Notebook | Deliverables |
 | -------- | ------------ |
 | `00_quality_check`        | Duration assertions, channel equality check, visual sanity panel, `quality_check.csv` |
-| `01_pipeline_validation`  | scipy vs NK2 agreement on **E1PRE**, `e1pre_pipeline_comparison.csv`, `e1pre_hrv_full.csv` |
+| `01_pipeline_validation`  | scipy vs NK2 agreement on **E1A**, `e1a_pipeline_comparison.csv`, `e1a_hrv_full.csv` |
 | `02_experiment_1`         | Postural analysis **E1A–E1C**: tachograms, ECG/RR PSD, duration sweep on **E1A** (supine), `table_1_1_postural.csv`, `e1a_duration_sweep.csv`, `e1_hrv_full.csv` |
 | `03_experiment_2`         | Breath-hold HR trajectories (mean ± SD across trials), RR spectrograms, pooled PSD against **E1B** seated baseline, `table_2_1a_trials.csv`, `table_2_1b_pooled.csv` |
 | `04_experiment_3`         | Walking tachogram, recovery τ fit, ECG snapshots rest/walk/recovery, motion cross-check (GSEN magnitude), `table_3_1_walking.csv` |
-| `05_experiment_4A`        | Publication-grade paced-breathing analysis: tachograms with EDR inset, single-panel RR PSD overlay, regression-based peak-frequency validation, LF/HF-vs-RMSSD contrast, monotonic-amplitude resonance analysis, expanded `table_4_1_paced.csv`, plus Methods/Results/Discussion text blocks |
+| `05_experiment_4`         | Publication-grade paced-breathing analysis: tachograms with EDR inset, single-panel RR PSD overlay, regression-based peak-frequency validation, LF/HF-vs-RMSSD contrast, monotonic-amplitude resonance analysis, expanded `table_4_1_paced.csv`, plus Methods/Results/Discussion text blocks |
 | `06_integration`          | Autonomic spectrum (log-scale LF/HF + HR twin-axis), HF-vs-HR scatter, cross-pipeline validation figure, E4B sleep appendix, `table_5_cross_experiment.csv` |
 
 ---
@@ -127,45 +127,37 @@ All artefacts land under `outputs/`.
 
 ### Figures (`outputs/figures/`)
 
+Canonical figure exports are now stored as PDF files in one place: `outputs/figures/`.
+Notebook code should go through `src.plotting.save_figure(...)`, which normalizes the
+extension to `.pdf` automatically.
+
+The manuscript uses these files directly instead of keeping a second copy under
+`manuscript/figures/`. The current main-text / appendix mapping is tracked in:
+
+- `manuscript/notes/FIGURE_INDEX.md`
+- `scripts/collect_paper_figures.py`
+
+Representative manuscript figures:
+
 | File | Notebook | Purpose |
 | ---- | -------- | ------- |
-| `00_quality_overview.png`            | 00 | 15-session ECG sanity panel |
-| `01_e1pre_validation.png`            | 01 | scipy vs NK2 peaks + RR tachogram + pooled PSD on E1PRE |
-| `11_postural_tachograms.png`         | 02 | Three-panel tachograms for E1A–E1C |
-| `12_ecg_psd_harmonics.png`           | 02 | ECG PSD with f0 harmonics + respiratory peak marker |
-| `13_rr_psd_postural.png`             | 02 | 2×3 RR tachogram + PSD (E1A–E1C), shared Y, grayscale LF/HF, inset metrics |
-| `14_duration_effect.png`             | 02 | SDNN/LF/HF vs sliding-window length with CV% |
-| `21_e2_tachograms.png`               | 03 | E2 trial-by-trial tachograms with hold markers |
-| `22_e2_hr_trajectory.png`            | 03 | HR mean ± SD, aligned to hold onset |
-| `23_e2_spectrogram.png`              | 03 | RR spectrograms during breath-hold |
-| `24_e2_pooled_psd.png`               | 03 | E1B seated anchor vs pooled hold vs pooled recovery PSD |
-| `31_e3_tachogram.png`                | 04 | Walking tachogram with rest / walk / recovery regimes |
-| `32_e3_ecg_snapshots.png`            | 04 | 10-s ECG snapshots per regime |
-| `33_e3_recovery_tau.png`             | 04 | Exponential recovery fit on HR |
-| `34_e3_ecg_psd.png`                  | 04 | ECG PSD per regime |
-| `35_e3_motion_crosscheck.png`        | 04 | Accelerometer magnitude vs HR |
-| `41_e4a_tachograms_ieee.png`         | 05 | Five-panel paced-breathing tachograms with HR / SDNN / RMSSD and EDR rate inset |
-| `41_e4a_tachograms_ieee.pdf`         | 05 | Vector-export companion of Figure 4.1 |
-| `42_e4a_psd_overlay_ieee.png`        | 05 | Single-panel RR PSD overlay (linear Y) with band shading, imposed-rate lines, peak labels, and verification inset |
-| `42_e4a_psd_overlay_ieee.pdf`        | 05 | Vector-export companion of Figure 4.2 |
-| `43_e4a_peak_freq_ieee.png`          | 05 | Expected-vs-measured breathing-frequency scatter with `linregress`, 95% CI, and hypothesis tests |
-| `43_e4a_peak_freq_ieee.pdf`          | 05 | Vector-export companion of Figure 4.3 |
-| `44_e4a_lfhf_crossover.png`          | 05 | Two-panel contrast: LF/HF inflation above, RMSSD stability below |
-| `44_e4a_lfhf_crossover.pdf`          | 05 | Vector-export companion of Figure 4.4 |
-| `45_e4a_resonance.png`               | 05 | RR amplitude (`p95-p5`) plus NK2 RSA P2T, showing monotonic increase rather than a clear 6/min peak |
-| `45_e4a_resonance.pdf`               | 05 | Vector-export companion of Figure 4.5 |
-| `51_autonomic_spectrum.png`          | 06 | Cross-experiment LF/HF (log) + HR (twin axis) |
-| `52_hf_vs_hr_scatter.png`            | 06 | HF power vs mean HR across all conditions |
-| `53_pipeline_validation.png`         | 06 | scipy vs NK2 peak-count / RR / HF agreement |
-| `A1_e4b_sleep_trajectory.png`        | 06 | Appendix: E4B wake-to-sleep HR trajectory |
+| `nb02_fig03_rr_psd_postural.pdf` | 02 | Main posture RR/PSD comparison |
+| `nb03_fig02_e2_effort_comparison.pdf` | 03 | Main breath-hold comparison |
+| `nb04_fig01_e3_tachogram.pdf` | 04 | Walking tachogram for Results |
+| `nb05_fig02_e4a_psd_overlay.pdf` | 05 | Paced-breathing PSD overlay |
+| `nb05_fig03_e4a_peak_freq.pdf` | 05 | Breathing peak tracking regression |
+| `nb05_fig04_e4a_lfhf_crossover.pdf` | 05 | LF/HF vs RMSSD dissociation |
+| `nb06_fig01_autonomic_spectrum.pdf` | 06 | Cross-experiment synthesis |
+| `nb06_fig03_pipeline_validation.pdf` | 06 | Appendix pipeline validation |
+| `nb06_fig04_e4b_sleep_trajectory.pdf` | 06 | Appendix sleep-onset trajectory |
 
 ### Tables (`outputs/tables/`)
 
 | File | Contents |
 | ---- | -------- |
 | `quality_check.csv`             | Per-session duration, channel equality, pass/fail flags |
-| `e1pre_pipeline_comparison.csv` | E1PRE scipy vs NK2 peak counts, RR diff, HRV diff |
-| `e1pre_hrv_full.csv`            | Full NK2 HRV suite (time / frequency / non-linear) for E1PRE |
+| `e1a_pipeline_comparison.csv`   | E1A scipy vs NK2 peak counts, RR diff, HRV diff |
+| `e1a_hrv_full.csv`              | Full NK2 HRV suite (time / frequency / non-linear) for E1A |
 | `e1a_duration_sweep.csv`        | Mean ± SD and CV% of SDNN / LF / HF (sliding windows on **E1A** supine) |
 | `e1_hrv_full.csv`               | Full NK2 HRV suite for **E1A–E1C** (stacked for integration) |
 | `table_1_1_postural.csv`        | Postural comparison (Task Force HRV indices) |
@@ -180,7 +172,7 @@ All artefacts land under `outputs/`.
 
 ## 5. Pipeline design notes
 
-- **Single filtering path.** `pipeline.filter_ecg` (50 Hz notch + 0.5–40 Hz
+- **Single filtering path.** `pipeline.filter_ecg` (60 Hz notch + 0.5–40 Hz
   Butterworth bandpass, `sosfiltfilt`) is the only ECG filter used. NK2 R-peak
   detection receives the already-filtered signal; we do *not* call
   `nk.ecg_clean` to avoid double filtering.
@@ -207,18 +199,3 @@ All artefacts land under `outputs/`.
   global `ANALYSIS_LOG` (written to `analysis_log.csv`) with session key,
   duration, peak counts, artefact stats, filter parameters, and detection
   method.
-
----
-
-## 6. Re-generating notebooks
-
-The notebook skeletons are produced by `scripts/build_notebooks.py` (reading
-the latest pipeline / plotting API). To re-scaffold:
-
-```bash
-python scripts/build_notebooks.py          # overwrites notebooks/*.ipynb
-```
-
-This is only needed if you change the plan or the `pipeline` / `plotting`
-signatures and want the cell boilerplate regenerated. Day-to-day, edit the
-notebooks directly.
