@@ -1,0 +1,1130 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.26)  27 APR 2026 22:25
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen148
+\@IEEEtrantmpdimenB=\dimen149
+\@IEEEtrantmpdimenC=\dimen150
+\@IEEEtrantmpcountA=\count275
+\@IEEEtrantmpcountB=\count276
+\@IEEEtrantmpcountC=\count277
+\@IEEEtrantmptoksA=\toks17
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 5
+03.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen151
+-- This is a 10 point document.
+LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding ?) o
+n input line 937.
+\CLASSINFOnormalsizebaselineskip=\dimen152
+\CLASSINFOnormalsizeunitybaselineskip=\dimen153
+\IEEEnormaljot=\dimen154
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+
+\IEEEquantizedlength=\dimen155
+\IEEEquantizedlengthdiff=\dimen156
+\IEEEquantizedtextheightdiff=\dimen157
+\IEEEilabelindentA=\dimen158
+\IEEEilabelindentB=\dimen159
+\IEEEilabelindent=\dimen160
+\IEEEelabelindent=\dimen161
+\IEEEdlabelindent=\dimen162
+\IEEElabelindent=\dimen163
+\IEEEiednormlabelsep=\dimen164
+\IEEEiedmathlabelsep=\dimen165
+\IEEEiedtopsep=\skip49
+\c@section=\count278
+\c@subsection=\count279
+\c@subsubsection=\count280
+\c@paragraph=\count281
+\c@IEEEsubequation=\count282
+\abovecaptionskip=\skip50
+\belowcaptionskip=\skip51
+\c@figure=\count283
+\c@table=\count284
+\@IEEEeqnnumcols=\count285
+\@IEEEeqncolcnt=\count286
+\@IEEEsubeqnnumrollback=\count287
+\@IEEEquantizeheightA=\dimen166
+\@IEEEquantizeheightB=\dimen167
+\@IEEEquantizeheightC=\dimen168
+\@IEEEquantizeprevdepth=\dimen169
+\@IEEEquantizemultiple=\count288
+\@IEEEquantizeboxA=\box53
+\@IEEEtmpitemindent=\dimen170
+\IEEEPARstartletwidth=\dimen171
+\c@IEEEbiography=\count289
+\@IEEEtranrubishbin=\box54
+) (/usr/local/texlive/2026basic/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen172
+))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen173
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count290
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count291
+\leftroot@=\count292
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count293
+\DOTSCASE@=\count294
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box55
+\strutbox@=\box56
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen174
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count295
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count296
+\dotsspace@=\muskip17
+\c@parentequation=\count297
+\dspbrk@lvl=\count298
+\tag@help=\toks19
+\row@=\count299
+\column@=\count300
+\maxfields@=\count301
+\andhelp@=\toks20
+\eqnshift@=\dimen175
+\alignsep@=\dimen176
+\tagshift@=\dimen177
+\tagwidth@=\dimen178
+\totwidth@=\dimen179
+\lineht@=\dimen180
+\@envbody=\toks21
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen181
+\Gin@req@width=\dimen182
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/grffile/grffile.sty
+Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
+y)
+Package grffile Info: This package is an empty stub for compatibility on input 
+line 40.
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen183
+\lightrulewidth=\dimen184
+\cmidrulewidth=\dimen185
+\belowrulesep=\dimen186
+\belowbottomsep=\dimen187
+\aboverulesep=\dimen188
+\abovetopsep=\dimen189
+\cmidrulesep=\dimen190
+\cmidrulekern=\dimen191
+\defaultaddspace=\dimen192
+\@cmidla=\count302
+\@cmidlb=\count303
+\@aboverulesep=\dimen193
+\@belowrulesep=\dimen194
+\@thisruleclass=\count304
+\@lastruleclass=\count305
+\@thisrulewidth=\dimen195
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip55
+\multirow@cntb=\count306
+\multirow@dima=\skip56
+\bigstrutjot=\dimen196
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2026-04-15 v3.5.4 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count307
+\l__siunitx_number_exponent_fixed_int=\count308
+\l__siunitx_number_min_decimal_int=\count309
+\l__siunitx_number_min_integer_int=\count310
+\l__siunitx_number_round_precision_int=\count311
+\l__siunitx_number_lower_threshold_int=\count312
+\l__siunitx_number_upper_threshold_int=\count313
+\l__siunitx_number_group_first_int=\count314
+\l__siunitx_number_group_size_int=\count315
+\l__siunitx_number_group_min_int=\count316
+\l__siunitx_number_group_minimum_int=\count317
+\l__siunitx_compound_count_int=\count318
+\l__siunitx_table_tmp_box=\box57
+\l__siunitx_table_tmp_dim=\dimen197
+\l__siunitx_table_column_width_dim=\dimen198
+\l__siunitx_table_integer_box=\box58
+\l__siunitx_table_decimal_box=\box59
+\l__siunitx_table_uncert_box=\box60
+\l__siunitx_table_before_box=\box61
+\l__siunitx_table_after_box=\box62
+\l__siunitx_table_before_dim=\dimen199
+\l__siunitx_table_carry_dim=\dimen256
+\l__siunitx_unit_tmp_int=\count319
+\l__siunitx_unit_position_int=\count320
+\l__siunitx_unit_total_int=\count321
+\l__siunitx_sexagesimal_tmp_dim=\dimen257
+\l__siunitx_sexagesimal_marker_box=\box63
+\l__siunitx_sexagesimal_unit_box=\box64
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen258
+\ar@mcellbox=\box65
+\extrarowheight=\dimen259
+\NC@list=\toks24
+\extratabsurround=\skip57
+\backup@length=\skip58
+\ar@cellbox=\box66
+))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/preprint/balance.sty
+Package: balance 1999/02/23 4.3 (PWD)
+\oldvsize=\dimen260
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+\TX@col@width=\dimen261
+\TX@old@table=\dimen262
+\TX@old@col=\dimen263
+\TX@target=\dimen264
+\TX@delta=\dimen265
+\TX@cols=\count322
+\TX@ftn=\toks25
+)
+
+Package siunitx Info: Option "detect-weight" has been deprecated in this
+(siunitx)             release.
+(siunitx)             
+(siunitx)             Use "reset-text-series = false, text-series-to-math =
+(siunitx)             true" as a replacement.
+
+
+Package siunitx Info: Option "detect-family" has been deprecated in this
+(siunitx)             release.
+(siunitx)             
+(siunitx)             Use "reset-text-family = false, text-family-to-math =
+(siunitx)             true" as a replacement.
+
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count323
+)
+No file main.aux.
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+-- Lines per column: 56 (exact).
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count324
+\scratchdimen=\dimen266
+\scratchbox=\box67
+\nofMPsegments=\count325
+\nofMParguments=\count326
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count327
+\MPscratchDim=\dimen267
+\MPnumerator=\count328
+\makeMPintoPDFobject=\count329
+\everyMPtoPDFconversion=\toks27
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+** WARNING: \thanks is locked out when in conference mode (line 51).
+LaTeX Font Info:    Trying to load font information for U+msa on input line 67.
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 67.
+
+
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+LaTeX Warning: Citation `taskforce1996' on page 1 undefined on input line 93.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 1 undefined on input line 98.
+
+
+LaTeX Warning: Citation `hirsch1981' on page 1 undefined on input line 101.
+
+
+LaTeX Warning: Citation `berntson1997' on page 1 undefined on input line 103.
+
+
+LaTeX Warning: Citation `shaffer2017' on page 1 undefined on input line 103.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 1 undefined on input line 108.
+
+
+LaTeX Warning: Citation `billman2013' on page 1 undefined on input line 112.
+
+
+LaTeX Warning: Citation `eckberg1997' on page 1 undefined on input line 112.
+
+
+LaTeX Warning: Citation `lehrer2014' on page 1 undefined on input line 118.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--152
+[]\OT1/ptm/m/n/10 Within the tested paced-breathing range (3--
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--152
+\OT1/ptm/m/n/10 12 breaths/min), RR os-cil-la-tion am-pli-tude does
+ []
+
+
+LaTeX Warning: Reference `tab:validity' on page 1 undefined on input line 173.
+
+[1{/usr/local/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/
+usr/local/texlive/2026basic/texmf-dist/fonts/enc/dvips/base/8r.enc}
+
+
+]
+
+LaTeX Warning: Reference `tab:assignment_map' on page 2 undefined on input line
+ 175.
+
+
+LaTeX Warning: Reference `ssec:posture' on page 2 undefined on input line 198.
+
+
+LaTeX Warning: Reference `fig:posture' on page 2 undefined on input line 198.
+
+
+LaTeX Warning: Reference `fig:poincare' on page 2 undefined on input line 198.
+
+
+LaTeX Warning: Reference `ssec:breathhold' on page 2 undefined on input line 19
+8.
+
+
+LaTeX Warning: Reference `fig:breathhold' on page 2 undefined on input line 198
+.
+
+
+LaTeX Warning: Reference `fig:hf_collapse' on page 2 undefined on input line 19
+8.
+
+
+LaTeX Warning: Reference `ssec:walking' on page 2 undefined on input line 198.
+
+
+LaTeX Warning: Reference `fig:walk_motion' on page 2 undefined on input line 19
+8.
+
+
+LaTeX Warning: Reference `fig:walk_ecg_psd' on page 2 undefined on input line 1
+98.
+
+
+LaTeX Warning: Reference `ssec:paced' on page 2 undefined on input line 198.
+
+
+LaTeX Warning: Reference `fig:e4a_tachograms' on page 2 undefined on input line
+ 198.
+
+
+LaTeX Warning: Reference `fig:e4a_resp_resonance' on page 2 undefined on input 
+line 198.
+
+
+LaTeX Warning: Reference `ssec:integration' on page 2 undefined on input line 1
+98.
+
+
+LaTeX Warning: Reference `fig:integration' on page 2 undefined on input line 19
+8.
+
+
+LaTeX Warning: Reference `tab:validity' on page 2 undefined on input line 198.
+
+
+LaTeX Warning: Reference `tab:protocol' on page 2 undefined on input line 220.
+
+
+LaTeX Warning: Citation `oppenheim1999' on page 2 undefined on input line 231.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 2 undefined on input line 237.
+
+
+LaTeX Warning: Reference `fig:duration_effect' on page 2 undefined on input lin
+e 242.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 2 undefined on input line 255.
+
+
+LaTeX Warning: Citation `virtanen2020' on page 2 undefined on input line 317.
+
+
+LaTeX Warning: Reference `fig:pipeline_overview' on page 2 undefined on input l
+ine 320.
+
+
+LaTeX Warning: Citation `pan1985' on page 2 undefined on input line 323.
+
+[2]
+
+LaTeX Warning: Citation `makowski2021' on page 3 undefined on input line 326.
+
+<../outputs/figures/nb01_fig01_pipeline_overview.pdf, id=23, 653.01988pt x 813.
+0375pt>
+File: ../outputs/figures/nb01_fig01_pipeline_overview.pdf Graphic file (type pd
+f)
+<use ../outputs/figures/nb01_fig01_pipeline_overview.pdf>
+Package pdftex.def Info: ../outputs/figures/nb01_fig01_pipeline_overview.pdf  u
+sed on input line 336.
+(pdftex.def)             Requested size: 252.0pt x 313.74615pt.
+
+LaTeX Warning: Citation `taskforce1996' on page 3 undefined on input line 349.
+
+
+LaTeX Warning: Reference `fig:duration_effect' on page 3 undefined on input lin
+e 355.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 3 undefined on input line 366.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 3 undefined on input line 372.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 3 undefined on input line 377.
+
+
+LaTeX Warning: Citation `shaffer2017' on page 3 undefined on input line 377.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 3 undefined on input line 386.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 3 undefined on input line 393.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 3 undefined on input line 405.
+
+
+LaTeX Warning: Reference `ssec:walking' on page 3 undefined on input line 436.
+
+[3 <../outputs/figures/nb01_fig01_pipeline_overview.pdf>]
+Underfull \hbox (badness 2088) in paragraph at lines 446--462
+\OT1/ptm/m/n/10 o-nance in-de-pen-dently of fixed LF/HF band bound-aries,
+ []
+
+
+LaTeX Warning: Reference `tab:posture' on page 4 undefined on input line 473.
+
+
+LaTeX Warning: Reference `fig:posture' on page 4 undefined on input line 474.
+
+
+LaTeX Warning: Reference `fig:poincare' on page 4 undefined on input line 474.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 4 undefined on input line 479.
+
+
+LaTeX Warning: Reference `fig:ecg_psd' on page 4 undefined on input line 481.
+
+
+LaTeX Warning: Reference `fig:poincare' on page 4 undefined on input line 486.
+
+
+LaTeX Warning: Reference `fig:ecg_psd' on page 4 undefined on input line 500.
+
+
+LaTeX Warning: Reference `fig:posture' on page 4 undefined on input line 502.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 4 undefined on input line 528.
+
+
+Overfull \hbox (24.98758pt too wide) in paragraph at lines 511--530
+ [][] 
+ []
+
+<../outputs/figures/nb02_fig03_rr_psd_postural.pdf, id=308, 525.88419pt x 348.9
+0326pt>
+File: ../outputs/figures/nb02_fig03_rr_psd_postural.pdf Graphic file (type pdf)
+
+<use ../outputs/figures/nb02_fig03_rr_psd_postural.pdf>
+Package pdftex.def Info: ../outputs/figures/nb02_fig03_rr_psd_postural.pdf  use
+d on input line 534.
+(pdftex.def)             Requested size: 252.0pt x 167.18948pt.
+
+LaTeX Warning: Citation `taskforce1996' on page 4 undefined on input line 543.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 4 undefined on input line 543.
+
+<../outputs/figures/nb02_fig02_ecg_psd_harmonics.pdf, id=309, 261.376pt x 369.7
+81pt>
+File: ../outputs/figures/nb02_fig02_ecg_psd_harmonics.pdf Graphic file (type pd
+f)
+<use ../outputs/figures/nb02_fig02_ecg_psd_harmonics.pdf>
+Package pdftex.def Info: ../outputs/figures/nb02_fig02_ecg_psd_harmonics.pdf  u
+sed on input line 549.
+(pdftex.def)             Requested size: 252.0pt x 356.51482pt.
+<../outputs/figures/nb02_fig05_poincare_plot.pdf, id=310, 1078.26656pt x 282.48
+976pt>
+File: ../outputs/figures/nb02_fig05_poincare_plot.pdf Graphic file (type pdf)
+<use ../outputs/figures/nb02_fig05_poincare_plot.pdf>
+Package pdftex.def Info: ../outputs/figures/nb02_fig05_poincare_plot.pdf  used 
+on input line 567.
+(pdftex.def)             Requested size: 252.0pt x 66.0187pt.
+
+LaTeX Warning: Reference `tab:posture' on page 4 undefined on input line 572.
+
+
+LaTeX Warning: Reference `tab:posture' on page 4 undefined on input line 572.
+
+
+LaTeX Warning: Reference `tab:breathhold' on page 4 undefined on input line 583
+.
+
+
+LaTeX Warning: Reference `fig:breathhold' on page 4 undefined on input line 584
+.
+
+
+LaTeX Warning: Reference `fig:hf_collapse' on page 4 undefined on input line 59
+6.
+
+
+LaTeX Warning: Reference `fig:breathhold' on page 4 undefined on input line 600
+.
+
+
+LaTeX Warning: Reference `fig:breathhold' on page 4 undefined on input line 617
+.
+
+<../outputs/figures/nb03_fig02_e2_effort_vs_relaxed.pdf, id=311, 448.59784pt x 
+356.40152pt>
+File: ../outputs/figures/nb03_fig02_e2_effort_vs_relaxed.pdf Graphic file (type
+ pdf)
+<use ../outputs/figures/nb03_fig02_e2_effort_vs_relaxed.pdf>
+Package pdftex.def Info: ../outputs/figures/nb03_fig02_e2_effort_vs_relaxed.pdf
+  used on input line 642.
+(pdftex.def)             Requested size: 252.0pt x 200.20888pt.
+<../outputs/figures/nb03_fig01_e2_hf_collapse.pdf, id=312, 270.42265pt x 468.68
+54pt>
+File: ../outputs/figures/nb03_fig01_e2_hf_collapse.pdf Graphic file (type pdf)
+<use ../outputs/figures/nb03_fig01_e2_hf_collapse.pdf>
+Package pdftex.def Info: ../outputs/figures/nb03_fig01_e2_hf_collapse.pdf  used
+ on input line 653.
+(pdftex.def)             Requested size: 252.0pt x 436.75255pt.
+
+LaTeX Warning: Reference `tab:walking' on page 4 undefined on input line 674.
+
+
+LaTeX Warning: Reference `fig:walk_motion' on page 4 undefined on input line 67
+5.
+
+
+LaTeX Warning: Reference `fig:recovery_tau' on page 4 undefined on input line 6
+75.
+
+
+LaTeX Warning: Reference `eq:recovery' on page 4 undefined on input line 678.
+
+
+LaTeX Warning: Citation `shaffer2017' on page 4 undefined on input line 680.
+
+
+Underfull \vbox (badness 3333) has occurred while \output is active []
+
+ [4 <../outputs/figures/nb02_fig03_rr_psd_postural.pdf>]
+
+LaTeX Warning: Reference `fig:walking_ecg_processing' on page 5 undefined on in
+put line 689.
+
+
+LaTeX Warning: Reference `fig:walk_ecg_psd' on page 5 undefined on input line 6
+91.
+
+[5 <../outputs/figures/nb02_fig02_ecg_psd_harmonics.pdf> <../outputs/figures/nb
+02_fig05_poincare_plot.pdf> <../outputs/figures/nb03_fig02_e2_effort_vs_relaxed
+.pdf>]
+
+LaTeX Warning: Reference `fig:walk_ecg_psd' on page 6 undefined on input line 7
+09.
+
+
+Underfull \vbox (badness 3049) has occurred while \output is active []
+
+
+
+LaTeX Warning: Reference `fig:walk_ecg_psd' on page 6 undefined on input line 7
+23.
+
+
+LaTeX Warning: Reference `fig:walk_motion' on page 6 undefined on input line 72
+4.
+
+<../outputs/figures/nb04_fig05_e3_motion_crosscheck.pdf, id=402, 731.13103pt x 
+442.05101pt>
+File: ../outputs/figures/nb04_fig05_e3_motion_crosscheck.pdf Graphic file (type
+ pdf)
+<use ../outputs/figures/nb04_fig05_e3_motion_crosscheck.pdf>
+Package pdftex.def Info: ../outputs/figures/nb04_fig05_e3_motion_crosscheck.pdf
+  used on input line 751.
+(pdftex.def)             Requested size: 252.0pt x 152.35936pt.
+<../outputs/figures/nb04_fig03_e3_recovery_tau.pdf, id=403, 586.59103pt x 333.6
+4601pt>
+File: ../outputs/figures/nb04_fig03_e3_recovery_tau.pdf Graphic file (type pdf)
+
+<use ../outputs/figures/nb04_fig03_e3_recovery_tau.pdf>
+Package pdftex.def Info: ../outputs/figures/nb04_fig03_e3_recovery_tau.pdf  use
+d on input line 766.
+(pdftex.def)             Requested size: 252.0pt x 143.33261pt.
+
+LaTeX Warning: Reference `eq:recovery' on page 6 undefined on input line 772.
+
+
+LaTeX Warning: Reference `eq:recovery' on page 6 undefined on input line 772.
+
+<../outputs/figures/nb04_fig04_e3_ecg_psd.pdf, id=404, 514.32103pt x 822.31189p
+t>
+File: ../outputs/figures/nb04_fig04_e3_ecg_psd.pdf Graphic file (type pdf)
+<use ../outputs/figures/nb04_fig04_e3_ecg_psd.pdf>
+Package pdftex.def Info: ../outputs/figures/nb04_fig04_e3_ecg_psd.pdf  used on 
+input line 778.
+(pdftex.def)             Requested size: 252.0pt x 402.89871pt.
+
+Underfull \hbox (badness 6825) in paragraph at lines 790--790
+ \OT1/ptm/m/it/10 D. Paced Breath-ing: En-train-ment Ma-nip-u-la-tion Check,
+ []
+
+
+LaTeX Warning: Reference `fig:psd_overlay' on page 6 undefined on input line 79
+9.
+
+[6 <../outputs/figures/nb03_fig01_e2_hf_collapse.pdf> <../outputs/figures/nb04_
+fig05_e3_motion_crosscheck.pdf>]
+
+LaTeX Warning: Reference `tab:paced' on page 7 undefined on input line 815.
+
+
+LaTeX Warning: Reference `fig:e4a_tachograms' on page 7 undefined on input line
+ 815.
+
+
+LaTeX Warning: Citation `lehrer2014' on page 7 undefined on input line 824.
+
+
+LaTeX Warning: Reference `fig:e4a_resp_resonance' on page 7 undefined on input 
+line 833.
+
+
+LaTeX Warning: Reference `fig:resonance_sensitivity' on page 7 undefined on inp
+ut line 838.
+
+
+LaTeX Warning: Reference `fig:lfhf_rmssd' on page 7 undefined on input line 848
+.
+
+
+LaTeX Warning: Citation `billman2013' on page 7 undefined on input line 852.
+
+
+LaTeX Warning: Citation `taskforce1996' on page 7 undefined on input line 887.
+
+
+Overfull \hbox (20.15999pt too wide) in paragraph at lines 868--889
+ [][] 
+ []
+
+<../outputs/figures/nb05_fig01_e4a_tachograms.pdf, id=449, 503.20624pt x 625.13
+359pt>
+File: ../outputs/figures/nb05_fig01_e4a_tachograms.pdf Graphic file (type pdf)
+<use ../outputs/figures/nb05_fig01_e4a_tachograms.pdf>
+Package pdftex.def Info: ../outputs/figures/nb05_fig01_e4a_tachograms.pdf  used
+ on input line 893.
+(pdftex.def)             Requested size: 252.0pt x 313.0525pt.
+<../outputs/figures/nb05_fig02_e4a_psd_overlay.pdf, id=450, 513.26004pt x 227.5
+9843pt>
+File: ../outputs/figures/nb05_fig02_e4a_psd_overlay.pdf Graphic file (type pdf)
+
+<use ../outputs/figures/nb05_fig02_e4a_psd_overlay.pdf>
+Package pdftex.def Info: ../outputs/figures/nb05_fig02_e4a_psd_overlay.pdf  use
+d on input line 905.
+(pdftex.def)             Requested size: 252.0pt x 111.74646pt.
+<../outputs/figures/nb05_fig04_e4a_lfhf_crossover.pdf, id=451, 236.8047pt x 318
+.40672pt>
+File: ../outputs/figures/nb05_fig04_e4a_lfhf_crossover.pdf Graphic file (type p
+df)
+<use ../outputs/figures/nb05_fig04_e4a_lfhf_crossover.pdf>
+Package pdftex.def Info: ../outputs/figures/nb05_fig04_e4a_lfhf_crossover.pdf  
+used on input line 916.
+(pdftex.def)             Requested size: 252.0pt x 338.8456pt.
+<../outputs/figures/nb05_fig05b_e4a_resp_power_and_amplitude.pdf, id=452, 283.9
+2056pt x 308.35152pt>
+File: ../outputs/figures/nb05_fig05b_e4a_resp_power_and_amplitude.pdf Graphic f
+ile (type pdf)
+<use ../outputs/figures/nb05_fig05b_e4a_resp_power_and_amplitude.pdf>
+Package pdftex.def Info: ../outputs/figures/nb05_fig05b_e4a_resp_power_and_ampl
+itude.pdf  used on input line 927.
+(pdftex.def)             Requested size: 252.0pt x 273.69328pt.
+
+Underfull \hbox (badness 5802) in paragraph at lines 943--943
+ \OT1/ptm/m/it/10 E. Cross-Experiment Com-par-i-son Re-quired Task-Specific
+ []
+
+
+LaTeX Warning: Reference `fig:integration' on page 7 undefined on input line 94
+7.
+
+[7 <../outputs/figures/nb04_fig03_e3_recovery_tau.pdf> <../outputs/figures/nb04
+_fig04_e3_ecg_psd.pdf>]
+<../outputs/figures/nb06_fig01_autonomic_spectrum.pdf, id=517, 541.56325pt x 29
+4.56105pt>
+File: ../outputs/figures/nb06_fig01_autonomic_spectrum.pdf Graphic file (type p
+df)
+<use ../outputs/figures/nb06_fig01_autonomic_spectrum.pdf>
+Package pdftex.def Info: ../outputs/figures/nb06_fig01_autonomic_spectrum.pdf  
+used on input line 969.
+(pdftex.def)             Requested size: 252.0pt x 137.06834pt.
+ [8 <../outputs/figures/nb05_fig01_e4a_tachograms.pdf> <../outputs/figures/nb05
+_fig02_e4a_psd_overlay.pdf> <../outputs/figures/nb05_fig04_e4a_lfhf_crossover.p
+df>]
+
+LaTeX Warning: Citation `billman2013' on page 9 undefined on input line 995.
+
+
+LaTeX Warning: Citation `eckberg1997' on page 9 undefined on input line 995.
+
+
+LaTeX Warning: Citation `hirsch1981' on page 9 undefined on input line 1012.
+
+
+LaTeX Warning: Citation `berntson1997' on page 9 undefined on input line 1014.
+
+
+LaTeX Warning: Citation `penttila2001' on page 9 undefined on input line 1014.
+
+
+LaTeX Warning: Citation `lehrer2014' on page 9 undefined on input line 1018.
+
+
+LaTeX Warning: Reference `tab:validity' on page 9 undefined on input line 1052.
+
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 HRV
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 Transient; short-segment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 Motion-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 Paced $\OMS/cmsy/m/n/8 ^^U$\OT1/ptm/m/n/8 9/min
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 Mostly
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 Paced $\OMS/cmsy/m/n/8 ^^T$\OT1/ptm/m/n/8 6/min
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 Band-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 RMSSD, TP, RR
+ []
+
+
+Underfull \hbox (badness 1533) in paragraph at lines 1075--1075
+[]|\OT1/ptm/m/n/8 LF/HF in-valid as sym-pa-
+ []
+
+
+Underfull \hbox (badness 2435) in paragraph at lines 1075--1075
+\OT1/ptm/m/n/8 centered power for res-o-
+ []
+
+[9 <../outputs/figures/nb05_fig05b_e4a_resp_power_and_amplitude.pdf> <../output
+s/figures/nb06_fig01_autonomic_spectrum.pdf>]
+Underfull \hbox (badness 2318) in paragraph at lines 1104--1113
+\OT1/ptm/m/n/10 fine-scale beat-to-beat met-rics dur-ing am-bu-la-tion should
+ []
+
+<../outputs/figures/appendixA_bland_altman.pdf, id=620, 537.77597pt x 249.24493
+pt>
+File: ../outputs/figures/appendixA_bland_altman.pdf Graphic file (type pdf)
+<use ../outputs/figures/appendixA_bland_altman.pdf>
+Package pdftex.def Info: ../outputs/figures/appendixA_bland_altman.pdf  used on
+ input line 1237.
+(pdftex.def)             Requested size: 252.0pt x 116.79523pt.
+
+Underfull \hbox (badness 1622) in paragraph at lines 1241--1241
+\OT1/ptm/m/n/8 Fig. 15.  Dual-path val-i-da-tion sum-mary. (a) Per-session ar-t
+i-fact rate.
+ []
+
+
+LaTeX Warning: Reference `fig:bland_altman' on page 10 undefined on input line 
+1245.
+
+
+LaTeX Warning: Reference `fig:bland_altman' on page 10 undefined on input line 
+1249.
+
+
+LaTeX Warning: Reference `fig:bland_altman' on page 10 undefined on input line 
+1252.
+
+
+LaTeX Warning: Reference `fig:duration_effect' on page 10 undefined on input li
+ne 1259.
+
+
+LaTeX Warning: Reference `ssec:protocol' on page 10 undefined on input line 127
+2.
+
+
+LaTeX Warning: Citation `oppenheim1999' on page 10 undefined on input line 1275
+.
+
+[10]
+<../outputs/figures/nb02_fig04_duration_effect.pdf, id=624, 933.8269pt x 299.09
+492pt>
+File: ../outputs/figures/nb02_fig04_duration_effect.pdf Graphic file (type pdf)
+
+<use ../outputs/figures/nb02_fig04_duration_effect.pdf>
+Package pdftex.def Info: ../outputs/figures/nb02_fig04_duration_effect.pdf  use
+d on input line 1279.
+(pdftex.def)             Requested size: 252.0pt x 80.71106pt.
+
+
+LaTeX Warning: Reference `fig:bland_altman' on page 11 undefined on input line 
+1289.
+
+
+LaTeX Warning: Reference `fig:breathhold' on page 11 undefined on input line 13
+00.
+
+
+LaTeX Warning: Reference `fig:breath_hold_pure_phys' on page 11 undefined on in
+put line 1307.
+
+
+LaTeX Warning: Reference `fig:hf_collapse' on page 11 undefined on input line 1
+315.
+
+
+LaTeX Warning: Reference `tab:breathhold' on page 11 undefined on input line 13
+22.
+
+<../outputs/figures/nb03_fig03_e2_pure_physiology.pdf, id=625, 255.33734pt x 24
+3.31139pt>
+File: ../outputs/figures/nb03_fig03_e2_pure_physiology.pdf Graphic file (type p
+df)
+<use ../outputs/figures/nb03_fig03_e2_pure_physiology.pdf>
+Package pdftex.def Info: ../outputs/figures/nb03_fig03_e2_pure_physiology.pdf  
+used on input line 1329.
+(pdftex.def)             Requested size: 252.0pt x 240.13647pt.
+
+LaTeX Warning: Reference `fig:walk_motion' on page 11 undefined on input line 1
+342.
+
+
+LaTeX Warning: Reference `fig:walk_ecg_psd' on page 11 undefined on input line 
+1342.
+
+[11 <../outputs/figures/appendixA_bland_altman.pdf> <../outputs/figures/nb02_fi
+g04_duration_effect.pdf> <../outputs/figures/nb03_fig03_e2_pure_physiology.pdf>
+]
+
+LaTeX Warning: Reference `fig:walking_ecg_processing' on page 12 undefined on i
+nput line 1349.
+
+
+LaTeX Warning: Reference `ssec:walking' on page 12 undefined on input line 1354
+.
+
+<../outputs/figures/nb04_fig02_e3_ecg_snapshots.pdf, id=685, 731.13103pt x 478.
+186pt>
+File: ../outputs/figures/nb04_fig02_e3_ecg_snapshots.pdf Graphic file (type pdf
+)
+<use ../outputs/figures/nb04_fig02_e3_ecg_snapshots.pdf>
+Package pdftex.def Info: ../outputs/figures/nb04_fig02_e3_ecg_snapshots.pdf  us
+ed on input line 1360.
+(pdftex.def)             Requested size: 252.0pt x 164.81381pt.
+
+LaTeX Warning: Reference `fig:walking_psd_contrast' on page 12 undefined on inp
+ut line 1372.
+
+
+LaTeX Warning: Reference `fig:walk_ecg_psd' on page 12 undefined on input line 
+1377.
+
+<../outputs/figures/nb04_fig06_e3_rr_psd_contrast.pdf, id=686, 452.93591pt x 33
+3.64601pt>
+File: ../outputs/figures/nb04_fig06_e3_rr_psd_contrast.pdf Graphic file (type p
+df)
+<use ../outputs/figures/nb04_fig06_e3_rr_psd_contrast.pdf>
+Package pdftex.def Info: ../outputs/figures/nb04_fig06_e3_rr_psd_contrast.pdf  
+used on input line 1391.
+(pdftex.def)             Requested size: 252.0pt x 185.63391pt.
+
+LaTeX Warning: Reference `ssec:paced' on page 12 undefined on input line 1403.
+
+
+LaTeX Warning: Reference `fig:resonance_sensitivity' on page 12 undefined on in
+put line 1410.
+
+<../outputs/figures/nb05_fig05_e4a_resp_centered_power.pdf, id=687, 261.30496pt
+ x 210.33644pt>
+File: ../outputs/figures/nb05_fig05_e4a_resp_centered_power.pdf Graphic file (t
+ype pdf)
+<use ../outputs/figures/nb05_fig05_e4a_resp_centered_power.pdf>
+Package pdftex.def Info: ../outputs/figures/nb05_fig05_e4a_resp_centered_power.
+pdf  used on input line 1428.
+(pdftex.def)             Requested size: 252.0pt x 202.85143pt.
+[12 <../outputs/figures/nb04_fig02_e3_ecg_snapshots.pdf> <../outputs/figures/nb
+04_fig06_e3_rr_psd_contrast.pdf>] [13
+
+ <../outputs/figures/nb05_fig05_e4a_resp_centered_power.pdf>]
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+(./main.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 7220 strings out of 469006
+ 171290 string characters out of 5454813
+ 556854 words of memory out of 5000000
+ 35855 multiletter control sequences out of 15000+600000
+ 671355 words of font info for 123 fonts, out of 8000000 for 9000
+ 319 hyphenation exceptions out of 8191
+ 57i,12n,65p,716b,543s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+0.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi6.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi9.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr6.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2026basic/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026basic/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2026basic/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2026basic/tex
+mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2026basic/texmf-di
+st/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2026basic/texmf-dist/f
+onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (13 pages, 1251238 bytes).
+PDF statistics:
+ 832 PDF objects out of 1000 (max. 8388607)
+ 509 compressed objects within 6 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+
