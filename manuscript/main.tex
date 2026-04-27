@@ -55,7 +55,7 @@
 Heart rate variability (HRV) is widely used as a noninvasive marker of
 autonomic regulation, but its interpretation depends strongly on
 physiological context.
-This single-participant lab study analyzed 15~single-lead ECG recordings
+This single-participant lab study analyzed 14~single-lead ECG recordings
 (500~Hz) across four task families specified by the assignment: postural
 baseline (supine/sitting/standing), voluntary breath-hold (inspiratory
 and expiratory, two trials each), walking with recovery, and a
@@ -121,11 +121,10 @@ posture, transient breath-hold, ambulatory motion, and externally paced
 respiration.
 We treat this as a within-subject lab investigation designed to expose
 context-dependent interpretive limits of standard HRV indices.
-We acquired 15~single-lead ECG recordings (500~Hz) from one participant
+We acquired 14~single-lead ECG recordings (500~Hz) from one participant
 using a unified analysis pipeline spanning (1)~postural baseline,
 (2)~voluntary breath-hold, (3)~ambulatory walking with recovery,
-(4)~paced breathing at five rates, and (5)~a partial sleep-onset segment
-(reported in the Appendix only).
+(4)~paced breathing at five rates.
 This design eliminates inter-individual variability and allows direct
 comparison of how the \emph{same} HRV indices behave under fundamentally
 different physiological demands.
@@ -190,7 +189,7 @@ Q2: Transpulmonary effects & E2 (insp/exp) & \ref{ssec:breathhold} &
   Fig.~\ref{fig:breathhold}--\ref{fig:hf_collapse} \\
 Q3: Ambulatory recording & E3 & \ref{ssec:walking} &
   Fig.~\ref{fig:walk_motion}--\ref{fig:walk_ecg_psd} \\
-Q4: Self-designed variation & E4A: paced breathing & \ref{ssec:paced} &
+Q4: Self-designed variation & E4: paced breathing & \ref{ssec:paced} &
   Fig.~\ref{fig:e4a_tachograms}--\ref{fig:e4a_resp_resonance} \\
 Cross-experiment synthesis & All & \ref{ssec:integration} &
   Fig.~\ref{fig:integration}, Table~\ref{tab:validity} \\
@@ -210,14 +209,14 @@ A single healthy male participant (age 22, no known cardiovascular
 or respiratory conditions) was instrumented with a VitalSigns VS-ECG
 single-lead chest-patch sensor sampling ECG at 500~Hz and triaxial
 accelerometry at 25~Hz.
-All 15~recordings were acquired in a single session on April~24,
+All 14~recordings were acquired in a single session on April~24,
 2026, under quiet indoor conditions.
 Because every recording came from the same acquisition chain and was
 processed with a unified pipeline, between-condition differences
 primarily reflect task-dependent physiology rather than
 instrumentation changes.
 
-The protocol comprised five experiment families
+The protocol comprised four experiment families
 (Table~\ref{tab:protocol}):
 
 \begin{enumerate}
@@ -238,7 +237,7 @@ The protocol comprised five experiment families
   baseline, 60~s walking at self-selected pace, and 60~s seated
   recovery.
 
-\item \textbf{Paced breathing (E4A).}
+\item \textbf{Paced breathing (E4).}
   \emph{Self-designed variation (Assignment Q4).}
   This experiment served as the self-designed variation required by the
   assignment, formulated to test hypotheses \textbf{H4} and \textbf{H5}
@@ -255,9 +254,6 @@ The protocol comprised five experiment families
   or fatigue effects cannot be fully separated from the
   breathing-rate manipulation.
 
-\item \textbf{Sleep onset (E4B).}
-  A 14.3-min partial sleep-onset recording was obtained for
-  exploratory purposes only and is reported in the Appendix.
 \end{enumerate}
 
 \begin{table}[!t]
@@ -278,9 +274,7 @@ E2 Breath-hold & Insp.\ $\times 2$ & 120 each & Sitting \\
 \midrule
 E3 Walking & Rest/Walk/Recovery & 180 & Sitting/Walk \\
 \midrule
-E4A Paced & 12, 9, 6, 5, 3/min & 220--280 & Sitting \\
-\midrule
-E4B Sleep & Partial recording & 860 & Supine \\
+E4 Paced & 12, 9, 6, 5, 3/min & 220--280 & Sitting \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -330,7 +324,7 @@ HRV indices were computed following the Task Force
 standards~\cite{taskforce1996}.
 RR intervals outside the 300--2000~ms physiological range were
 rejected.
-For steady-state conditions (E1, E4A), the full analysis window
+For steady-state conditions (E1, E4), the full analysis window
 ($\geq$220~s) was used.
 Window-length sensitivity on the E1A supine recording (Appendix,
 Fig.~\ref{fig:app_duration}) showed that sliding-window coefficient of
@@ -1021,9 +1015,9 @@ Breath-hold (E2) & Partial & HR response, recovery, HF & Transient; short-segmen
 \addlinespace
 Walking (E3) & Motion-limited & Mean HR, recovery $\tau$ & RMSSD unreliable \\
 \addlinespace
-Paced $\geq$9/min (E4A) & Mostly valid & RMSSD, HF, LF/HF & Resp.\ peak in or near HF band \\
+Paced $\geq$9/min (E4) & Mostly valid & RMSSD, HF, LF/HF & Resp.\ peak in or near HF band \\
 \addlinespace
-Paced $\leq$6/min (E4A) & Band-shifted & RMSSD, total power, RR ampl., resp.-centered power & LF/HF invalid as sympathovagal index; use resp.-centered power for resonance \\
+Paced $\leq$6/min (E4) & Band-shifted & RMSSD, total power, RR ampl., resp.-centered power & LF/HF invalid as sympathovagal index; use resp.-centered power for resonance \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1061,9 +1055,6 @@ strong phase-locked linear coupling but not excluding broadband or
 non-linear artifact; the combination of high accelerometer motion and
 cadence-proximate spectral energy warrants caution for fine-scale HRV
 indices.
-
-Fifth, the sleep-onset recording (E4B) was incomplete (14.3~min) and
-supports only appendix-level exploratory trend reporting.
 
 Despite these limitations, the within-subject design provides a
 controlled demonstration of context-dependent HRV metric behavior
@@ -1179,7 +1170,7 @@ reference path) was validated on the E1A 5-min supine recording.
 Peak count agreement was 99.6\% (269 vs.\ 268 peaks).
 The mean RR difference was 0.96~ms (0.09\%), SDNN difference was
 1.65~ms (2.1\%), and RMSSD difference was 2.69~ms (2.7\%).
-Across all 9~steady-state sessions, peak-count agreement
+Across all 8~steady-state sessions, peak-count agreement
 exceeded 99.5\%.
 
 \begin{figure}[!t]
@@ -1257,28 +1248,6 @@ The consistency across bandwidths indicates that the absence of a
 classical 6-breaths/min resonance maximum is not an artifact of
 integration-window choice.}
 \label{fig:app_sensitivity}
-\end{figure}
-
-
-\section{Exploratory Sleep-Onset Recording (E4B)}
-\label{app:sleep}
-
-A 14.3-min partial sleep-onset recording showed a smoothed HR
-decrease of approximately 2.6~bpm (from 55.3 to 52.7~bpm),
-approaching the E1A supine anchor of 54.0~bpm.
-This directionally plausible trend is consistent with early
-parasympathetic dominance during sleep onset, but the recording
-was too short and incomplete for formal HRV analysis.
-The trajectory is shown in Fig.~\ref{fig:sleep}.
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{nb06_fig04_e4b_partial_sleep_trajectory.pdf}
-\caption{Partial sleep-onset HR trajectory.  The smoothed HR trace
-shows a gradual decline toward the supine baseline, consistent with
-increasing vagal tone during sleep onset.  This recording is
-exploratory and should not be interpreted as steady-state HRV.}
-\label{fig:sleep}
 \end{figure}
 
 \balance
