@@ -842,11 +842,13 @@ def plot_spectrogram_rr(f: np.ndarray, t: np.ndarray, Sxx: np.ndarray,
 
 
 def plot_duration_sweep(df_sweep, metrics=('sdnn_ms', 'lf_ms2', 'hf_ms2'),
-                        fig=None):
+                        fig=None, fontsize=None):
     """Plot Figure 1.4 — mean ± std over window length, one panel per metric,
     with CV% annotated at each point.
 
     df_sweep is the DataFrame returned by pipeline.duration_effect_sweep().
+    If *fontsize* is set, it applies to axis labels, titles, and (slightly
+    smaller) CV annotations; otherwise rcParams defaults are used.
     """
     if fig is None:
         fig, axes = plt.subplots(1, len(metrics), figsize=(4.2 * len(metrics), 4))
@@ -855,7 +857,13 @@ def plot_duration_sweep(df_sweep, metrics=('sdnn_ms', 'lf_ms2', 'hf_ms2'),
     if len(metrics) == 1:
         axes = [axes]
 
-    for ax, metric in zip(axes, metrics):
+    _sweep_label = {
+        'sdnn_ms': 'SDNN',
+        'lf_ms2': 'LF (ms²)',
+        'hf_ms2': 'HF (ms²)',
+    }
+
+    for i, (ax, metric) in enumerate(zip(axes, metrics)):
         sub = df_sweep[df_sweep['metric'] == metric].sort_values('window_s')
         if sub.empty:
             continue
@@ -870,16 +878,24 @@ def plot_duration_sweep(df_sweep, metrics=('sdnn_ms', 'lf_ms2', 'hf_ms2'),
                         M + np.where(np.isfinite(S), S, 0.0),
                         color='#4C72B0', alpha=0.15)
 
+        ann_fs = 8 if fontsize is None else max(7, int(round(fontsize * 0.85)))
         for xi, yi, ci in zip(W, M, cv):
             if np.isfinite(ci):
                 ax.annotate(f'CV {ci:.1f}%',
                             xy=(xi, yi), xytext=(4, 6),
-                            textcoords='offset points', fontsize=8,
+                            textcoords='offset points', fontsize=ann_fs,
                             color='#555555')
 
-        ax.set_xlabel('Window length (s)')
-        ax.set_ylabel(metric.replace('_', ' '))
-        ax.set_title(f'Duration effect — {metric}')
+        xy_kw = {} if fontsize is None else {'fontsize': fontsize}
+        ax.set_xlabel('Window length (s)', **xy_kw)
+        ax.set_ylabel(metric.replace('_', ' '), **xy_kw)
+        panel = f'({chr(ord("a") + i)})'
+        mtxt = _sweep_label.get(metric, metric.replace('_', ' '))
+        title_kw = {'loc': 'left', 'fontweight': 'bold'}
+        if fontsize is not None:
+            title_kw['fontsize'] = fontsize
+            ax.tick_params(axis='both', labelsize=fontsize)
+        ax.set_title(f'{panel} {mtxt}', **title_kw)
 
     fig.tight_layout()
     return fig
