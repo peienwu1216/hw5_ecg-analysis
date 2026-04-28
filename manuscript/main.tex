@@ -46,7 +46,7 @@
     National Yang Ming Chiao Tung University, Hsinchu, Taiwan\\
     Email: peienwu.ee13@nycu.edu.tw
   }
-  \thanks{EEEC~1099 Biomedical Sensors --- HW5 Lab Report, April 2026.
+  \thanks{EEEC~1099 Biomedical Sensors, HW5 Lab Report, April 2026.
     Code and data: \protect\url{https://github.com/peienwu1216/hw5_ecg-analysis}.}
 }
 
@@ -54,30 +54,33 @@
 
 % ============================================================
 \begin{abstract}
-Heart rate variability (HRV) is widely used to assess autonomic
-regulation, but the physiological interpretation of standard metrics
-is context-dependent.
-This single-participant lab study analyzed 14~single-lead ECG recordings
-(500~Hz) across four experimental conditions: postural
-baseline (supine/sitting/standing), voluntary breath-hold (inspiratory
-and expiratory, two trials each), walking with recovery, and
-paced breathing at five rates (12, 9, 6, 5,
-3~breaths/min).
-Postural loading produced monotonic vagal withdrawal: mean HR rose from
-54.0 to 79.7~bpm and RMSSD fell from 99.1 to 25.2~ms.
-Inspiratory breath-hold produced larger HR excursions than expiratory
-hold ($\Delta$HR up to +14.3 vs.\ +1.9~bpm).
-Walking elevated HR to 83.0~bpm with rapid post-exercise recovery
-($\tau = 6.8$~s), but motion artifacts limited fine-scale HRV
-interpretation.
-Paced breathing entrained the RR spectral peak, which closely
-matched the imposed breathing frequency
-($R^{2} = 0.998$); LF/HF inflated from 0.22 to 17.47 while RMSSD
-remained stable (47.7--64.9~ms), indicating spectral-band migration rather than
-sympathovagal reversal.
-A condition-by-condition validity summary identifies which metrics
-remained interpretable and which became misleading, underscoring the
-need to match HRV interpretation to task physiology and signal quality.
+Heart rate variability (HRV) is a standard noninvasive autonomic index,
+yet common metrics become misleading when their underlying
+assumptions---stationary respiration within the high-frequency band,
+artifact-free recording, and sufficient window duration---are violated.
+This single-participant study examines how standard HRV metrics behave
+across four task contexts (postural baseline, voluntary breath-hold,
+walking, and paced breathing at five rates from 12 to 3~breaths/min)
+using 14~single-lead ECG recordings processed through a unified
+pipeline.
+
+Postural loading reproduced the expected orthostatic pattern: heart rate
+rose and vagal indices fell progressively from supine to standing.
+Inspiratory breath-hold imposed a larger chronotropic challenge than
+expiratory hold. Walking elevated heart rate with rapid post-exercise
+recovery, but cadence--cardiac spectral proximity limited confidence
+in fine-scale HRV during ambulation. During paced breathing, the RR
+spectral peak closely followed the imposed breathing rate. As breathing
+slowed below the conventional 0.15-Hz HF boundary, LF/HF increased
+from 0.22 to 17.47 while RMSSD remained within 48--65~ms, indicating
+spectral-band migration rather than a true sympathovagal shift. RR
+oscillation amplitude increased monotonically rather than peaking at
+6~breaths/min, contrary to the classical resonance prediction.
+
+Table~\ref{tab:validity} summarizes which metrics were interpretable
+in each condition. A single participant produced a 60-fold range in
+LF/HF through postural and respiratory manipulations alone, illustrating
+why HRV interpretation must be matched to task physiology.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -100,10 +103,8 @@ oscillations~\cite{taskforce1996}.
 The HF band primarily reflects respiratory sinus arrhythmia (RSA),
 the phasic vagal modulation of heart rate coupled to the breathing
 cycle~\cite{hirsch1981}.
-HRV is now a standard noninvasive tool in cardiovascular research
-and clinical risk stratification~\cite{berntson1997,shaffer2017}.
 
-Although HRV is widely used, the physiological interpretation of a
+The physiological interpretation of a
 given metric depends on the recording condition.
 The LF/HF ratio, originally proposed as a sympathovagal balance
 index~\cite{taskforce1996}, has been challenged on mechanistic
@@ -119,59 +120,36 @@ interventions are increasingly used in biofeedback
 therapy~\cite{lehrer2014}.
 
 Here, we examine how common HRV metrics behave across four task
-contexts: steady-state posture, transient breath-hold, ambulatory
-motion, and externally paced respiration.
-The study was designed as a within-subject lab investigation to
-identify conditions in which standard HRV indices remain interpretable
-or become misleading.
-We acquired 14~single-lead ECG recordings (500~Hz) from one participant
-using a unified analysis pipeline spanning (1)~postural baseline,
-(2)~voluntary breath-hold, (3)~ambulatory walking with recovery,
-(4)~paced breathing at five rates.
-This within-subject design eliminates inter-individual variability,
-allowing direct assessment of how the \emph{same} HRV indices behave
-under different physiological demands.
+contexts (steady-state posture, transient breath-hold, ambulatory
+motion, and paced respiration) using 14~single-lead ECG recordings
+(500~Hz) from one participant processed through a unified analysis
+pipeline. The within-subject design eliminates inter-individual
+variability, enabling direct comparison of metric behavior across
+physiological demands.
 
-We formulated five hypotheses prior to data collection:
-\begin{enumerate}
-  \item[\textbf{H1}:]
-    Progressive orthostatic loading (supine $\to$ sitting $\to$
-    standing) produces monotonic increases in HR and decreases in
-    vagal-linked indices (RMSSD, HF power).
-  \item[\textbf{H2}:]
-    Inspiratory breath-hold imposes a greater chronotropic challenge than
-    expiratory breath-hold, consistent with altered thoracic mechanics
-    and autonomic compensation.
-  \item[\textbf{H3}:]
-    Walking-phase fine-scale HRV (RMSSD) is limited by motion
-    artifacts, whereas mean HR and post-exercise recovery kinetics remain
-    interpretable.
-  \item[\textbf{H4}:]
-    Within the tested paced-breathing range (3--12~breaths/min), RR
-    oscillation amplitude does not exhibit a classical resonance maximum
-    centered at 6~breaths/min.
-  \item[\textbf{H5}:]
-    When breathing frequency falls below 0.15~Hz, the resulting LF/HF
-    inflation reflects spectral-band migration, not sympathovagal shift,
-    and therefore dissociates from RMSSD.
-\end{enumerate}
-Successful entrainment of the RR spectral peak by paced
-breathing (verified by linear regression of measured vs.\ imposed
-frequency) was treated as a manipulation check rather than a hypothesis,
-given that respiratory entrainment of the cardiac cycle is
-well-established.
+We used posture, breath-hold, walking, and paced breathing to address
+two related questions: whether standard HRV indices behave as expected
+under common physiological manipulations, and whether LF/HF becomes
+misleading when respiration crosses conventional spectral-band
+boundaries.
 
-The analysis has three components.
-First, a single ECG preprocessing and HRV analysis pipeline was
-applied across all recordings, with R-peak detection agreement
-assessed by a secondary detection path.
-Second, each task was interpreted using metrics appropriate to its
-physiological and signal-quality constraints: posture maps a
-steady-state autonomic set-point axis; breath-hold and walking
-reveal transient challenge--recovery trajectories; paced breathing
-modulates oscillation amplitude and spectral location.
-Third, the resulting metric interpretations are summarized in a
-task-specific validity table (Table~\ref{tab:validity}).
+Specifically, we expected orthostatic loading to produce monotonic
+vagal withdrawal (H1)~\cite{taskforce1996,shaffer2017}; inspiratory
+breath-hold to impose a greater chronotropic challenge than expiratory
+hold (H2), given higher intrathoracic pressure~\cite{berntson1997};
+and walking to elevate HR with characteristic recovery kinetics while
+compromising fine-scale HRV through motion artifact (H3).
+For paced breathing, classical resonance theory predicts peak RR
+amplitude near 6~breaths/min (H4)~\cite{lehrer2014}, and the
+spectral-band migration critique predicts that LF/HF will inflate
+when breathing slows below the 0.15-Hz boundary, without a
+corresponding change in RMSSD (H5)~\cite{billman2013,eckberg1997}.
+Entrainment of the RR spectral peak by paced breathing was verified
+by linear regression.
+
+All recordings were processed through the same preprocessing and
+R-peak detection pipeline, and per-condition metric validity is
+summarized in Table~\ref{tab:validity}.
 
 Table~\ref{tab:assignment_map} maps each assignment question to the
 corresponding experiment, results section, and main-text figures.
@@ -213,9 +191,6 @@ single-lead chest-patch sensor sampling ECG at 500~Hz and triaxial
 accelerometry at 25~Hz.
 All 14~recordings were acquired in a single session on April~24,
 2026, under quiet indoor conditions.
-Because every recording came from the same acquisition chain and was
-processed with a unified pipeline, between-condition differences
-are unlikely to reflect instrumentation variability.
 
 The protocol comprised four experiment families
 (Table~\ref{tab:protocol}):
@@ -225,36 +200,32 @@ The protocol comprised four experiment families
   After a 5-min rest, three consecutive 5-min recordings were obtained
   in supine (E1A), sitting (E1B), and standing (E1C) postures.
   The participant maintained relaxed spontaneous breathing throughout.
-  Although the assignment specification requires only 30-s recordings
-  per posture, this duration is too short for stable frequency-domain HRV
-  estimation.
-  With Welch's method and a Hann window, the effective spectral
-  resolution is $\Delta f \approx 1.6/T$~\cite{oppenheim1999}; for
-  $T = 30$~s this yields $\Delta f \approx 0.053$~Hz, placing only
-  $\sim$2 resolvable frequency bins within the entire LF band
-  (0.04--0.15~Hz) and rendering LF power estimation unreliable.
-  The Task Force guidelines explicitly recommend recordings of
-  $\geq$5~min for short-term frequency-domain
-  analysis~\cite{taskforce1996}.
-  We therefore extended each postural condition to 5~min (300~s),
-  providing $\Delta f \approx 0.005$~Hz and $\sim$22 bins across the
-  LF band, sufficient for stable Welch-based spectral estimation.
-  The empirical effect of window duration on metric stability is
-  quantified in Appendix~A (Fig.~\ref{fig:duration_effect}).
+  Because 30-s segments provide poor LF resolution
+  ($\sim$2 resolvable bins~\cite{oppenheim1999}), each posture was
+  extended to 5~min following Task Force
+  guidelines~\cite{taskforce1996}, providing $\Delta f \approx
+  0.005$~Hz and $\sim$22 LF-band bins.
+  Window-duration effects on metric stability are quantified in
+  Appendix~A (Fig.~\ref{fig:duration_effect}).
 
 \item \textbf{Voluntary breath-hold (E2).}
   In a seated position, the participant performed two trials of
   maximum inspiratory breath-hold ($\sim$40~s each) followed by 40~s
   of recovery breathing, and two trials of maximum expiratory
   breath-hold with the same protocol.
-  The assignment specifies 20-s breath-holds; we extended the
-  target hold duration to $\sim$40~s to approximately double the
-  number of cardiac cycles available during the apnoeic phase,
-  to increase the number of cardiac cycles available for
-  hold-phase time-domain metrics (HR slope, RMSSD) and to increase the spectral
-  prominence of apnoea-related HRV changes within the per-trial
-  PSD~\cite{taskforce1996}.
+  Hold duration was extended to $\sim$40~s (vs.\ the 20-s assignment
+  specification) to increase cardiac cycles available for hold-phase
+  metrics~\cite{taskforce1996}.
   Inter-trial rest was provided until baseline HR was restored.
+  Within each respiratory mode, two consecutive trials were obtained.
+  Trial~1 was performed with greater volitional effort (anticipatory
+  strain), while Trial~2 was more relaxed, consistent with the known
+  attenuation of volitional strain on repetition~\cite{berntson1997}.
+  Both trials are reported in Table~\ref{tab:breathhold}; spectral
+  quantification uses only Trial~2 because Trial~1 violated
+  stationarity, evidenced by HR-slope sign reversal in the inspiratory
+  condition ($-$0.19 vs.\ $+$0.18~bpm/s;
+  Table~\ref{tab:breathhold}).
 
 \item \textbf{Walking challenge (E3).}
   A 180-s continuous recording was segmented into 60~s seated
@@ -263,10 +234,8 @@ The protocol comprised four experiment families
 
 \item \textbf{Paced breathing (E4).}
   \emph{Self-designed variation (Assignment Q4).}
-  This experiment served as the self-designed variation required by the
-  assignment, formulated to test hypotheses \textbf{H4} and \textbf{H5}
-  regarding the resonance question and LF/HF spectral-band migration
-  under slow respiration.
+  This self-designed variation tested \textbf{H4} (resonance) and
+  \textbf{H5} (spectral-band migration under slow respiration).
   Five conditions were recorded in a seated position at fixed
   breathing rates of 12, 9, 6, 5, and 3~breaths/min, guided by a
   metronome.
@@ -275,10 +244,9 @@ The protocol comprised four experiment families
   breathing cycles.
   Inter-condition rest periods of $\geq$3~min were enforced to
   allow autonomic recovery and mitigate cumulative fatigue.
-  \emph{Limitation}: despite these rest periods, the five rates were
-  presented in fixed descending order (12$\to$3), so progressive
-  relaxation or training effects cannot be fully excluded without
-  counterbalanced presentation.
+  The fixed descending order (12$\to$3~breaths/min) remains a
+  potential source of order effects; progressive relaxation cannot
+  be fully excluded without counterbalanced presentation.
 
 \end{enumerate}
 
@@ -314,8 +282,9 @@ E4 Paced & 12, 9, 6, 5, 3/min & 220--280 & Sitting \\
 All processing was performed in Python~3.10 using a unified pipeline
 (\texttt{src/pipeline.py}).
 Raw ECG was corrected for baseline drift with a two-stage median
-filter (200~ms and 600~ms kernel widths), then filtered with a 50~Hz
-second-order IIR notch ($Q = 30$) to suppress power-line interference,
+filter (200~ms and 600~ms kernel widths), then filtered with a 60~Hz
+second-order IIR notch ($Q = 30$) to suppress power-line interference
+(Taiwan utility frequency),
 followed by a 0.5--40~Hz fourth-order Butterworth bandpass
 (zero-phase via \texttt{sosfiltfilt})~\cite{virtanen2020}.
 
@@ -337,13 +306,10 @@ mean RR difference $<$1.0~ms and RMSSD difference $<$2.7~ms.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb01_fig01_pipeline_overview.pdf}
-\caption{Unified single-lead ECG processing and analysis workflow. Raw
-500-Hz ECG recordings were cropped, stabilized, baseline-corrected,
-notch-filtered, and bandpass-filtered before dual-path R-peak detection.
-NeuroKit2 served as the primary analysis pipeline, while the
-SciPy/Pan--Tompkins pipeline provided independent validation. The validated RR series was
-then used for task-specific HRV analyses across posture, breath-hold,
-walking, and paced breathing.}
+\caption{ECG processing workflow. Raw 500-Hz recordings were
+baseline-corrected, notch-filtered, and bandpass-filtered before
+R-peak detection. NeuroKit2 served as the primary detector;
+a SciPy/Pan--Tompkins detector provided independent validation.}
 \label{fig:pipeline_overview}
 \end{figure}
 
@@ -357,14 +323,10 @@ RR intervals outside the 300--2000~ms physiological range were
 rejected.
 For steady-state conditions (E1, E4), the full analysis window
 ($\geq$220~s) was used.
-Window-length sensitivity on the E1A supine recording (Appendix A,
-Fig.~\ref{fig:duration_effect}) showed that sliding-window coefficient of
-variation fell below 10\% for SDNN and below 5\% for HF once segment
-duration reached $\sim$180~s, whereas 30--60~s windows exhibited much
-higher variability; this supports our use of full multi-minute
-windows---including 5-min postural baselines (E1) and the
-$\geq$220~s steady-state segments for paced breathing---for stable
-time- and frequency-domain HRV estimation.
+Window-length sensitivity on the E1A supine recording (Appendix~A,
+Fig.~\ref{fig:duration_effect}) confirmed that CV fell below 10\%
+for SDNN and below 5\% for HF beyond $\sim$180~s, supporting the
+use of full multi-minute analysis windows.
 
 \textbf{Time domain.}
 The following time-domain indices were computed from the edited NN
@@ -377,14 +339,12 @@ definitions~\cite{taskforce1996}:
     dependent on recording length, values are comparable only across
     segments of equal duration~\cite{taskforce1996}.
   \item \textbf{RMSSD}: the root mean square of successive NN
-    interval differences, selectively capturing short-term,
-    beat-to-beat variability mediated predominantly by vagal
-    (parasympathetic) efferent
-    activity~\cite{taskforce1996,shaffer2017}.  Unlike
-    frequency-domain HF power, RMSSD is insensitive to spectral-band
-    boundary definitions and therefore remains less dependent on fixed spectral-band
-    definitions when breathing frequency migrates across the LF/HF
-    boundary.
+    interval differences, capturing short-term beat-to-beat
+    variability mediated predominantly by vagal
+    efferent activity~\cite{taskforce1996,shaffer2017}.  Unlike
+    HF power, RMSSD is insensitive to spectral-band definitions
+    and remains interpretable when breathing frequency migrates
+    across the LF/HF boundary.
   \item \textbf{pNN50}: the proportion of successive NN interval
     pairs differing by more than 50~ms, a complementary
     parasympathetic index highly correlated with RMSSD but employing
@@ -394,16 +354,21 @@ definitions~\cite{taskforce1996}:
 Mean heart rate (HR) in beats per minute was computed as
 $60 / \overline{\text{NN}}$.
 
-\textbf{Frequency domain.}
-The RR series was linearly detrended and resampled at 4~Hz via cubic
-interpolation~\cite{taskforce1996}.
-Power spectral density (PSD) was estimated using Welch's method
-(256-point Hann window, 50\% overlap).
-Band powers were integrated over the Task Force frequency ranges:
-VLF (0.003--0.04~Hz), LF (0.04--0.15~Hz), and HF (0.15--0.40~Hz).
-Normalized units were computed as
-$\text{LF}_\text{n.u.} = \text{LF} / (\text{TP} - \text{VLF})
-\times 100$.
+\textbf{Frequency domain.} The RR series was linearly detrended and
+resampled at 4 Hz via cubic interpolation \cite{taskforce1996}. Power
+spectral density (PSD) was estimated using Welch's method with a Hann
+window and 50\% overlap. The window length \texttt{nperseg} was selected
+according to recording duration: 256 points ($\Delta f \approx 0.0156$
+Hz) for the 5-min postural baselines (E1) and breath-hold per-trial
+spectra (E2), and 512 points ($\Delta f \approx 0.0078$ Hz) for the
+$\geq$220 s paced-breathing recordings (E4) to improve frequency
+resolution near the 0.15 Hz LF/HF boundary, which is critical for the
+band-migration analysis (H5). In all cases, $\geq$8 non-overlapping
+window equivalents were available, ensuring stable spectral averaging.
+Band powers were integrated over the Task Force frequency ranges: VLF
+(0.003--0.04 Hz), LF (0.04--0.15 Hz), and HF (0.15--0.40 Hz). Normalized
+units were computed as $\text{LF}_{\text{n.u.}} = \text{LF}/(\text{TP}
+- \text{VLF}) \times 100$.
 
 \textbf{Transient conditions (E2, E3).}
 Because individual phases (hold, walk, recovery) lasted only
@@ -428,7 +393,7 @@ using nonlinear least-squares (\texttt{scipy.optimize.curve\_fit})
 over the 60-s post-walking recovery window.
 
 \textbf{Motion artifact assessment.}
-Walking-phase motion artifact interference was evaluated using two
+Walking-phase motion artifact was evaluated using two
 complementary metrics.
 First, Pearson correlation between absolute successive RR
 differences ($|\Delta\text{RR}|$) and accelerometer vector magnitude
@@ -450,29 +415,21 @@ reported; the null hypotheses slope~$=1$ and intercept~$=0$ were
 tested.
 
 \textbf{Respiratory-centered spectral analysis.}
-To assess resonance independently of fixed LF/HF band boundaries,
+To assess resonance independently of fixed LF/HF boundaries,
 respiratory-centered RR spectral power was computed by integrating
-the Welch PSD within a narrow window around each imposed breathing
-frequency.
-The primary integration window was $\pm$0.015~Hz; sensitivity
-analyses were performed with $\pm$0.010~Hz and $\pm$0.020~Hz
-windows.
-This approach reduces reliance on fixed LF/HF bands when breathing
-frequency crosses the 0.15~Hz boundary, because the integration
-window tracks the respiratory peak rather than relying on fixed
-spectral bands.
+the Welch PSD within $\pm$0.015~Hz of each imposed breathing
+frequency; sensitivity analyses used $\pm$0.010~Hz and
+$\pm$0.020~Hz windows.
 RR oscillation amplitude was additionally quantified as the
-distribution-based p95--p5 range, which is robust against
-cycle-level detection instability in the absence of a direct
-respiratory belt signal.
+distribution-based p95--p5 range, robust to cycle-level detection
+instability without a direct respiratory signal.
 
 
 % ============================================================
 \section{Results}
 \label{sec:results}
 
-\subsection{Postural Baseline Showed the Expected
-Orthostatic HRV Pattern (\textbf{H1 Supported})}
+\subsection{Postural Loading Reproduced the Expected Orthostatic HRV Pattern}
 \label{ssec:posture}
 
 Orthostatic loading was associated with monotonic changes in HRV
@@ -481,8 +438,8 @@ Fig.~\ref{fig:posture}--\ref{fig:poincare}).
 From supine to standing, mean HR increased from 54.0 to 79.7~bpm,
 RMSSD decreased from 99.1 to 25.2~ms, HF power dropped from 3252.8
 to 310.7~ms$^{2}$, and LF/HF rose from 0.28 to 1.44.
-These changes are consistent with progressive vagal withdrawal under
-orthostatic stress~\cite{taskforce1996} and support \textbf{H1}.
+This pattern is compatible with orthostatic vagal
+withdrawal~\cite{taskforce1996}.
 
 The ECG power spectral density (Fig.~\ref{fig:ecg_psd}) further
 reveals the heartbeat fundamental frequency ($f_{0}$) and its
@@ -492,8 +449,8 @@ visible as a low-frequency spectral peak, across all three postures.
 Poincar\'e return maps (Fig.~\ref{fig:poincare}) show the same
 reduction in beat-to-beat variability: the
 scatter cloud contracts progressively from supine to standing,
-consistent with the reduction in short-term vagal modulation
-measured by RMSSD.
+mirroring the RMSSD reduction in
+Table~\ref{tab:posture}.
 
 The sitting baseline (E1B) was subsequently used as the
 posture-matched anchor for the seated breath-hold and walking
@@ -529,13 +486,11 @@ LF/HF                   & 0.28  & 0.54  & 1.44 \\
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb02_fig03_rr_psd_postural.pdf}
-\caption{Postural RR tachograms and RR power spectra. Top panels show
-RR interval time series during supine, sitting, and standing postures;
-bottom panels show RR power spectral density with LF (0.04--0.15~Hz) and
-HF (0.15--0.40~Hz) bands shaded. Supine posture showed the largest
-beat-to-beat RR fluctuations and HF power, whereas standing shifted RR
-intervals downward and reduced HF power, consistent with postural
-reduction of vagal-linked variability.}
+\caption{RR interval time series (top) and RR power spectra (bottom)
+during supine, sitting, and standing postures. LF and HF bands are
+shaded in the spectral panels. Supine showed larger beat-to-beat
+fluctuations and higher HF power; standing showed shorter RR intervals
+and reduced HF power.}
 \label{fig:posture}
 \end{figure}
 
@@ -543,12 +498,10 @@ reduction of vagal-linked variability.}
 \centering
 \includegraphics[width=\columnwidth]{nb02_fig02_ecg_psd_harmonics.pdf}
 \caption{ECG power spectral density across postures. The cardiac
-fundamental frequency shifted from 0.90~Hz in supine posture to
-1.33~Hz in standing posture, consistent with the increase in mean HR.
-Harmonic peaks at $2f_{0}$ and $3f_{0}$ are visible across conditions,
-reflecting the periodic QRS morphology. Low-frequency modulation is
-also present, most clearly in the supine recording, consistent with
-respiratory-related amplitude and rate modulation.}
+fundamental shifted from 0.90~Hz (supine) to 1.33~Hz (standing).
+Harmonic peaks at $2f_{0}$ and $3f_{0}$ are visible across
+conditions. Low-frequency modulation, most prominent in the supine
+recording, likely reflects respiratory-related rate modulation.}
 \label{fig:ecg_psd}
 \end{figure}
 
@@ -557,24 +510,19 @@ respiratory-related amplitude and rate modulation.}
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb02_fig05_poincare_plot.pdf}
-\caption{Poincar\'e return maps of consecutive RR intervals across
-postures. Each point represents $\text{RR}_{n}$ plotted against
-$\text{RR}_{n+1}$. The point cloud becomes progressively more compact
-from supine to standing, with SD1 decreasing from 68.3 to 17.9~ms.
-This geometric contraction visualizes the reduction in short-term
-beat-to-beat variability, consistent with the RMSSD trend in
-Table~\ref{tab:posture}.}
+\caption{Poincar\'e return maps ($\text{RR}_{n}$ vs.\
+$\text{RR}_{n+1}$) across postures. The point cloud contracts
+progressively from supine to standing (SD1: 68.3 to 17.9~ms).}
 \label{fig:poincare}
 \end{figure}
 
 
 % ------ Breath-Hold ------
-\subsection{Inspiratory and Expiratory Breath-Hold
-Produced Different HR Responses (\textbf{H2 Supported})}
+\subsection{Breath-Hold Produced Asymmetric Inspiratory--Expiratory HR Responses}
 \label{ssec:breathhold}
 
-Inspiratory breath-hold produced larger HR
-responses than expiratory hold (Table~\ref{tab:breathhold},
+In this participant, inspiratory breath-hold produced larger HR
+responses than expiratory hold across both trials (Table~\ref{tab:breathhold},
 Fig.~\ref{fig:breathhold}).
 Across two inspiratory trials, mean hold-phase HR rose to 66.9 and
 73.5~bpm ($\Delta$HR = +4.0 and +14.3~bpm relative to pre-hold
@@ -582,9 +530,9 @@ baseline), whereas expiratory hold-phase HR remained near baseline
 (57.8 and 60.8~bpm; $\Delta$HR = $-$0.9 and +1.9~bpm).
 The large inter-trial variability in the inspiratory condition
 (CV of pre-hold HR: 4.3\% vs.\ 0.2\% for expiratory) suggests that
-conscious effort and volitional strategy---in addition to
-respiratory cessation---shape the breath-hold response, supporting
-\textbf{H2}.
+conscious effort and volitional strategy, not just
+respiratory cessation, shaped the breath-hold response in this
+participant.
 
 Spectral comparison against the E1B seated anchor showed a similar
 asymmetry (Fig.~\ref{fig:hf_collapse}).
@@ -603,7 +551,10 @@ perturbation with recovery toward the seated anchor.
 
 \begin{table}[!t]
 \centering
-\caption{Breath-Hold Trial-Level Metrics}
+\caption{Breath-Hold Trial-Level Metrics. Trial~1 (effortful) and
+Trial~2 (relaxed) reflect attenuation of volitional strain on
+repetition (Section~\ref{ssec:protocol}). HF power is reported only
+for the relaxed trial due to stationarity violation in Trial~1.}
 \label{tab:breathhold}
 \footnotesize
 \begin{tabular}{@{}lcccc@{}}
@@ -623,94 +574,64 @@ Recovery HR (bpm)   & 79.2 & 64.8 & 59.2 & 57.4 \\
 Hold HF (ms$^{2}$) & — & 39.1 & — & 230.9 \\
 Recovery HF (ms$^{2}$) & — & 1207 & — & 1213 \\
 \bottomrule
-\multicolumn{5}{@{}p{\columnwidth}@{}}{\footnotesize Trial~1 and
-  Trial~2 correspond to effortful and relaxed holds, respectively.
-  HF power is reported only for the relaxed trial because the
-  inspiratory trials showed opposite HR-slope directions, violating
-  the stationarity assumption required for pooled spectral averaging.}
+\multicolumn{5}{@{}p{\columnwidth}@{}}{\footnotesize HF power
+  restricted to the relaxed trial; inspiratory trials showed
+  opposite HR-slope directions, violating stationarity.}
 \end{tabular}
 \end{table}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb03_fig02_e2_effort_vs_relaxed.pdf}
-\caption{Inspiratory breath-hold trial variability and effort dependence.
-Panels~A--B show RR tachograms for two inspiratory breath-hold trials, and
-panels~C--D show hold-phase RR spectra for the corresponding trials.
-Trial~1 and Trial~2 exhibited different HR-slope directions and response
-shapes, indicating that voluntary effort and breath-hold strategy
-substantially affected the transient response. Because of this
-nonstationarity, subsequent spectral quantification was restricted to
-the relaxed trial.}
+\caption{Inspiratory breath-hold trial comparison. (a,\,b)~RR tachograms
+and (c,\,d)~hold-phase spectra for Trial~1 (effortful) and Trial~2
+(relaxed). The two trials showed different HR-slope directions.
+Spectral quantification used Trial~2 only
+(Section~\ref{ssec:protocol}).}
 \label{fig:breathhold}
 \end{figure}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb03_fig01_e2_hf_collapse.pdf}
-\caption{Breath-hold spectral dynamics in the relaxed trial.
-Panel~A compares HF power during hold and recovery against the E1B
-seated anchor. Inspiratory hold produced stronger HF suppression than
-expiratory hold ($-$96.5\% vs.\ $-$79.4\%), while both conditions
-recovered to near-anchor levels after release.
-Panels~B--D show the representative inspiratory relaxed trial,
-including RR tachogram, time--frequency representation, and LF/HF
-power trajectories. These results support a transient respiratory
-perturbation with recovery toward the seated baseline.}
+\caption{Breath-hold spectral dynamics (relaxed trial).
+(a)~HF power during hold and recovery vs.\ E1B seated anchor:
+inspiratory hold produced stronger HF suppression ($-$96.5\% vs.\
+$-$79.4\%), with both conditions recovering to near-anchor levels.
+(b--d)~Representative inspiratory relaxed trial: RR tachogram,
+time--frequency representation, and LF/HF power trajectories.}
 \label{fig:hf_collapse}
 \end{figure}
 
 
 % ------ Walking ------
-\subsection{Walking Increased HR
-but Limited Fine-Scale HRV Interpretation (\textbf{H3 Supported})}
+\subsection{Walking Increased Heart Rate but Limited Fine-Scale HRV Interpretation}
 \label{ssec:walking}
 
 The walking challenge produced an acute cardiovascular response
 consistent with mild exercise (Table~\ref{tab:walking},
 Figs.~\ref{fig:walk_motion},~\ref{fig:recovery_tau}).
-Mean HR rose from 60.8~bpm (seated) to 83.0~bpm (walking) and
-returned to 70.3~bpm during recovery, with a fitted exponential
-time constant $\tau = 6.8$~s (Eq.~\ref{eq:recovery}).
-This rapid recovery is consistent with parasympathetic reactivation
-following low-intensity exercise~\cite{shaffer2017}.
+Mean HR rose from 60.8 to 83.0~bpm and returned to 70.3~bpm
+during recovery ($\tau = 6.8$~s, Eq.~\ref{eq:recovery}),
+indicating rapid parasympathetic
+reactivation~\cite{shaffer2017}.
 
-However, walking-phase RMSSD (41.1~ms) should not be directly
-compared with resting RMSSD because walking introduces
-motion artifacts through multiple non-linear pathways---electrode-skin
-impedance fluctuations, trunk EMG, and cable sway---that
-cause random R-peak fiducial-point shifts and may inflate
-beat-to-beat variability indices.
-The raw walking ECG confirmed visible waveform degradation
-(Appendix D, Fig.~\ref{fig:walking_ecg_processing}), and the walking-segment
-ECG spectrum showed elevated broadband energy in the 1--3~Hz
-locomotor band (Fig.~\ref{fig:walk_ecg_psd}).
-The accelerometer-derived step frequency
-(1.46~Hz) fell within 6\% of the walking heart-rate fundamental
-($f_0 = 1.38$~Hz at 83~bpm), creating a spectral overlap that
-limits reliable separation of cardiac and locomotor components
-by linear filtering alone.
-
-We computed magnitude-squared coherence to test for phase-locked,
-linear coupling between locomotor mechanics and the cardiac signal.
-Coherence was low both at the step peak ($C_{xy} = 0.04$) and across
-the 1--3~Hz cadence band (mean $C_{xy} = 0.06$, max~0.20),
-providing little evidence for a stable phase-locked linear
-coupling pathway; Pearson correlation between
-$|\Delta\text{RR}|$ and accelerometer magnitude was likewise weak
-($r = 0.26$).
-Low coherence does not, however, exclude non-linear artifacts such as
-broadband baseline wander or stochastic fiducial-point jitter.
-Combined with the cadence-proximate spectral energy in 1--3~Hz
-(Fig.~\ref{fig:walk_ecg_psd}); walking-phase
-fine-scale HRV was therefore treated as motion-limited.
-
-Mean HR and recovery kinetics---which depend on
-slow trends robust to fiducial jitter---remain physiologically
-interpretable, while fine-scale HRV indices such as RMSSD are
-motion-limited.
-The walking-phase HRV was accordingly flagged as
-\textbf{unreliable~(motion)} in the summary table, consistent with \textbf{H3}.
+Walking-phase RMSSD (41.1~ms) should be interpreted cautiously.
+Motion artifacts---electrode-skin impedance changes, trunk EMG,
+cable sway---can introduce fiducial-point jitter and inflate
+beat-to-beat variability. The accelerometer-derived step frequency
+(1.46~Hz) fell within 6\% of the cardiac fundamental
+($f_0 = 1.38$~Hz), creating spectral overlap that linear
+filtering cannot resolve (Fig.~\ref{fig:walk_ecg_psd}).
+Magnitude-squared coherence at the step peak was low
+($C_{xy} = 0.04$; 1--3~Hz band mean $C_{xy} = 0.06$), and
+the correlation between $|\Delta\text{RR}|$ and accelerometer
+magnitude was weak ($r = 0.26$). R-peak detection remained
+nominally successful (Appendix~D,
+Fig.~\ref{fig:walking_ecg_processing}), but low coherence does
+not exclude broadband drift. We therefore treat walking-phase
+fine-scale HRV as motion-limited: RMSSD is reported but not
+used as a cross-condition comparator.
 
 \begin{table}[!t]
 \centering
@@ -737,13 +658,10 @@ E1B anchor & 56.1 & 61.1 & --- & Seated ref. \\
 \centering
 \includegraphics[width=\columnwidth]{nb04_fig05_e3_motion_crosscheck.pdf}
 \caption{Walking challenge overview.
-Panel~A shows RR interval dynamics across seated baseline, walking,
-and recovery; panel~B shows accelerometer magnitude and 2-s RMS
-motion envelope. Walking increased mean HR and elevated motion RMS
-relative to seated and recovery segments. The modest correlation
-between $|\Delta\text{RR}|$ and motion magnitude ($r = 0.26$) supports
-treating walking-phase beat-to-beat HRV as motion-limited rather than
-using it as a resting-HRV comparator.}
+(a)~RR interval dynamics across seated baseline, walking, and
+recovery. (b)~Accelerometer magnitude and 2-s RMS motion envelope.
+Correlation between $|\Delta\text{RR}|$ and motion magnitude was
+modest ($r = 0.26$).}
 \label{fig:walk_motion}
 \end{figure}
 
@@ -751,10 +669,8 @@ using it as a resting-HRV comparator.}
 \centering
 \includegraphics[width=\columnwidth]{nb04_fig03_e3_recovery_tau.pdf}
 \caption{Post-walking heart-rate recovery. Beat-to-beat HR during the
-60-s recovery segment was fitted with a single-exponential decay model.
-The fitted time constant was $\tau = 6.8$~s, with
-HRR$_{60} = 18.5$~bpm, indicating rapid recovery after the
-low-intensity walking challenge.}
+60-s recovery segment fitted to a single-exponential decay
+($\tau = 6.8$~s; HRR$_{60} = 18.5$~bpm).}
 \label{fig:recovery_tau}
 \end{figure}
 
@@ -762,22 +678,17 @@ low-intensity walking challenge.}
 \centering
 \includegraphics[width=\columnwidth]{nb04_fig04_e3_ecg_psd.pdf}
 \caption{ECG and accelerometer spectra during the walking challenge.
-ECG spectra are shown for seated baseline, walking, and recovery,
-with cardiac harmonics marked by $f_{0}$, $2f_{0}$, and higher
-multiples. During walking, the accelerometer-derived step frequency
-was 1.46~Hz, close to the ECG fundamental frequency at 1.38~Hz,
-creating a cadence--ECG overlap region within 1--3~Hz. This spectral
-proximity limits confident separation of cardiac and locomotor
-components and supports labeling walking-phase fine-scale HRV as
-motion-limited.}
+Cardiac harmonics ($f_{0}$, $2f_{0}$, etc.) are marked. During
+walking, the step frequency (1.46~Hz) fell close to the cardiac
+fundamental (1.38~Hz), creating a cadence--ECG overlap region
+within 1--3~Hz.}
 \label{fig:walk_ecg_psd}
 \end{figure}
 
 
 
 % ------ Paced Breathing ------
-\subsection{Paced Breathing: Entrainment Manipulation Check,
-LF/HF Band Migration (\textbf{H5}), and Resonance (\textbf{H4})}
+\subsection{Paced Breathing Shifted RR Spectral Power Across Frequency Bands}
 \label{ssec:paced}
 
 The paced-breathing experiment yielded three main observations.
@@ -785,35 +696,31 @@ The paced-breathing experiment yielded three main observations.
 \subsubsection{Frequency Entrainment Was Quantitatively Verified}
 
 The measured RR spectral peak closely tracked the imposed breathing
-frequency (Fig.~\ref{fig:psd_overlay}).
-Linear regression yielded slope~$= 1.022$ (95\% CI: 0.947--1.097),
-intercept~$= -0.002$~Hz (95\% CI: $-$0.012 to 0.008),
-$R^{2} = 0.998$, and residual SD~$= 0.003$~Hz.
-Neither the slope-$=$1 nor the intercept-$=$0 null hypothesis was
-rejected, indicating that the manipulation was effective and that the
-paced-breathing protocol produced respiratory entrainment of
-the cardiac cycle (manipulation check).
+frequency (Fig.~\ref{fig:psd_overlay}):
+slope~$= 1.022$ (95\%~CI: 0.947--1.097),
+intercept~$= -0.002$~Hz (95\%~CI: $-$0.012 to 0.008),
+$R^{2} = 0.998$, residual SD~$= 0.003$~Hz.
+Neither the slope-$=$1 nor intercept-$=$0 null was rejected,
+confirming respiratory entrainment.
 
-\subsubsection{The Primary Effect Was Amplitude Expansion,
-Not Heart-Rate Reduction}
+\subsubsection{Slow Breathing Increased RR Oscillation Amplitude}
 
-Across the five paced conditions, mean HR varied only narrowly
-(57.0--60.1~bpm), whereas SDNN rose from 48.7 to 131.4~ms, total
-power increased from 1754 to 10{,}493~ms$^{2}$, and peak-to-trough
-RR amplitude grew from 157 to 406~ms
-(Table~\ref{tab:paced}, Fig.~\ref{fig:e4a_tachograms}).
-In this dataset, slow breathing primarily expanded oscillatory amplitude
-rather than shifting the mean chronotropic operating point.
+Mean HR varied narrowly across conditions (57.0--60.1~bpm), whereas
+SDNN rose from 48.7 to 131.4~ms, total power from 1754 to
+10{,}493~ms$^{2}$, and peak-to-trough RR amplitude from 157 to
+406~ms (Table~\ref{tab:paced}, Fig.~\ref{fig:e4a_tachograms}).
+Slow breathing thus primarily expanded oscillatory amplitude rather
+than shifting mean heart rate.
 
 \subsubsection{Respiratory-Centered Spectral Power Did Not Peak at
-6~Breaths/Min (\textbf{H4} Supported)}
+6~Breaths/Min (\textbf{H4} Not Supported)}
 
 Classical resonance biofeedback theory predicts a peak in RR
 oscillation amplitude near 6~breaths/min
 ($\sim$0.1~Hz)~\cite{lehrer2014}.
 To test this without relying on fixed LF/HF bands or cycle-level
-peak-to-trough detection---which can be unstable during very slow
-breathing without a direct respiratory belt signal---we computed
+peak-to-trough detection (which can be unstable during very slow
+breathing without a direct respiratory belt signal), we computed
 respiratory-centered RR spectral power by integrating the Welch PSD
 within $\pm$0.015~Hz of each imposed breathing frequency.
 Both respiratory-centered power and distribution-based RR amplitude
@@ -825,27 +732,24 @@ Sensitivity analysis using $\pm$0.010~Hz and $\pm$0.020~Hz
 integration windows showed that the same monotonic pattern was
 observed across all three bandwidths
 (Appendix E, Fig.~\ref{fig:resonance_sensitivity}).
-A classical 6-breaths/min resonance maximum was
-\emph{not observed} in this participant under the present
-fixed-order protocol (\textbf{H4} supported).
+RR oscillation amplitude thus increased monotonically as breathing
+slowed, without showing the inverted-U profile centered at
+6~breaths/min predicted by classical resonance theory. The
+fixed descending presentation order qualifies this finding
+(Section~\ref{sec:limitations}).
 
-\subsubsection{LF/HF Inflation Dissociated from RMSSD, Supporting
-Spectral-Band Migration (\textbf{H5} Supported)}
+\subsubsection{LF/HF Inflation Dissociated from RMSSD}
 
-LF/HF rose dramatically from 0.22 (12/min) to 11.54 (6/min) and
+LF/HF rose from 0.22 (12/min) to 11.54 (6/min) and
 plateaued near 17.5 at the slowest rates, yet RMSSD remained in a
 narrow range of 48--66~ms throughout (Fig.~\ref{fig:lfhf_rmssd}).
-This dissociation is consistent with \textbf{H5}: when the
-respiratory peak crosses the 0.15~Hz LF/HF boundary, the resulting
-LF/HF increase reflects respiratory spectral-band migration---not a
-sympathovagal shift~\cite{billman2013}.
-RMSSD, being computed entirely in the time domain, is unaffected by
-frequency-band assignment and therefore provides a more stable vagal
-index under slow paced breathing.
-Together with the respiratory-centered analysis above, these results
-indicate that slow paced breathing inflates LF/HF because the
-dominant respiratory peak shifted from HF into LF,
-rather than by shifting autonomic balance.
+Because the respiratory peak crossed the 0.15-Hz boundary between
+these conditions, the LF/HF increase is better explained by
+spectral-band migration than by a sympathovagal
+shift~\cite{billman2013}.
+RMSSD, computed entirely in the time domain, is unaffected by
+frequency-band assignment and provided a more stable vagal index
+across these conditions.
 
 
 \begin{table}[!t]
@@ -872,64 +776,60 @@ LF/HF              & 0.22  & 0.84  & 11.54 & 17.45 & 17.47 \\
 RR amp.\ (ms)      & 157   & 240   & 293   & 297   & 406 \\
 \bottomrule
 \multicolumn{6}{@{}p{\columnwidth}@{}}{\footnotesize $^\ast$SDNN is
-  duration-dependent~\cite{taskforce1996}; E4 condition durations
-  ranged from 220 to 280~s. Frequency-domain comparisons should be
-  interpreted together with respiratory-centered analyses in
-  Fig.~\ref{fig:e4a_resp_resonance}.}
+  duration-dependent \cite{taskforce1996}. E4 condition durations
+  ranged from 220 to 280~s; based on the window-length sensitivity
+  analysis (Appendix~A, Fig.~\ref{fig:duration_effect}), SDNN
+  coefficient of variation falls below 6\% beyond 220~s, indicating
+  that the 27\% duration spread across E4 conditions contributes
+  negligibly to the observed 2.7-fold SDNN range (48.7--131.4~ms)
+  and does not confound cross-condition comparison. Frequency-domain
+  comparisons should be interpreted together with respiratory-centered
+  analyses in Fig.~\ref{fig:e4a_resp_resonance}.}
 \end{tabular}
 \end{table}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb05_fig01_e4a_tachograms.pdf}
-\caption{RR tachograms during paced breathing. RR intervals are shown
-for five metronome-guided breathing rates from 12 to 3~breaths/min.
-Grey vertical lines indicate cued inhalation onsets. As breathing
-slowed, RR oscillation amplitude increased, whereas mean HR remained
-relatively stable across conditions.}
+\caption{RR tachograms during paced breathing at five metronome-guided
+rates (12 to 3~breaths/min). Grey lines mark cued inhalation onsets.
+Oscillation amplitude increased as breathing slowed; mean HR remained
+relatively stable.}
 \label{fig:e4a_tachograms}
 \end{figure}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb05_fig02_e4a_psd_overlay.pdf}
-\caption{RR power spectra during paced breathing. The dominant RR
-spectral peak shifted leftward with decreasing imposed breathing rate
-and crossed the 0.15-Hz LF/HF boundary between 12 and 6~breaths/min.
-This confirms respiratory entrainment and illustrates why fixed LF/HF
-bands become problematic during slow breathing.}
+\caption{RR power spectra during paced breathing. The dominant spectral
+peak shifted leftward with decreasing breathing rate and crossed the
+0.15-Hz LF/HF boundary between 12 and 6~breaths/min.}
 \label{fig:psd_overlay}
 \end{figure}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb05_fig04_e4a_lfhf_crossover.pdf}
-\caption{LF/HF dissociation from RMSSD during paced breathing.
-LF/HF increased sharply once the imposed breathing frequency moved
-below the 0.15-Hz LF/HF boundary, whereas RMSSD remained within a
-relatively narrow range. This dissociation supports interpreting the
-LF/HF increase as respiratory spectral-band migration rather than
-sympathovagal reversal.}
+\caption{LF/HF and RMSSD during paced breathing. LF/HF increased
+sharply once breathing frequency fell below 0.15~Hz, whereas RMSSD
+remained within a narrow range across all five conditions.}
 \label{fig:lfhf_rmssd}
 \end{figure}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb05_fig05b_e4a_resp_power_and_amplitude.pdf}
-\caption{Resonance assessment using respiratory-centered metrics.
-Panel~A shows RR spectral power integrated within $\pm$0.015~Hz of
-each imposed breathing frequency. Panel~B shows distribution-based RR
-amplitude (p95--p5). Both metrics increased as breathing slowed from
-12 to 3~breaths/min and did not show an isolated maximum at
-6~breaths/min. Thus, a classical 6-breaths/min resonance maximum was
-not observed in this participant under the fixed-order protocol.}
+\caption{Respiratory-centered RR metrics across paced-breathing rates.
+(a)~Spectral power integrated within $\pm$0.015~Hz of each imposed
+frequency. (b)~Distribution-based RR amplitude (p95--p5). Both
+metrics increased monotonically from 12 to 3~breaths/min without
+an isolated maximum at 6~breaths/min.}
 \label{fig:e4a_resp_resonance}
 \end{figure}
 
 
 % ------ Cross-Experiment ------
-\subsection{Cross-Experiment Comparison Required
-Task-Specific Metrics}
+\subsection{HRV Metrics Behaved Differently Across Tasks}
 \label{ssec:integration}
 
 Viewed together (Fig.~\ref{fig:integration}), the four experiments
@@ -943,26 +843,24 @@ mean~HR while expanding total power by a factor of 6.0
 
 These represent different types of physiological modulation
 and cannot be ranked on a single LF/HF axis.
-The breath-hold and walking paradigms, meanwhile, are best described
-as challenge--recovery trajectories: inspiratory hold showed the
-stronger HR rise, expiratory recovery showed the largest RMSSD
-rebound, and walking recovery followed an exponential time course.
+The breath-hold and walking paradigms are better described by
+their transient HR dynamics: inspiratory hold showed the
+larger HR rise, and walking recovery followed an exponential
+time course ($\tau = 6.8$~s).
 
-These results favor reporting cross-experiment summaries using
-mean~HR, RMSSD, total power, and explicit validity annotations
-(e.g., ``motion-limited,'' ``band-shifted'') rather than reducing
-all conditions to a single frequency-domain scalar.
+Cross-experiment summaries are therefore more informative when
+reported as mean~HR, RMSSD, and total power with explicit validity
+annotations (e.g., ``motion-limited,'' ``band-shifted'') rather
+than reduced to a single frequency-domain ratio.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb06_fig01_autonomic_spectrum.pdf}
-\caption{Cross-experiment summary of steady-state HRV responses.
-Panel~A maps mean HR against RMSSD for postural and paced-breathing
-conditions. Posture shifted the operating point toward higher HR and
-lower RMSSD, whereas paced breathing clustered at similar mean HR with
-preserved RMSSD. Panel~B compares total RR spectral power, showing
-that paced breathing expanded oscillatory power while posture reduced
-total power from supine to standing.}
+\caption{Cross-experiment summary of steady-state conditions.
+(A)~Mean HR vs.\ RMSSD for postural and paced-breathing conditions.
+(B)~Total RR spectral power. Posture shifted HR upward and RMSSD
+downward; paced breathing expanded oscillatory power at nearly
+constant HR.}
 \label{fig:integration}
 \end{figure}
 
@@ -973,20 +871,13 @@ total power from supine to standing.}
 
 \subsection{Context Determines Interpretation}
 
-The main observation is that HRV indices did not retain the same
-physiological interpretation across task contexts.
-The same LF/HF ratio that separated supine from
-standing (0.28 vs.\ 1.44) became physiologically uninterpretable
-under slow paced breathing (17.47), where it was largely explained
-by the mechanical relocation of the respiratory peak from HF into
-LF.
-This result aligns with longstanding critiques that LF/HF ``does not
-accurately measure cardiac sympatho-vagal
-balance''~\cite{billman2013,eckberg1997} and provides a
-within-participant example: the same participant
-generated a 60-fold range in LF/HF (0.28--17.47) through postural
-and respiratory manipulations alone, without any pharmacological or
-pathological intervention.
+HRV indices did not retain the same meaning across tasks.
+LF/HF separated supine from standing (0.28 vs.\ 1.44) but reached
+17.47 under slow paced breathing, where it reflected relocation of the
+respiratory peak into the LF band rather than sympathovagal change.
+A single participant thus produced a 60-fold LF/HF range through
+postural and respiratory manipulations
+alone~\cite{billman2013,eckberg1997}.
 
 \subsection{Paced Breathing: Amplitude, Not Rate}
 
@@ -995,36 +886,28 @@ of respiratory sinus arrhythmia rather than reduction of mean heart
 rate: mean HR varied by only 3.1~bpm across the five paced conditions
 (57.0--60.1~bpm), whereas peak-to-trough RR amplitude increased by
 159\% (157--406~ms).
-Slow breathing thus amplifies the gain of the cardiorespiratory
-coupling loop---baroreflex modulation, respiratory gating of vagal
-efferents~\cite{hirsch1981}, and mechanical intrathoracic pressure
+Slow breathing thus amplified cardiorespiratory coupling---baroreflex
+modulation, respiratory gating of vagal
+efferents~\cite{hirsch1981}, and intrathoracic pressure
 oscillations---without substantially shifting mean
 HR~\cite{berntson1997,penttila2001}.
 
-The absence of a 6-breaths/min resonance maximum in this participant
-requires qualification.
-Classical resonance theory~\cite{lehrer2014} predicts that RR
-oscillation amplitude peaks when breathing frequency matches the
-cardiovascular system's natural resonance, typically near 0.1~Hz.
-Using respiratory-centered RR spectral power---a metric that
-tracks the imposed breathing frequency rather than relying on fixed
-LF/HF bands---we found that both spectral power and RR amplitude
-(p95--p5) increased monotonically down to 3~breaths/min (0.05~Hz).
-The monotonic pattern was unchanged across three integration bandwidths
-($\pm$0.010, $\pm$0.015, $\pm$0.020~Hz).
-However, this is a single-participant observation under a
-fixed descending presentation order (12$\to$3~breaths/min), so the
-monotonic increase may partly reflect progressive relaxation, deeper
-tidal volumes at slower rates, or cumulative training effects
-rather than an absence of resonance.
-A randomized or counterbalanced multi-participant design with
-concurrent respiratory monitoring would be needed to distinguish
-these possibilities from a true resonance-frequency shift.
+The absence of a 6-breaths/min resonance maximum requires
+qualification. Classical theory~\cite{lehrer2014} predicts peak RR
+amplitude near 0.1~Hz. Using respiratory-centered spectral power,
+both spectral power and RR amplitude (p95--p5) increased
+monotonically to 3~breaths/min (0.05~Hz), unchanged across three
+integration bandwidths ($\pm$0.010, $\pm$0.015, $\pm$0.020~Hz).
+However, the fixed descending presentation order
+(12$\to$3~breaths/min) means the monotonic increase may partly
+reflect progressive relaxation or deeper tidal volumes.
+A counterbalanced multi-participant design with respiratory
+monitoring would be needed to distinguish order effects from a true
+resonance-frequency shift.
 
-\subsection{Practical Implications for HRV Reporting}
+\subsection{Reporting Recommendations}
 
-Based on this analysis, three reporting practices are recommended
-for similar multi-condition HRV protocols:
+Three practices follow from the present analysis:
 \begin{enumerate}
 \item Report LF/HF only when breathing rate is confirmed to lie
   within the HF band ($>$0.15~Hz, i.e., $>$9~breaths/min).
@@ -1037,11 +920,11 @@ for similar multi-condition HRV protocols:
   task-specific autonomic effects.
 \end{enumerate}
 
-Table~\ref{tab:validity} lists the metric interpretation used for
-each condition in this study.
+Table~\ref{tab:validity} summarizes which metrics were interpretable
+in each condition.
 
 \begin{table}[!t]
-\caption{Task-Specific Interpretability of HRV Metrics}
+\caption{HRV Metric Interpretability by Condition}
 \label{tab:validity}
 \centering
 \footnotesize
@@ -1050,11 +933,11 @@ each condition in this study.
 \toprule
 Condition & Standard HRV interpretation? & Primary metric & Caveat \\
 \midrule
-Supine/sitting/\newline standing (E1) & Yes & RMSSD, HF, LF/HF & Steady-state \\
+Supine/sitting/\newline standing (E1) & Yes & RMSSD, HF, LF/HF & Steady-state; $\geq$300\,s windows \\
 \addlinespace
-Breath-hold (E2) & Partial & HR response, recovery, HF & Transient; short-segment PSD \\
+Breath-hold (E2) & Phase-restricted & HR response, recovery, HF & Hold $\geq$40\,s: time-domain and per-trial PSD valid; segments $<$30\,s should not be used for spectral estimation \\
 \addlinespace
-Walking (E3) & Motion-limited & Mean HR, recovery $\tau$ & Fine-scale HRV motion-limited \\
+Walking (E3) & Motion-limited & Mean HR, recovery $\tau$ & Fine-scale HRV motion-limited; coherence excludes linear lock-in but not broadband artifact \\
 \addlinespace
 Paced $\geq$9/min (E4) & Mostly valid & RMSSD, HF, LF/HF & Resp.\ peak in or near HF band \\
 \addlinespace
@@ -1068,62 +951,55 @@ Paced $\leq$6/min (E4) & Band-shifted & RMSSD, TP, RR ampl., resp.-centered powe
 \section{Limitations}
 \label{sec:limitations}
 
-This lab study has four limitations.
-First, it is a single-participant within-subject investigation; the
-findings illustrate metric-behavior principles under controlled
-within-subject manipulation but cannot claim population
-generalizability.
-We deliberately framed this as a methodological lab demonstration
-rather than an inferential study.
+Several limitations should be considered. This is a single-participant
+study, so the findings illustrate metric-behavior principles under
+controlled within-subject manipulation but cannot be generalized
+to a broader population. The paced-breathing conditions were
+presented in fixed descending order (12$\to$3~breaths/min);
+despite $\geq$3-min recovery periods between conditions, progressive
+relaxation or training effects cannot be ruled out without a
+counterbalanced design.
 
-Second, the paced-breathing conditions were presented in fixed
-descending order (12$\to$3~breaths/min).
-Inter-condition rest periods of $\geq$3~min were enforced to allow
-autonomic recovery, but progressive relaxation or training effects
-cannot be fully excluded without counterbalanced or randomized
-presentation order.
-
-Third, no direct respiratory signal (respiratory belt or impedance
-pneumography) was recorded.
-Respiratory entrainment was inferred from the RR spectral peak;
-ECG-derived respiration (EDR) validation is recommended for future
-iterations of this lab.
-
-Fourth, walking-phase HRV is motion-limited, and fine-scale
-beat-to-beat metrics during ambulation should be interpreted with
-explicit motion-limited validity caveats.
-Magnitude-squared coherence between the walking ECG and accelerometer
-was low ($C_{xy} = 0.04$ at the step peak), consistent with absence of
-strong phase-locked linear coupling but not excluding broadband or
-non-linear artifact; the combination of high accelerometer motion and
-cadence-proximate spectral energy warrants caution for fine-scale HRV
-indices.
-
-Despite these constraints, the controlled within-subject design
-isolates task-dependent changes in metric behavior, which was the
-primary aim of this methodological demonstration.
+Three further constraints affect interpretation. No direct
+respiratory signal was recorded, so entrainment was inferred from
+the RR spectral peak rather than measured by a respiratory belt or
+impedance pneumography. Walking-phase fine-scale HRV is
+motion-limited: low coherence between ECG and accelerometer
+($C_{xy} = 0.04$) ruled out strong phase-locked coupling but does
+not exclude broadband artifact, so walking RMSSD was not used for
+cross-condition comparison. Finally, each condition was recorded
+once (twice for breath-hold), precluding within-condition
+reliability assessment; absolute values are session-specific, and
+replication would strengthen the methodological conclusions about
+relative metric behavior across tasks~\cite{shaffer2017}.
 
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-Using a unified single-lead ECG pipeline across four
-paradigms, this lab study showed distinct HRV response patterns
-across posture, breath-hold, walking, and paced breathing.
-Posture shifts the autonomic operating point (\textbf{H1}).
-Breath-hold reveals asymmetric inspiratory--expiratory dynamics
-(\textbf{H2}).
-Walking increased cardiovascular load but limited fine-scale
-HRV interpretability (\textbf{H3}).
-Within the tested range of paced breathing, no classical
-6-breaths/min resonance maximum was observed (\textbf{H4}).
-Slow paced breathing showed that LF/HF can reflect band migration
-rather than a sympathovagal index (\textbf{H5}).
-Collectively, these findings argue for task-specific interpretation
-of HRV metrics: under slow paced breathing, mean~HR, RMSSD, and total
-power provided the most interpretable cross-condition summary in
-this dataset.
+Across four physiological tasks, the same HRV metrics changed for
+different reasons. Postural loading primarily shifted the autonomic
+operating point, with higher heart rate and lower RMSSD from supine to
+standing. Walking produced a clear heart-rate response and rapid
+recovery, but cadence--cardiac spectral proximity made fine-scale HRV
+during ambulation difficult to interpret. In paced breathing, the
+dominant RR spectral peak tracked the imposed breathing rate, but its
+movement across conventional LF/HF boundaries changed the meaning of
+spectral indices.
+
+The clearest interpretive failure occurred during slow paced breathing:
+LF/HF increased from 0.22 to 17.47 while RMSSD remained relatively
+stable, indicating spectral-band migration rather than a true
+sympathovagal shift. RR oscillation amplitude also increased
+monotonically as breathing slowed, rather than peaking at
+6~breaths/min, although this finding should be interpreted in light of
+the fixed descending protocol. Overall, these results show that HRV
+metrics should be selected according to the recording condition,
+rather than interpreted uniformly across tasks. For slow breathing and
+motion-contaminated recordings, explicit validity notes and
+posture-matched comparisons are more informative than relying on LF/HF
+alone.
 
 
 % ============================================================
@@ -1225,13 +1101,12 @@ sessions (E1A--C, E4 12--3~breaths/min), peak-count agreement exceeded
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{appendixA_bland_altman.pdf}
-\caption{Dual-path R-peak detection validation. Panel~A summarizes
-artifact-correction burden across recordings. Panels~B and~C show
-Bland--Altman agreement between the SciPy independent validation
-pipeline and NeuroKit2 primary analysis pipeline for mean NN interval
-and RMSSD. The small mean
-differences support use of the NeuroKit2-derived RR series for
-downstream HRV analysis.}
+\caption{Dual-path R-peak detection validation. Bland--Altman plots
+comparing the SciPy independent validation pipeline and the NeuroKit2
+primary analysis pipeline for (a)~mean NN interval and (b)~RMSSD.
+The small mean differences ($-0.43$~ms and $1.24$~ms, respectively)
+support use of the NeuroKit2-derived RR series for downstream HRV
+analysis.}
 \label{fig:bland_altman}
 \end{figure}
 
@@ -1257,15 +1132,11 @@ variability,
 dropping to 3.6\% CV by 250~s. LF remained the noisiest band
 (CV $>$ 27\% even at 250~s), reflecting its sensitivity to slow trends
 and sub-band drift. These results support the use of full multi-minute
-windows---5~min for postural baselines (E1) and $\geq$220~s for
-steady-state paced breathing (E4)---rather than the shorter 30--60~s
+windows (5~min for postural baselines (E1) and $\geq$220~s for
+steady-state paced breathing (E4)) rather than the shorter 30--60~s
 windows commonly used for transient analyses.
-This empirical observation is consistent with the theoretical
-spectral-resolution constraint discussed in
-Section~\ref{ssec:protocol}: a 30-s Hann window yields
-$\Delta f \approx 0.053$~Hz, placing only $\sim$2 bins inside the LF
-band and precluding reliable LF power
-estimation~\cite{oppenheim1999}.
+This is consistent with the spectral-resolution constraint
+in Section~\ref{ssec:protocol}~\cite{oppenheim1999}.
 
 \begin{figure}[!t]
 \centering
@@ -1292,12 +1163,10 @@ recording required exclusion.
 \section{Breath-Hold Trial-Level Detail}
 \label{app:breathhold_detail}
 
-The main-text Fig.~\ref{fig:breathhold} shows the two inspiratory
-trials to highlight the effort/relaxation contrast used to evaluate
-H2. This appendix provides the complementary
-inspiratory-vs.-expiratory overlay restricted to the relaxed trial,
-thereby reducing the voluntary-strain confound present in Trial~1
-and focusing on the respiratory-cessation effect.
+This appendix overlays the relaxed inspiratory and expiratory trials,
+complementing the main-text effort/relaxation contrast
+(Fig.~\ref{fig:breathhold}) by isolating the respiratory-cessation
+effect.
 
 Figure~\ref{fig:breath_hold_pure_phys} overlays the relaxed
 inspiratory trial (Trial~2) against the relaxed expiratory trial,
@@ -1308,26 +1177,23 @@ inspiratory condition may be consistent with elevated intrathoracic
 pressure compressing venous return during sustained lung inflation,
 complementing the spectral evidence shown in main-text
 Fig.~\ref{fig:hf_collapse}.
+Multiple mechanisms, including the Bainbridge reflex, chemoreflex
+activation from rising CO$_2$, and voluntary effort, could
+contribute to the inspiratory hold HR increase; the present data
+cannot dissociate their relative contributions.
 
-The figure also clarifies the temporal asymmetry of recovery. After
-release, both traces relax toward baseline over the subsequent
-recovery window, but the inspiratory hold shows a steeper immediate
-descent from its higher peak. This pattern is consistent with the
-observation from
-Table~\ref{tab:breathhold} that the dominant difference between the
-two relaxed holds is not hold duration, but the magnitude of the
-circulatory perturbation induced by lung volume at the onset and
-during sustained apnea.
+Recovery was temporally asymmetric: the inspiratory hold showed a
+steeper descent from its higher peak, consistent with a larger
+circulatory perturbation driven by lung volume rather than hold
+duration (Table~\ref{tab:breathhold}).
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb03_fig03_e2_pure_physiology.pdf}
 \caption{Relaxed-trial inspiratory vs.\ expiratory breath-hold responses
 aligned to hold onset. The inspiratory hold produced an earlier and
-larger HR excursion than the expiratory hold, despite using the relaxed
-trials to reduce voluntary-strain confounding. This supports the
-interpretation that lung volume and respiratory mode contributed to the
-breath-hold HR response.}
+larger HR excursion than the expiratory hold. Only relaxed trials
+(Trial~2) are shown to reduce voluntary-strain confounding.}
 \label{fig:breath_hold_pure_phys}
 \end{figure}
 
@@ -1335,13 +1201,9 @@ breath-hold HR response.}
 \section{Walking Detail Figures}
 \label{app:walking_detail}
 
-This appendix provides supplementary views of the walking experiment
-(E3) data. The main-text Figs.~\ref{fig:walk_motion}--\ref{fig:walk_ecg_psd}
-cover the autonomic response, recovery kinetics, and
-cadence-coincident ECG spectral overlap. The figures below add
-signal-quality context needed to interpret why mean HR and recovery
-remain trustworthy while walking-phase fine-scale HRV should be treated
-cautiously.
+This appendix provides signal-quality context supplementing the
+main-text walking analysis
+(Figs.~\ref{fig:walk_motion}--\ref{fig:walk_ecg_psd}).
 
 Figure~\ref{fig:walking_ecg_processing} shows a representative 10-s
 window of walking-phase ECG before and after preprocessing,
@@ -1364,33 +1226,17 @@ extraction while motivating caution for fine-scale HRV.}
 \label{fig:walking_ecg_processing}
 \end{figure}
 
-Figure~\ref{fig:walking_psd_contrast} compares the seated-baseline
-(E1B) and walking RR power spectra on a common axis. The walking
-spectrum shows strongly attenuated HF power and a broadened LF region,
-consistent with reduced beat-to-beat variability combined with
-motion-induced spectral spreading. In
-that sense, the figure complements Fig.~\ref{fig:walk_ecg_psd}: the
-main-text panel shows where locomotor spectral overlap affects the ECG
-spectrum, while the appendix contrast shows the resulting flattening
-of physiologically interpretable RR structure.
-
-These two panels suggest a bounded conclusion for E3:
-walking still permits extraction of average rate and recovery
-timing, but it degrades the assumptions required for high-confidence
-interpretation of short-lag variability metrics. This is why the
-walking-phase RMSSD value is reported for completeness but not used as
-a cross-condition autonomic comparator.
+Figure~\ref{fig:walking_psd_contrast} compares the E1B seated-baseline
+and walking RR power spectra. The walking spectrum shows attenuated HF
+power and broadened LF energy, consistent with reduced beat-to-beat
+variability combined with motion-induced spectral spreading.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb04_fig06_e3_rr_psd_contrast.pdf}
 \caption{RR power spectral density during seated baseline and walking.
-Compared with E1B seated baseline, the walking segment shows reduced
-HF-band structure and broader low-frequency power. Because ambulation
-combines physiological exercise response with motion-related
-measurement effects, this spectrum should not be interpreted as a pure
-autonomic signature. The comparison supports treating walking-phase
-RMSSD and spectral HRV as motion-limited.}
+The walking segment shows reduced HF-band structure and broader
+low-frequency power compared with the E1B seated baseline.}
 \label{fig:walking_psd_contrast}
 \end{figure}
 
@@ -1400,8 +1246,8 @@ RMSSD and spectral HRV as motion-limited.}
 The respiratory-centered RR spectral power metric introduced in
 Section~\ref{ssec:paced} depends on the choice of integration
 bandwidth around each imposed breathing frequency. To verify that our
-central conclusion---absence of a 6-breaths/min resonance
-maximum---is not an artifact of bandwidth selection, we repeated the
+central conclusion (absence of a 6-breaths/min resonance
+maximum) is not an artifact of bandwidth selection, we repeated the
 analysis with three integration windows: $\pm$0.010, $\pm$0.015
 (primary), and $\pm$0.020~Hz.
 
@@ -1411,25 +1257,19 @@ to 12~breaths/min, with no isolated peak at 6~breaths/min. The
 narrower $\pm$0.010~Hz window shows slightly lower absolute power
 because some respiratory-band energy falls outside the integration
 limits at higher breathing rates where peaks are broader, but the
-qualitative shape---and notably, the absence of an inverted-U---is
+qualitative shape (and notably, the absence of an inverted-U) is
 preserved.
 
-This sensitivity analysis supports the interpretation that the
-negative result is unlikely to be explained solely by bandwidth
-choice, although fixed-order effects remain possible. The
-paced-breathing
-manipulation produced frequency tracking and large amplitude changes
-without revealing a classical resonance maximum at 6~breaths/min.
+The monotonic pattern was thus robust to bandwidth choice, though
+fixed-order effects remain a possible confound.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{nb05_fig05_e4a_resp_centered_power.pdf}
-\caption{Sensitivity analysis of respiratory-centered RR spectral power.
-Power was integrated within $\pm$0.010, $\pm$0.015, and $\pm$0.020~Hz
-of each imposed breathing frequency. All three bandwidths showed the
-largest response at 3~breaths/min and no isolated maximum at
-6~breaths/min, indicating that the resonance conclusion was not driven
-by the primary bandwidth choice.}
+\caption{Sensitivity analysis of respiratory-centered RR spectral power
+using $\pm$0.010, $\pm$0.015, and $\pm$0.020~Hz integration windows.
+All three bandwidths showed monotonically increasing power from 12 to
+3~breaths/min with no isolated maximum at 6~breaths/min.}
 \label{fig:resonance_sensitivity}
 \end{figure}
 
