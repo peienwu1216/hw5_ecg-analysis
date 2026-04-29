@@ -1,4 +1,8 @@
-# Python
+# ==============================================================
+# .gitignore — HRV Single-Lead ECG Analysis Repository
+# ==============================================================
+
+# ---- Python ----
 __pycache__/
 *.py[cod]
 *$py.class
@@ -8,45 +12,49 @@ __pycache__/
 *.egg-info/
 .eggs/
 dist/
-# Python/setuptools; also matches any other `build/` dir (e.g. manuscript/build for LaTeX).
 build/
 *.manifest
 
-# Virtual environments
+# ---- Virtual environments ----
 .venv/
 venv/
 ENV/
 
-# Jupyter
+# ---- Jupyter ----
 .ipynb_checkpoints/
 
-# OS / editor
+# ---- OS / editor ----
 .DS_Store
 Thumbs.db
 *.swp
 .idea/
 .vscode/
 
-# Env & local secrets
+# ---- Env & local secrets ----
 .env
 .env.*
 *.pem
 
-# Local agent / IDE (drop these lines if you want them in the repo)
+# ---- Local IDE / AI assistant configs ----
 .claude/
 .cursor/
+.cursorrules
 CLAUDE.md
 CURSOR.md
 CURSORRULES.md
-CURSORRULES.md
+
+# ---- Non-project files (reference PDFs, homework specs, dev notes) ----
 Edwin/
-# Raw session CSVs under data-new/ (~tens of MB; health-related).
-# Remove the next line if you use a private repo and want data versioned, or use Git LFS.
+Heart-rate-variability-guidelines.pdf
+hw_spec.txt
+patch.md
+texput.log
+
+# ---- Raw data (health-related, not distributed) ----
+# Remove if using a private repo with Git LFS for data versioning.
 data-new/
 
-# --- LaTeX (manuscript/) ---
-# Track: main.tex, latexmkrc, README.md, notes/**
-# Ignore: PDF + aux from latexmk / pdflatex (primary: manuscript/build/ via `build/` above).
+# ---- LaTeX build artifacts (manuscript/) ----
 manuscript/build/
 manuscript/*.aux
 manuscript/*.log
@@ -62,3 +70,9 @@ manuscript/*.bbl
 manuscript/*.blg
 manuscript/*.bcf
 manuscript/*.run.xml
+
+# ---- Internal dev notes (not part of the public repo) ----
+manuscript/notes/FIGURE_ANALYSIS_REPORT.md
+manuscript/notes/FIGURE_TABLE_PLAN.md
+manuscript/notes/OVERLEAF_SETUP.md
+scripts/preflight_report.md
