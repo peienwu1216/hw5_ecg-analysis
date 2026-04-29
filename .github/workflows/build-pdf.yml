@@ -1,10 +1,8 @@
 name: Build and Release Manuscript PDF
 
 on:
-  push:
-    paths:
-      - 'manuscript/**'
-      - 'outputs/figures/**'
+  # Trigger on every push (no path filters).
+  push: {}
 
   workflow_dispatch:
 
