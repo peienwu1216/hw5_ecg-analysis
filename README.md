@@ -2,7 +2,7 @@
 
 > **Paper:** *HRV Interpretation Across Physiological Tasks Using Single-Lead ECG*
 > Pei-En Wu · NYCU EEEC 1099 Biomedical Sensors · April 2026
-> Code & data: [github.com/peienwu1216/hw5_ecg-analysis](https://github.com/peienwu1216/hw5_ecg-analysis)
+> [**Download manuscript (PDF)**](https://github.com/peienwu1216/hw5_ecg-analysis/releases/latest/download/main.pdf) · [Code & data](https://github.com/peienwu1216/hw5_ecg-analysis)
 
 End-to-end analysis pipeline for 14 single-lead ECG recordings (500 Hz) acquired
 from one healthy participant across four physiological paradigms: postural baselines,
