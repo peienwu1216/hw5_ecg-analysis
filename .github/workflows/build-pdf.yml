@@ -23,15 +23,13 @@ jobs:
           working_directory: manuscript
           root_file: main.tex
           latexmk_use_xelatex: false
-
-      - name: Rename PDF
-        run: mv manuscript/build/main.pdf manuscript/wu_hrv_ecg_analysis.pdf
+          post_compile: mv build/main.pdf ../wu_hrv_ecg_analysis.pdf
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: manuscript-pdf
-          path: manuscript/wu_hrv_ecg_analysis.pdf
+          path: wu_hrv_ecg_analysis.pdf
 
       - name: Update latest release
         uses: softprops/action-gh-release@v2
@@ -39,5 +37,5 @@ jobs:
           tag_name: latest
           name: Latest Manuscript
           body: Auto-built from the latest commit on `main`.
-          files: manuscript/wu_hrv_ecg_analysis.pdf
+          files: wu_hrv_ecg_analysis.pdf
           make_latest: true
