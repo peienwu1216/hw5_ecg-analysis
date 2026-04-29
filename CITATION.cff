@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "HRV Interpretation Across Physiological Tasks Using Single-Lead ECG"
+message: "If you use this software or data, please cite it as below."
+type: software
+authors:
+  - given-names: Pei-En
+    family-names: Wu
+    email: peienwu.ee13@nycu.edu.tw
+    affiliation: "National Yang Ming Chiao Tung University"
+repository-code: "https://github.com/peienwu1216/hw5_ecg-analysis"
+license: MIT
+date-released: "2026-04-29"
+keywords:
+  - heart rate variability
+  - single-lead ECG
+  - paced breathing
+  - spectral band migration
+  - autonomic nervous system
