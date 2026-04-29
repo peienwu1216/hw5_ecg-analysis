@@ -1,17 +1,28 @@
 # HW5 — ECG / HRV Analysis
 
-End-to-end pipeline for a single-lead, 500 Hz ECG dataset spanning 15 recording
-sessions (postural baselines, breath-hold events, treadmill walking, paced
-breathing, and a partial sleep recording). The project implements both a
-scipy-based teaching pipeline and a NeuroKit2-based reference pipeline, and
-materializes all figures and tables required by the HW5 specification.
+> **Paper:** *HRV Interpretation Across Physiological Tasks Using Single-Lead ECG*
+> Pei-En Wu · NYCU EEEC 1099 Biomedical Sensors · April 2026
+> Code & data: [github.com/peienwu1216/hw5_ecg-analysis](https://github.com/peienwu1216/hw5_ecg-analysis)
+
+End-to-end analysis pipeline for 14 single-lead ECG recordings (500 Hz) acquired
+from one healthy participant across four physiological paradigms: postural baselines,
+voluntary breath-hold, treadmill walking, and paced breathing at five metronome-guided
+rates. The project implements a dual-detector strategy (scipy Pan–Tompkins teaching
+path + NeuroKit2/Kubios primary path) and generates all figures and tables for the
+accompanying IEEE-format manuscript.
+
+**Key findings:**
+- Postural loading: HR rose from 54.0 to 79.7 bpm; RMSSD fell from 99.1 to 25.2 ms (supine → standing).
+- Breath-hold: inspiratory hold produced 28.7× stronger HF suppression than expiratory hold; both recovered to near-baseline within 50 s.
+- Walking: rapid post-exercise HR recovery (τ = 6.8 s); fine-scale HRV motion-limited (step frequency ≈ cardiac fundamental).
+- Paced breathing: LF/HF rose from 0.22 to 17.47 as breathing slowed from 12 to 3 breaths/min, while RMSSD remained within 48–66 ms — spectral-band migration, not sympathovagal shift. RR oscillation amplitude increased monotonically (no resonance peak at 6 breaths/min).
 
 ---
 
 ## 1. Environment setup
 
 The project targets Python ≥ 3.10. Use **NeuroKit2 ≥ 0.2.13** so HRV frequency
-analysis works with **NumPy 2.4+** (``np.trapz`` removed). Pandas is capped at
+analysis works with **NumPy 2.4+** (`np.trapz` removed). Pandas is capped at
 **< 3** because current NK2 releases declare that upper bound.
 
 ```bash
@@ -64,6 +75,8 @@ hw5_ecg-analysis/
 ├── outputs/
 │   ├── figures/                     # PDF exports from notebooks / scripts
 │   └── tables/                      # all CSVs (HRV tables + ANALYSIS_LOG)
+├── manuscript/
+│   └── main.tex                     # IEEE-format paper (IEEEtran conference)
 ├── scripts/
 │   ├── preflight_check.py           # verify NK2 API against pipeline assumptions
 │   ├── preflight_report.md          # notes from the preflight run
@@ -73,16 +86,23 @@ hw5_ecg-analysis/
 
 ### Session map
 
-Sessions are referenced by short keys (`E1A`, `E1B`, `E1C`,
-`E2A_insp_1`, `E2A_insp_2`, `E2B_exp_1`, `E2B_exp_2`, `E3_walk`,
-`E4A_12pm/9pm/6pm/5pm/3pm`, `E4B_sleep`). **E1A–E1C** are the postural ramp
-(supine → sitting → standing). **E1A** (post-sleep supine) is used for pipeline
-validation. Experiment 1 folders use the same suffix as the key (`…_E1A`,
-`…_E1B`, …); other experiments keep their original naming. `SESSION_MAP` in
-`src/config.py` lists the exact directory name for each key.
+All 14 recordings were acquired on 2026-04-24 in a single session.
+Sessions are referenced by short keys:
 
-Each session folder contains one or more hour directories (`00/`, `01/`, …)
-each with:
+| Key | Paradigm | Duration | Posture |
+| --- | -------- | -------- | ------- |
+| `E1A` | Postural baseline — supine | 300 s | Supine |
+| `E1B` | Postural baseline — sitting | 300 s | Sitting |
+| `E1C` | Postural baseline — standing | 300 s | Standing |
+| `E2A_insp_1/2` | Inspiratory breath-hold (2 trials) | ~120 s each | Sitting |
+| `E2B_exp_1/2` | Expiratory breath-hold (2 trials) | ~120 s each | Sitting |
+| `E3_walk` | Rest / walk / recovery | 180 s | Sitting → Walking |
+| `E4A_12/9/6/5/3pm` | Paced breathing (5 rates) | 220–280 s each | Sitting |
+
+**E1B** (sitting) is used as the posture-matched anchor for E2 and E3 comparisons.
+`SESSION_MAP` in `src/config.py` lists the exact directory name for each key.
+
+Each session folder contains one or more hour directories (`00/`, `01/`, …) each with:
 
 - `ecgh.csv` — two identical ECG channels at 500 Hz (only `ch1` is used).
 - `gsen.csv` — 3-axis accelerometer at 25 Hz.
@@ -112,12 +132,12 @@ The notebooks are self-contained but share `src/`:
 | Notebook | Deliverables |
 | -------- | ------------ |
 | `00_quality_check`        | Duration assertions, channel equality check, visual sanity panel, `quality_check.csv` |
-| `01_pipeline_validation`  | scipy vs NK2 agreement on **E1A**, `e1a_pipeline_comparison.csv`, `e1a_hrv_full.csv` |
-| `02_experiment_1`         | Postural analysis **E1A–E1C**: tachograms, ECG/RR PSD, duration sweep on **E1A** (supine), `table_1_1_postural.csv`, `e1a_duration_sweep.csv`, `e1_hrv_full.csv` |
-| `03_experiment_2`         | Breath-hold HR trajectories (mean ± SD across trials), RR spectrograms, pooled PSD against **E1B** seated baseline, `table_2_1a_trials.csv`, `table_2_1b_pooled.csv` |
-| `04_experiment_3`         | Walking tachogram, recovery τ fit, ECG snapshots rest/walk/recovery, motion cross-check (GSEN magnitude), `table_3_1_walking.csv` |
-| `05_experiment_4`         | Publication-grade paced-breathing analysis: tachograms with EDR inset, single-panel RR PSD overlay, regression-based peak-frequency validation, LF/HF-vs-RMSSD contrast, monotonic-amplitude resonance analysis, expanded `table_4_1_paced.csv`, plus Methods/Results/Discussion text blocks |
-| `06_integration`          | Autonomic spectrum (log-scale LF/HF + HR twin-axis), HF-vs-HR scatter, cross-pipeline validation figure, E4B sleep appendix, `table_5_cross_experiment.csv` |
+| `01_pipeline_validation`  | scipy vs NK2 agreement on **E1A** (≥99.5% peak-count, RMSSD diff <2.7 ms), Bland–Altman plots, `e1a_pipeline_comparison.csv`, `e1a_hrv_full.csv` |
+| `02_experiment_1`         | Postural analysis **E1A–E1C**: tachograms, ECG PSD harmonics, RR PSD comparison, Poincaré maps, window-duration CV sweep, `table_1_1_postural.csv`, `e1a_duration_sweep.csv`, `e1_hrv_full.csv` |
+| `03_experiment_2`         | Breath-hold: effort vs. relaxed trial contrast (inspiratory), pure-physiology overlay (insp. vs. exp. relaxed), HF collapse + spectral dynamics vs. **E1B** anchor, `table_2_1a_trials.csv`, `table_2_1b_pooled.csv` |
+| `04_experiment_3`         | Walking: tachogram + motion cross-check, exponential recovery fit (τ = 6.8 s), ECG snapshots, cadence–cardiac spectral overlap, `table_3_1_walking.csv` |
+| `05_experiment_4`         | Paced breathing: tachograms, RR PSD overlay, regression-based peak-frequency tracking (R² = 0.998), LF/HF-vs-RMSSD dissociation, respiratory-centered power (monotonic, no 6/min resonance peak), sensitivity analysis (±0.010/0.015/0.020 Hz), `table_4_1_paced.csv` |
+| `06_integration`          | Cross-experiment HR vs. RMSSD scatter and total-power summary, `table_5_cross_experiment.csv` |
 
 ---
 
@@ -127,29 +147,39 @@ All artefacts land under `outputs/`.
 
 ### Figures (`outputs/figures/`)
 
-Canonical figure exports are now stored as PDF files in one place: `outputs/figures/`.
-Notebook code should go through `src.plotting.save_figure(...)`, which normalizes the
-extension to `.pdf` automatically.
+All figures are exported as PDFs via `src.plotting.save_figure(fig, "nbXX_figYY_*.pdf")`.
+The manuscript (`manuscript/main.tex`) reads these directly via `\graphicspath{{../outputs/figures/}}`.
 
-The manuscript uses these files directly instead of keeping a second copy under
-`manuscript/figures/`. The current main-text / appendix mapping is tracked in:
+**Main-text figures:**
 
-- `manuscript/notes/FIGURE_INDEX.md`
-- `scripts/collect_paper_figures.py`
+| File | Notebook | Paper location |
+| ---- | -------- | -------------- |
+| `nb01_fig01_pipeline_overview.pdf` | 01 | Fig. 1 — ECG processing workflow |
+| `nb02_fig03_rr_psd_postural.pdf` | 02 | Fig. 2 — Postural RR/PSD comparison |
+| `nb02_fig02_ecg_psd_harmonics.pdf` | 02 | Fig. 3 — ECG PSD harmonics across postures |
+| `nb02_fig05_poincare_plot.pdf` | 02 | Fig. 4 — Poincaré return maps |
+| `nb03_fig02_e2_effort_vs_relaxed.pdf` | 03 | Fig. 5 — Inspiratory trial effort vs. relaxed |
+| `nb03_fig01_e2_hf_collapse.pdf` | 03 | Fig. 6 — HF collapse + spectral dynamics |
+| `nb04_fig05_e3_motion_crosscheck.pdf` | 04 | Fig. 7 — Walking overview + motion check |
+| `nb04_fig03_e3_recovery_tau.pdf` | 04 | Fig. 8 — Post-walking HR recovery (τ = 6.8 s) |
+| `nb04_fig04_e3_ecg_psd.pdf` | 04 | Fig. 9 — Walking ECG/accelerometer spectra |
+| `nb05_fig01_e4a_tachograms.pdf` | 05 | Fig. 10 — Paced-breathing tachograms |
+| `nb05_fig02_e4a_psd_overlay.pdf` | 05 | Fig. 11 — Paced-breathing RR PSD overlay |
+| `nb05_fig04_e4a_lfhf_crossover.pdf` | 05 | Fig. 12 — LF/HF vs. RMSSD dissociation |
+| `nb05_fig05b_e4a_resp_power_and_amplitude.pdf` | 05 | Fig. 13 — Resp.-centered power + RR amplitude |
+| `nb06_fig01_autonomic_spectrum.pdf` | 06 | Fig. 14 — Cross-experiment autonomic summary |
 
-Representative manuscript figures:
+**Appendix figures:**
 
-| File | Notebook | Purpose |
-| ---- | -------- | ------- |
-| `nb02_fig03_rr_psd_postural.pdf` | 02 | Main posture RR/PSD comparison |
-| `nb03_fig02_e2_effort_comparison.pdf` | 03 | Main breath-hold comparison |
-| `nb04_fig01_e3_tachogram.pdf` | 04 | Walking tachogram for Results |
-| `nb05_fig02_e4a_psd_overlay.pdf` | 05 | Paced-breathing PSD overlay |
-| `nb05_fig03_e4a_peak_freq.pdf` | 05 | Breathing peak tracking regression |
-| `nb05_fig04_e4a_lfhf_crossover.pdf` | 05 | LF/HF vs RMSSD dissociation |
-| `nb06_fig01_autonomic_spectrum.pdf` | 06 | Cross-experiment synthesis |
-| `nb06_fig03_pipeline_validation.pdf` | 06 | Appendix pipeline validation |
-| `nb06_fig04_e4b_sleep_trajectory.pdf` | 06 | Appendix sleep-onset trajectory |
+| File | Notebook | Appendix |
+| ---- | -------- | -------- |
+| `appendixA_bland_altman.pdf` | 01 | App. A — Dual-path Bland–Altman + artifact rates |
+| `nb02_fig04_duration_effect.pdf` | 02 | App. A — Window-duration CV sweep |
+| `nb05_fig03_e4a_peak_freq_optimized.pdf` | 05 | App. A — Peak-frequency entrainment regression |
+| `nb03_fig03_e2_pure_physiology.pdf` | 03 | App. B — Insp. vs. exp. relaxed-trial overlay |
+| `nb04_fig02_e3_ecg_snapshots.pdf` | 04 | App. C — Walking ECG pre/post-filter snapshots |
+| `nb04_fig06_e3_rr_psd_contrast.pdf` | 04 | App. C — Seated vs. walking RR PSD contrast |
+| `nb05_fig05_e4a_resp_centered_power.pdf` | 05 | App. D — Resonance sensitivity (3 bandwidths) |
 
 ### Tables (`outputs/tables/`)
 
@@ -158,44 +188,42 @@ Representative manuscript figures:
 | `quality_check.csv`             | Per-session duration, channel equality, pass/fail flags |
 | `e1a_pipeline_comparison.csv`   | E1A scipy vs NK2 peak counts, RR diff, HRV diff |
 | `e1a_hrv_full.csv`              | Full NK2 HRV suite (time / frequency / non-linear) for E1A |
-| `e1a_duration_sweep.csv`        | Mean ± SD and CV% of SDNN / LF / HF (sliding windows on **E1A** supine) |
-| `e1_hrv_full.csv`               | Full NK2 HRV suite for **E1A–E1C** (stacked for integration) |
+| `e1a_duration_sweep.csv`        | CV% of SDNN / LF / HF vs sliding window duration on E1A |
+| `e1_hrv_full.csv`               | Full NK2 HRV suite for E1A–E1C (stacked) |
 | `table_1_1_postural.csv`        | Postural comparison (Task Force HRV indices) |
 | `table_2_1a_trials.csv`         | Per-trial time-domain metrics for breath-hold events |
-| `table_2_1b_pooled.csv`         | Pooled hold / recovery PSD band powers vs E1B seated baseline |
+| `table_2_1b_pooled.csv`         | Hold / recovery PSD band powers vs E1B seated anchor |
 | `table_3_1_walking.csv`         | Rest / walk / recovery HRV + recovery τ |
-| `table_4_1_paced.csv`           | Expanded paced-breathing matrix: expected / measured peak, deviation, EDR, HRV, total power, LF/HF, LF_nu / HF_nu, and RSA metrics |
-| `table_5_cross_experiment.csv`  | Cross-experiment HRV summary (sorted per `CONDITION_ORDER`) |
+| `table_4_1_paced.csv`           | Paced-breathing matrix: peak tracking, HRV, LF/HF, resp.-centered power, RR amplitude |
+| `table_5_cross_experiment.csv`  | Cross-experiment HRV summary |
 | `analysis_log.csv`              | Append-only audit trail of every `analyze_*` / `load_ecg` call |
 
 ---
 
 ## 5. Pipeline design notes
 
-- **Single filtering path.** `pipeline.filter_ecg` (60 Hz notch + 0.5–40 Hz
-  Butterworth bandpass, `sosfiltfilt`) is the only ECG filter used. NK2 R-peak
-  detection receives the already-filtered signal; we do *not* call
-  `nk.ecg_clean` to avoid double filtering.
-- **Two QRS detectors.** `detect_qrs` is a legend-faithful Pan-Tompkins port
-  (5–15 Hz band, squaring, moving-window integration, local adaptive
-  threshold, snap-to-max). `detect_qrs_nk` calls
-  `nk.ecg_peaks(correct_artifacts=False)` followed by
-  `nk.signal_fixpeaks(method='kubios', iterative=True)` so that ectopic /
-  missed / extra / longshort counts are explicitly recovered.
-- **Artefact rejection is scipy-only.** `reject_artifacts` (300 < RR < 2000 ms)
-  runs exclusively in the scipy teaching path; the NK2 path relies on Kubios
-  correction at the peak level and does not re-filter at the RR layer.
+- **Single filtering path.** `pipeline.filter_ecg` applies a 60 Hz notch ($Q=30$)
+  and a 0.5–40 Hz fourth-order Butterworth bandpass (`sosfiltfilt`). NK2 R-peak
+  detection receives the already-filtered signal; `nk.ecg_clean` is *not* called
+  to avoid double filtering.
+- **Two QRS detectors.** `detect_qrs` is a Pan–Tompkins port (5–15 Hz band,
+  squaring, moving-window integration, local adaptive threshold, snap-to-max).
+  `detect_qrs_nk` calls `nk.ecg_peaks(correct_artifacts=False)` followed by
+  `nk.signal_fixpeaks(method='kubios', iterative=True)`.
+  The NeuroKit2 path is the **primary source** for all reported results.
+- **Artifact rejection.** The scipy teaching path applies physiological-range
+  filtering (300 < RR < 2000 ms). The NK2 path relies on Kubios correction at
+  the peak level.
 - **Frequency-domain HRV.** RR series are linearly detrended, cubically
-  interpolated to 4 Hz, and Welch-PSD'd with a segment length chosen from the
-  available duration. Band definitions follow Task Force of ESC/NASPE (1996).
+  interpolated to 4 Hz, and Welch-PSD'd. `nperseg = 256` (Δ*f* ≈ 0.0156 Hz)
+  for 5-min steady-state windows; `nperseg = 512` (Δ*f* ≈ 0.0078 Hz) for
+  ≥220 s paced-breathing recordings. Band definitions follow Task Force 1996:
+  VLF 0.003–0.04 Hz, LF 0.04–0.15 Hz, HF 0.15–0.40 Hz.
 - **Short segments use spectral averaging.** `spectral_average_rr` pools
-  independent PSDs rather than concatenating RR series — used for E2 hold /
-  recovery so that the 40–50 s per-trial segments stay below the 60 s HF
-  minimum but the pooled PSD still averages four independent Welch estimates.
-- **E2 / E3 baseline = E1B (sitting).** The postural anchor for breath-hold and
-  walking analysis is the 5-minute seated steady state (**E1B**), not supine
-  **E1A**, so the reference is posture-matched to seated tasks.
-- **Analysis log.** Every orchestrator call appends one row to the module
-  global `ANALYSIS_LOG` (written to `analysis_log.csv`) with session key,
-  duration, peak counts, artefact stats, filter parameters, and detection
-  method.
+  independent PSDs for E2 hold/recovery segments rather than concatenating
+  short RR series.
+- **E2 / E3 baseline = E1B (sitting).** The posture-matched anchor for
+  breath-hold and walking analysis is the 5-min seated steady state (E1B).
+- **Analysis log.** Every orchestrator call appends one row to `ANALYSIS_LOG`
+  (written to `analysis_log.csv`) with session key, duration, peak counts,
+  artifact stats, filter parameters, and detection method.
