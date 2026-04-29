@@ -25,7 +25,7 @@ jobs:
           latexmk_use_xelatex: false
 
       - name: Rename PDF
-        run: mv manuscript/main.pdf manuscript/wu_hrv_ecg_analysis.pdf
+        run: mv manuscript/build/main.pdf manuscript/wu_hrv_ecg_analysis.pdf
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
