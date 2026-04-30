@@ -879,12 +879,29 @@ def plot_duration_sweep(df_sweep, metrics=('sdnn_ms', 'lf_ms2', 'hf_ms2'),
                         color='#4C72B0', alpha=0.15)
 
         ann_fs = 8 if fontsize is None else max(7, int(round(fontsize * 0.85)))
-        for xi, yi, ci in zip(W, M, cv):
-            if np.isfinite(ci):
-                ax.annotate(f'CV {ci:.1f}%',
-                            xy=(xi, yi), xytext=(4, 6),
-                            textcoords='offset points', fontsize=ann_fs,
-                            color='#555555')
+        finite_idx = [k for k, ci in enumerate(cv) if np.isfinite(ci)]
+        # Keep labels sparse for readability: shortest, midpoint, longest window.
+        if len(finite_idx) <= 3:
+            label_idx = finite_idx
+        else:
+            label_idx = [finite_idx[0], finite_idx[len(finite_idx) // 2], finite_idx[-1]]
+        x_span = max(float(np.nanmax(W) - np.nanmin(W)), 1.0)
+        y_top = M + np.where(np.isfinite(S), S, 0.0)
+        y_bot = M - np.where(np.isfinite(S), S, 0.0)
+        y_span = max(float(np.nanmax(y_top) - np.nanmin(y_bot)), 1.0)
+        directions = [1.0, -1.0, 1.0]
+        for k, idx in enumerate(label_idx):
+            xi, yi, ci = W[idx], M[idx], cv[idx]
+            sign = directions[k % len(directions)]
+            x_txt = xi + 0.03 * x_span
+            y_txt = yi + sign * (max(float(np.nan_to_num(S[idx], nan=0.0)), 0.0) + 0.05 * y_span)
+            ax.annotate(f'CV {ci:.1f}%',
+                        xy=(xi, yi), xytext=(x_txt, y_txt),
+                        textcoords='data', fontsize=ann_fs,
+                        color='#555555',
+                        va='center', ha='left',
+                        arrowprops=dict(arrowstyle='-', color='#6b7280', lw=0.6, shrinkA=2, shrinkB=3),
+                        bbox=dict(boxstyle='round,pad=0.12', fc='white', ec='none', alpha=0.65))
 
         xy_kw = {} if fontsize is None else {'fontsize': fontsize}
         ax.set_xlabel('Window length (s)', **xy_kw)
