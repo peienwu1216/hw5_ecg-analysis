@@ -1185,6 +1185,33 @@ band-migration analysis.}
 \label{fig:freq_entrainment}
 \end{figure}
 
+\section{Supplementary IMU-Based Respiratory Phase Analysis}
+\label{app:imu_phase}
+
+As a supplementary cross-check for the paced-breathing analysis, we
+examined the 5~breaths/min trial using the tri-axial IMU signal as a
+motion-based respiratory surrogate. The dominant $z$-axis spectral peak
+occurred at 0.0854~Hz, corresponding to 5.1~breaths/min and closely
+matching the imposed breathing rate (Fig.~\ref{fig:e4a_imu_phase}a).
+After band-pass filtering and differentiating the respiration-band
+$z$-axis signal, the resulting IMU-derived signal led the beatwise HR
+respiratory component by 1.60~s (peak same-phase correlation
+$r=0.79$; Fig.~\ref{fig:e4a_imu_phase}b).
+This ordering is consistent with respiratory motion preceding
+respiratory-related HR modulation, but the waveform should be interpreted
+only as a motion-based surrogate because no direct respiratory belt or
+airflow signal was recorded.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{test-2_e4a_5pm_imu_deep_dive.pdf}
+\caption{Supplementary IMU-based phase analysis for the 5~breaths/min
+paced-breathing trial. (a)~Respiratory-band spectra of the tri-axial
+IMU channels. (b)~Beatwise HR respiratory component overlaid with an
+IMU-derived $z$-axis respiratory-motion derivative.}
+\label{fig:e4a_imu_phase}
+\end{figure}
+
 \setcounter{section}{2}
 
 \section{Breath-Hold Trial-Level Detail}
