@@ -1,0 +1,120 @@
+% ============================================================
+% EEEC 1099 Biomedical Sensors - Spring 2026
+% Final Project Proposal
+% Due: 2026-05-22 (email to EdwinKan5@nycu.edu.tw)
+% ============================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=0.9in]{geometry}
+\usepackage{parskip}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+
+% Custom enumerate spacing without enumitem dependency
+\newenvironment{tightenum}{%
+  \begin{enumerate}%
+    \setlength{\itemsep}{0.4em}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\topsep}{0.2em}%
+    \setlength{\leftmargin}{1.5em}%
+}{\end{enumerate}}
+
+\begin{document}
+
+% --------- Title block ---------
+\begin{center}
+{\Large\bfseries When Should the LF/HF Ratio Be Used as an\\
+Autonomic-Balance Metric in Wearable ECG?\par}
+\vspace{0.5em}
+Pei-En Wu\\
+{\small NYCU ID: 113511103 \quad
+Email: \href{mailto:peienwu.ee13@nycu.edu.tw}{peienwu.ee13@nycu.edu.tw}\par}
+{\small EEEC 1099 Introduction to Biomedical Sensors, Spring 2026 --- Final Project Proposal}
+\end{center}
+
+\vspace{0.5em}
+
+% --------- Three major points ---------
+\section*{Three Major Points}
+
+\begin{tightenum}
+
+\item This project focuses on LF/HF, a frequency-domain HRV ratio that
+emerged from classic spectral-analysis work as a simplified marker of
+sympathovagal balance~\cite{taskforce1996},~\cite{malliani1991}, but later
+cardiovascular physiology literature questioned whether LF and HF power can
+cleanly separate sympathetic and parasympathetic
+activity~\cite{eckberg1997},~\cite{billman2013}.
+
+\item Using fourteen single-lead ECG recordings from my HW5 dataset, I will
+use posture, breath-hold, walking, and paced-breathing conditions as an
+illustrative within-subject case study to discuss how respiration, posture,
+motion, and window duration can reshape LF/HF in short-term wearable
+recordings~\cite{bernardi2000}, especially when the respiratory peak crosses
+the 0.15-Hz LF/HF boundary during slow paced breathing~\cite{billman2013}.
+
+\item By synthesizing HRV standards~\cite{taskforce1996}, the original LF/HF
+framework~\cite{malliani1991}, methodological
+critiques~\cite{eckberg1997,bernardi2000,billman2013}, and reporting
+recommendations~\cite{laborde2017}, the final deliverable will be a
+context-aware HRV reporting checklist that, for each common short-term wearable
+recording context, specifies the primary metric, its interpretive validity, and
+the dominant caveat.
+
+\end{tightenum}
+
+% --------- References ---------
+% thebibliography emits its own ``References'' heading (\refname); do not add \section*{References}.
+
+\begin{thebibliography}{6}
+\setlength{\itemsep}{0.15em}
+
+\bibitem{taskforce1996}
+Task Force of the European Society of Cardiology and the North American
+Society of Pacing and Electrophysiology,
+``Heart rate variability: Standards of measurement, physiological
+interpretation, and clinical use,''
+\emph{Circulation}, vol.~93, no.~5, pp.~1043--1065, 1996,
+doi: \href{https://doi.org/10.1161/01.CIR.93.5.1043}{10.1161/01.CIR.93.5.1043}.
+
+\bibitem{malliani1991}
+A.~Malliani, M.~Pagani, F.~Lombardi, and S.~Cerutti,
+``Cardiovascular neural regulation explored in the frequency domain,''
+\emph{Circulation}, vol.~84, no.~2, pp.~482--492, 1991,
+doi: \href{https://doi.org/10.1161/01.CIR.84.2.482}{10.1161/01.CIR.84.2.482}.
+
+\bibitem{eckberg1997}
+D.~L. Eckberg,
+``Sympathovagal balance: A critical appraisal,''
+\emph{Circulation}, vol.~96, no.~9, pp.~3224--3232, 1997,
+doi: \href{https://doi.org/10.1161/01.CIR.96.9.3224}{10.1161/01.CIR.96.9.3224}.
+
+\bibitem{bernardi2000}
+L.~Bernardi et al.,
+``Effects of controlled breathing, mental activity and mental stress with or
+without verbalization on heart rate variability,''
+\emph{Journal of the American College of Cardiology}, vol.~35, no.~6,
+pp.~1462--1469, 2000,
+doi: \href{https://doi.org/10.1016/S0735-1097(00)00595-7}{10.1016/S0735-1097(00)00595-7}.
+
+\bibitem{billman2013}
+G.~E. Billman,
+``The LF/HF ratio does not accurately measure cardiac sympatho-vagal
+balance,''
+\emph{Frontiers in Physiology}, vol.~4, art.~26, 2013,
+doi: \href{https://doi.org/10.3389/fphys.2013.00026}{10.3389/fphys.2013.00026}.
+
+\bibitem{laborde2017}
+S.~Laborde, E.~Mosley, and J.~F. Thayer,
+``Heart rate variability and cardiac vagal tone in psychophysiological
+research: Recommendations for experiment planning, data analysis, and data
+reporting,''
+\emph{Frontiers in Psychology}, vol.~8, art.~213, 2017,
+doi: \href{https://doi.org/10.3389/fpsyg.2017.00213}{10.3389/fpsyg.2017.00213}.
+
+\end{thebibliography}
+
+\end{document}

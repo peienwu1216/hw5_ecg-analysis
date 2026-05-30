@@ -1,0 +1,6 @@
+condition,rate_bpm,imu_to_hr_lag_s,peak_xcorr_r,interpretation
+12/min,12,-2.0,0.3669538673188736,HR leads IMU
+9/min,9,1.56,0.8612470342977147,IMU leads HR
+6/min,6,1.64,0.7602599209828277,IMU leads HR
+5/min,5,1.0,0.9362037657660909,IMU leads HR
+3/min,3,-0.32,0.8917138798025046,HR leads IMU
