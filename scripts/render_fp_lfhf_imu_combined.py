@@ -294,16 +294,18 @@ def _draw_right(ax, psd_pub, peak_pub, imu_peaks):
 
     # Single-column legend tucked into the empty HF region (x > 0.25)
     ax.legend(
-        title="Breathing\nrate", title_fontsize=6.5, fontsize=7,
+        title="Breathing rate", title_fontsize=6.5, fontsize=7,
         ncols=1, loc="upper right",
+        bbox_to_anchor=(0.94, 0.98),
         frameon=True, framealpha=0.93, edgecolor="0.80",
-        handlelength=1.2, borderpad=0.4,
+        handlelength=1.2, borderpad=0.55,
         handletextpad=0.45, labelspacing=0.22,
+        borderaxespad=0,
     )
 
     # Short technical note in the flat HF region (no overlap with peaks)
     ax.text(
-        0.99, 0.018,
+        0.92, 0.04,
         f"Welch nperseg={NPERSEG}, Δf={FREQ_RES:.4f} Hz",
         transform=ax.transAxes, fontsize=5.5, color="0.60",
         ha="right", va="bottom",

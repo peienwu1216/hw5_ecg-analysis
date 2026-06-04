@@ -59,11 +59,15 @@ A synchronous chest-patch IMU confirmed the respiratory frequency at all
 five breathing rates. Excluding the SNR-limited 12/min condition, IMU--HR
 coupling was strong in the slower-breathing range ($C_{xy} = 0.69$--$0.89$),
 and reassigning the migrated power compressed the corrected ratio into a
-narrow range (0.22--1.04, $\leq 1.05$), removing the spurious LF inflation. The same IMU, used as an activity sensor, instead gated walking-phase fine-scale HRV as motion-limited, since step motion overlapped the cardiac band and could not be reassigned. IMU--HR coherence thus served as a shared decision variable, separating respiratory power that can be reassigned from motion that can only be flagged. These observations suggest that LF/HF is most interpretable as an autonomic-balance metric when the respiratory component lies clearly within the HF band; near the 0.15-Hz boundary it is better classified from the RR spectral peak in a respiratory-sensor-anchored window, and under slow, boundary-adjacent, or unmonitored breathing, RMSSD with respiratory monitoring is more reliable.
+narrow range (0.22--1.04, $\leq 1.05$), removing the spurious LF inflation. The same IMU, used as an activity sensor, instead gated walking-phase fine-scale HRV as motion-limited, since step motion overlapped the cardiac band and could not be reassigned. IMU--HR coherence therefore served as a shared decision variable, separating reassignable respiratory power from motion-limited HRV that should be flagged.
+
+These observations suggest that LF/HF is most interpretable as an autonomic-balance metric when the respiratory component lies clearly within the HF band. Near the 0.15-Hz boundary, classification should rely on the RR spectral peak within a respiratory-sensor-anchored window. Under slow, boundary-adjacent, or unmonitored breathing, RMSSD with respiratory monitoring is more reliable.
 \end{abstract}
 
 \noindent\textbf{Keywords:} heart rate variability, LF/HF ratio, wearable
-ECG, respiratory sinus arrhythmia, multi-sensor fusion, IMU
+ECG, respiratory sinus arrhythmia, multi-sensor fusion, IMU\\
+\noindent\textbf{Repository:}
+\href{https://github.com/peienwu1216/hw5_ecg-analysis}{\texttt{github.com/peienwu1216/hw5\_ecg-analysis}}
 
 % ============================================================
 \section{Introduction}
@@ -82,20 +86,26 @@ re-examine Billman's~\cite{billman2013} criteria and Laborde's~\cite{laborde2017
 recommendations using 14~single-lead ECG recordings from one participant
 across postural, breath-hold, walking, and paced-breathing conditions. A
 synchronous chest-patch IMU provides an independent respiratory reference.
-Fig.~\ref{fig:pipeline} outlines the dual-detector processing pipeline
-(NeuroKit2 + SciPy Pan--Tompkins-style detector, 99.6\% peak-count agreement
-on the supine baseline).
+Fig.~\ref{fig:pipeline} outlines the ECG--IMU analysis pipeline for
+context-aware HRV interpretation.
 
-\begin{figure}[!t]
+Throughout this report, LF/HF refers to the ratio of LF to HF RR power,
+RMSSD is used as the main time-domain vagal index, and coherence ($C_{xy}$)
+quantifies IMU--HR coupling at the imposed breathing frequency.
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.64\textwidth]{nb01_fig01_pipeline_overview.pdf}
-\caption{Analysis pipeline for 14~single-lead ECG recordings (500~Hz, one
-participant). After cropping, baseline correction, and bandpass filtering,
-R-peaks are detected in parallel by NeuroKit2 (primary) and a
-Pan-Tompkins-style SciPy validator (99.6\% peak-count agreement, supine
-baseline). RR-derived time- and frequency-domain HRV features feed four
-experiments: postural transitions, breath-hold, walking with recovery, and
-paced breathing (3 to 12~breaths/min).}
+\includegraphics[width=\textwidth]{fp_pipe-line.pdf}
+\caption{ECG--IMU analysis pipeline for context-aware HRV interpretation.
+Fourteen single-lead ECG recordings were collected with a synchronous
+chest-patch IMU from one participant across postural, breath-hold, walking,
+and paced-breathing conditions. The ECG branch performs preprocessing,
+dual-detector R-peak validation, RR reconstruction, and HRV feature
+extraction. The IMU branch provides respiratory frequency validation during
+paced breathing and activity gating during walking. RR spectral features
+and IMU-derived context are then combined to decide whether LF/HF can be
+interpreted conventionally, corrected by migrated-RSA reassignment, or
+flagged as motion-limited.}
 \label{fig:pipeline}
 \end{figure}
 
@@ -104,11 +114,7 @@ paced breathing (3 to 12~breaths/min).}
 
 Malliani et~al.~\cite{malliani1991} framed LF/HF as an index of
 sympathovagal balance, using LF (0.04--0.15~Hz) and HF (0.15--0.40~Hz)
-bands later formalized by the Task Force~\cite{taskforce1996}. In this
-study, \textbf{LF/HF} denotes the ratio of LF to HF RR power;
-\textbf{RMSSD} denotes the root mean square of successive RR differences;
-and \textbf{coherence} ($C_{xy}$) quantifies IMU--HR coupling at the
-imposed breathing frequency.
+bands later formalized by the Task Force~\cite{taskforce1996}.
 
 Eckberg~\cite{eckberg1997} challenged the reciprocal framework, arguing
 that LF power receives substantial vagal contribution.
@@ -122,30 +128,36 @@ respiration is not recorded. Laborde et~al.~\cite{laborde2017} subsequently tran
 these critiques into practical reporting recommendations for short-term
 HRV.
 
-Fig.~\ref{fig:hook} summarizes the study dataset. Postural loading
-shifted the autonomic operating point toward higher HR and lower RMSSD.
-Paced breathing, in contrast, expanded oscillatory power at nearly
-constant HR and produced an 80-fold LF/HF range (0.22--17.46).
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=0.48\textwidth]{fp_autonomic_scatter_hr_rmssd.pdf}
-\caption{Cross-experiment operating map in the RMSSD--mean-HR plane. Green
-circles, postural conditions (supine, sitting, standing); orange squares,
-paced-breathing conditions (12, 9, 6, 5, 3~breaths/min). Posture moves the
-operating point along a HR--RMSSD trade-off (rising HR, falling RMSSD from
-supine to standing), whereas paced breathing varies RMSSD at nearly constant
-HR ($\approx$57--60~bpm). The LF/HF range observed over these conditions
-(0.22--17.46; Sections~3 and~5) is thus produced by task manipulation alone
-and is not plotted on these axes.}
-\label{fig:hook}
-\end{figure}
+Taken together, these studies suggest that LF/HF should not be interpreted
+from fixed-band power alone. Respiratory context, parallel time-domain HRV
+metrics, and motion information are needed before LF/HF can be treated as
+an autonomic-balance measure. This provides the basis for rechecking
+Billman's criteria in the present wearable ECG--IMU dataset.
 
 % ============================================================
 \section{Rechecking Billman's Criteria}
 
-We focus on the two most consequential of Billman's critiques and test
-each against the paced-breathing and postural data.
+Fig.~\ref{fig:hook} summarizes the dataset in the RMSSD--mean-HR
+plane. Postural loading shifted the operating point toward higher HR and
+lower RMSSD, whereas paced breathing kept HR nearly constant but produced
+an 80-fold LF/HF range (0.22--17.46). We therefore focus on Billman's two
+most relevant critiques and test them against the paced-breathing and
+postural data.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.50\textwidth]{fp_autonomic_scatter_hr_rmssd.pdf}
+\caption{Cross-experiment operating map in the RMSSD--mean-HR plane.
+Circles denote postural conditions and squares denote paced-breathing
+conditions; labels identify the specific posture or breathing rate. The
+solid line connects the postural sequence, which shifts toward higher HR
+and lower RMSSD from supine to standing. The dashed outline encloses the
+paced-breathing cluster, which remains near 57--60~bpm while LF/HF, not
+plotted on these axes, ranges from 0.22 to 17.46.}
+\label{fig:hook}
+\end{figure}
+
+
 
 \subsection{Criterion 1: Respiration Alters Both LF and HF}
 
@@ -160,7 +172,7 @@ dominant RR spectral component closely tracked the imposed rate
 ($R^2 = 0.998$, residual SD = 0.003~Hz) and moved toward or across the
 fixed 0.15-Hz LF/HF boundary. LF/HF rose from 0.22 to 17.46, an
 80-fold increase within the same seated posture, while RMSSD remained
-between 47.7 and 64.9~ms throughout (Fig.~\ref{fig:lfhf}b). Stable
+between 47.7 and 64.9~ms throughout (Fig.~\ref{fig:lfhf}). Stable
 RMSSD does not prove unchanged vagal tone, but it gives no evidence of
 large cardiac vagal withdrawal. Because RMSSD emphasizes short-term
 beat-to-beat differences, it did not scale with the large slow-breathing
@@ -175,22 +187,22 @@ Section~\ref{sec:fusion}.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\linewidth]{fp_lfhf_imu_summary.pdf}
-\caption{Paced-breathing spectral-band migration. \textbf{(a)} LF/HF ratio
-(log scale) versus breathing rate; shading marks the LF and HF bands split
-at 0.15~Hz and the dotted line marks LF/HF = 1. LF/HF rose from 0.22 to
-17.46 as the respiratory peak crossed from HF into LF. \textbf{(b)} RMSSD
-versus breathing frequency for the same conditions, staying within
-47.7--64.9~ms (mean 56.4~ms, dashed line). \textbf{(c)} RR-interval PSD for
-all five rates (colour legend), computed with the canonical fusion setting
-(RR interpolation $f_s = 4$~Hz, $n_{\mathrm{perseg}} = 256$,
-$\Delta f = 0.0156$~Hz); VLF/LF/HF bands are shaded and top triangles mark
-IMU-derived respiratory frequencies. At 9/min the metronome target was
-0.150~Hz and the IMU peak 0.146~Hz, but the RR-PSD argmax used for band
-assignment fell at 0.15625~Hz (HF side), so no LF reassignment was applied.}
+\caption{Paced-breathing spectral-band migration.
+(a) LF/HF ratio increased from 0.22 to 17.46 as breathing slowed and the
+dominant respiratory component moved from HF toward LF. Shaded regions mark
+the LF and HF bands separated at 0.15~Hz.
+(b) RMSSD remained within 47.7--64.9~ms across the same conditions.
+(c) RR-interval PSD across the five breathing rates (RR interpolation
+$f_s=4$~Hz, $n_{\mathrm{perseg}}=256$, $\Delta f=0.0156$~Hz); shaded bands
+indicate VLF, LF, and HF ranges, and top triangles mark IMU-derived
+respiratory frequencies. The alignment between RR spectral peaks and IMU
+markers supports respiratory-band migration as the main source of LF/HF
+inflation.}
 \label{fig:lfhf}
 \end{figure}
 
-We used the synchronous triaxial IMU to test whether this band migration
+We used the synchronous triaxial IMU as an independent mechanical
+respiratory reference to test whether this band migration
 reflected respiratory motion instead of an ECG-internal artifact (25~Hz
 chest-patch accelerometer; Nyquist 12.5~Hz, ample for the
 $\leq$0.20~Hz respiratory band). The IMU z-axis PSD peak matched the
@@ -320,23 +332,22 @@ bands still assign that component solely by frequency. We therefore used
 the IMU respiratory estimate to guide a respiration-aware reassignment of
 RR spectral power.
 
-For each rate, we estimated the respiratory frequency $f_{\mathrm{resp}}$
-from the IMU z-axis PSD, near the RR respiratory component. We did not use
-the metronome rate for reassignment. We then integrated RR power within
-$\pm \delta$ of $f_{\mathrm{resp}}$, with $\delta = 0.015$~Hz. This
-window served analysis only. It corresponds to approximately one
-Welch bin in the canonical fusion PSD ($f_s = 4$~Hz,
-$n_{\mathrm{perseg}} = 256$, $\Delta f = 0.015625$~Hz) and should not be
-interpreted as a physiological bandwidth.
+For each paced-breathing rate, we estimated the respiratory frequency
+$f_{\mathrm{resp}}$ from the IMU z-axis PSD, near the RR respiratory
+component. The metronome rate was not used for reassignment. We then
+integrated RR power within $\pm \delta$ of $f_{\mathrm{resp}}$, with
+$\delta = 0.015$~Hz. The window was chosen to match the spectral resolution
+of the canonical fusion PSD, approximately one Welch bin ($f_s=4$~Hz,
+$n_{\mathrm{perseg}}=256$, $\Delta f=0.015625$~Hz), and was used as an
+analysis window rather than a physiological bandwidth.
 
-For boundary cases, the reassignment decision used the RR-PSD maximum
-within the IMU-anchored window. When that maximum fell in LF, the
-corresponding respiratory power was classified as migrated RSA and
-reassigned to the vagal pool. When it fell in HF, the original LF/HF
-assignment was retained. The final band call is made by the RR-PSD argmax
-rather than by the IMU peak directly because the quantity being reassigned
-is RR power: the IMU only anchors the search window, so the RR spectrum
-itself must adjudicate which band that power occupies.
+For boundary cases, the band assignment was determined by the RR-PSD
+maximum within the IMU-anchored window. If this maximum fell in LF, the
+corresponding respiratory RR power was classified as migrated RSA and
+reassigned to the vagal pool; if it fell in HF, the original LF/HF
+assignment was retained. Thus, the IMU anchored the respiratory search
+window, but the RR spectrum determined the final band assignment because
+RR power was the quantity being reassigned.
 
 The corrected ratio was defined as
 \[
@@ -381,20 +392,17 @@ also remained in HF.}
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\linewidth]{fp_fusion_recovery.pdf}
-\caption{IMU-anchored fusion recovery of the vagal component. \textbf{(a)}
-Naive LF/HF (an $\approx$80-fold rise across rates), IMU-corrected LF/HF,
-and RMSSD (right axis, time-domain) versus breathing rate; reassignment
-compressed the corrected ratio into a narrow range (0.22--1.04,
-$\leq 1.05$), removing the spurious LF inflation, while RMSSD stayed
-stable. The annotation marks rates at which the respiratory peak had
-migrated into LF. \textbf{(b)} LF-band power split into IMU-confirmed
-migrated RSA (reassigned to the vagal pool) and the non-respiratory LF
-residual; the migrated-RSA share was 46--68\% at 3--6~breaths/min and 0\%
-at 9 and 12~breaths/min, where the respiratory peak remained in HF.
-\textbf{(c)} IMU-anchored respiratory RR power ($P_\mathrm{resp}$) versus
-breathing rate, increasing as breathing slowed; the line uses
-$\delta = 0.015$~Hz and the shaded band spans
-$\delta \in [0.015, 0.025]$~Hz.}
+\caption{IMU-anchored fusion recovery of the vagal component.
+(a) Naive LF/HF, IMU-corrected LF/HF, and RMSSD versus breathing rate.
+Reassignment compressed the naive LF/HF swing from 0.22--17.46 to a
+corrected range of 0.22--1.04, while RMSSD remained stable.
+(b) LF-band power decomposed into IMU-confirmed migrated RSA and the
+non-respiratory LF residual. Migrated RSA accounted for 46--68\% of LF
+power at 3--6~breaths/min and 0\% at 9 and 12~breaths/min, where the
+respiratory peak remained in HF.
+(c) IMU-anchored respiratory RR power ($P_{\mathrm{resp}}$) increased as
+breathing slowed; the line uses $\delta=0.015$~Hz and the shaded band spans
+$\delta \in [0.015,0.025]$~Hz.}
 \label{fig:fusion}
 \end{figure}
 
@@ -407,52 +415,36 @@ $\sim$80-fold LF/HF swing (0.22--17.46) to a corrected ratio between
 0.22 and 1.04 across rates, remaining $\leq 1.05$ for every
 $\delta \in [0.015, 0.025]$~Hz.
 
-After removal of IMU-confirmed RSA, the remaining LF residual gives a
-cleaner estimate of non-respiratory LF power, though it is not a pure
-sympathetic index. The method is a proof of concept for respiration-aware
-attribution of migrated RSA power, not an estimate of absolute sympathetic
-or parasympathetic tone.
+After separating IMU-confirmed RSA, the remaining LF residual provides a
+more specific estimate of non-respiratory LF power, but it should not be
+interpreted as a pure sympathetic index. The fusion procedure is therefore
+best viewed as respiration-aware attribution of migrated RSA power, rather
+than as an absolute estimate of sympathetic or parasympathetic tone.
 
 \subsection{Activity-Channel Gating of HRV Validity}
 \label{sec:gating}
 
-The same IMU that recovers migrated RSA in Section~\ref{sec:fusion} flags
-motion-corrupted HRV via its activity channel; we illustrate this with the
-walking challenge (60~s seated, 60~s self-paced walking, 60~s seated recovery),
-the only ambulatory instance in this dataset.
+The same IMU that supports migrated-RSA reassignment in Section~5.1 also
+provides an activity channel for identifying motion-limited HRV. We illustrate
+this with the walking challenge (60~s seated, 60~s self-paced walking, 60~s
+seated recovery), the only condition designed to test walking-related motion in
+this dataset.
 
 During walking, accelerometer RMS rose from 0.036~g (seated) to 0.103~g,
 returning to 0.042~g in recovery (Fig.~\ref{fig:gating}a). The step frequency
 was 1.46~Hz (88~steps/min), within 6\% of the walking cardiac fundamental
 ($f_0 = 1.38$~Hz); the two bands overlap in the 1--3~Hz range and cannot be
 separated by linear filtering (Fig.~\ref{fig:gating}b). ECG--accelerometer
-coherence at the step peak was low ($C_{xy} = 0.04$; 1--3~Hz mean $0.06$), and
-the $|\Delta\text{RR}|$--motion correlation was weak ($r = 0.26$).
+coherence was low both at the step peak ($C_{xy}=0.04$) and across the
+1--3~Hz overlap band (mean $C_{xy}=0.06$). The $|\Delta\text{RR}|$--motion
+correlation was weak ($r = 0.26$).
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.72\linewidth]{fp_activity_gating.pdf}
-\caption{Activity-channel gating during the walking challenge
-(seated$\rightarrow$walk$\rightarrow$recovery). \textbf{(a)} Accelerometer
-magnitude with its 2-s RMS envelope; segment RMS rose from 0.036~g (seated)
-to 0.103~g (walking, $\approx$2.9$\times$) and fell to 0.042~g (recovery).
-\textbf{(b)} Walking ECG PSD (left axis) and accelerometer PSD (right axis)
-on a shared frequency axis; the step peak (1.46~Hz, 88~steps/min) lies
-within 6\% of the cardiac fundamental $f_0$ (1.38~Hz), inside the shaded
-1--3~Hz overlap band. ECG--accelerometer coherence is low ($C_{xy} = 0.04$
-at the step peak, 0.06 over 1--3~Hz), indicating no narrowband artifact
-locked into the cardiac rhythm; with the band overlap, this leaves
-walking-phase fine-scale HRV motion-limited.}
-\label{fig:gating}
-\end{figure}
-
-Low coherence indicates no narrowband motion artifact locked into the cardiac
-rhythm, so no component can be isolated and reassigned as in
-Section~\ref{sec:fusion}. It does \emph{not}, however, exclude broadband motion
-drift, which the band overlap makes unremovable by filtering. We therefore treat
-walking-phase fine-scale HRV (RMSSD, HF) as \emph{motion-limited} and exclude it
-from cross-condition comparison; walking RMSSD (41.1~ms) is reported but not
-used as a comparator. Measures independent of beat-to-beat structure remain
+The low coherence argues against a narrowband motion artifact locked to the
+cardiac rhythm. However, it does not exclude broadband motion-related
+distortion, especially because the step and cardiac bands overlap. We
+therefore treat walking-phase fine-scale HRV metrics (RMSSD and HF) as
+motion-limited and exclude them from cross-condition comparison. Measures
+independent of beat-to-beat structure remain
 valid: mean HR rose from 60.8 to 83.0~bpm, with single-exponential recovery
 ($\tau = 6.8$~s, HRR$_{60} = 18.5$~bpm).
 
@@ -464,6 +456,24 @@ identifies non-reassignable contamination, so the affected fine-scale HRV is
 flagged invalid. Both protect the parasympathetic estimate: the first
 reattributes vagal power misassigned to LF, the second prevents a
 motion-corrupted RMSSD or HF from being read as vagal tone.
+
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=0.9\linewidth]{fp_activity_gating.pdf}
+     \caption{Activity-channel gating during the walking challenge
+     (seated--walk--recovery).
+     (a) Accelerometer magnitude and 2-s RMS envelope; segment RMS increased
+     from 0.036~g during baseline to 0.103~g during walking, returning
+     to 0.042~g during recovery.
+     (b) Walking ECG PSD (left axis) and accelerometer PSD (right axis) 
+     on a shared frequency axis. The step peak occurred at 1.46~Hz
+     (88~steps/min), within 6\% of the walking cardiac fundamental
+     ($f_0=1.38$~Hz), inside the shaded 1--3~Hz overlap band.
+     ECG--accelerometer coherence was low at the step peak ($C_{xy}=0.04$) and
+     across the overlap band (mean $C_{xy}=0.06$), supporting motion-limited
+     interpretation of walking-phase fine-scale HRV.}
+     \label{fig:gating}
+     \end{figure}
 
 % ============================================================
 \section{Context-Aware HRV Reporting Checklist}
@@ -485,72 +495,74 @@ fine-scale HRV (Section~\ref{sec:gating}).}
 Context & Preferred metrics & LF/HF use & Respiratory sensing & Activity / motion gating \\
 \hline
 Supine / sit / stand & HR, RMSSD, HF, LF/HF & Conditional & Recommended & Not needed \\
-Breath-hold & HR, HF, recovery & No standalone & N/A (optional absence check) & Not needed \\
-Walking & Mean HR, recovery $\tau$ & No & Optional & Required; RMSSD/\allowbreak HF invalid \\
-Breathing $>0.15$ Hz & RMSSD, HF, LF/HF & Conditional & Optional / rec. & Not needed \\
-Near 0.15 Hz boundary & RMSSD, RR PSD, $f_{\mathrm{resp}}$ & Caution & Required & Not needed \\
-Slow breathing $<0.15$ Hz & RMSSD, TP, resp.\ power & No standalone & Required & Not needed \\
+Breath-hold & HR, HF, recovery & Not standalone & Optional & Not needed \\
+Walking & Mean HR, recovery $\tau$ & No & Optional & Required; RMSSD/\allowbreak HF motion-limited \\
+Breathing $>0.15$ Hz & RMSSD, HF, LF/HF & Conditional & Recommended & Not needed \\
+Near 0.15 Hz boundary & RMSSD, RR PSD, $f_{\mathrm{resp}}$ & Use with caution & Required & Not needed \\
+Slow breathing $<0.15$ Hz & RMSSD, TP, resp.\ power & Not standalone & Required & Not needed \\
 \hline
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:checklist} presents a proposed reporting framework derived
-from the present single-subject case and the cited literature. The two
-right-hand columns distinguish respiratory sensing for spectral reassignment
-from activity gating for identifying conditions unsuitable for LF/HF
-interpretation. Within this framework, LF/HF is most informative as an
-autonomic-balance metric when the measured respiratory component lies clearly
-within the HF band. Near 0.15~Hz, nominal breathing rate alone is
-insufficient for classification. Under slow, boundary-adjacent, or
-unmonitored breathing conditions, RMSSD interpreted with respiratory
-monitoring provides a more defensible primary metric.
+We summarize context-aware HRV reporting in Table~\ref{tab:checklist}, based
+on this single-subject case and the cited literature. The two right-hand
+columns separate the two IMU roles: respiratory sensing supports spectral
+reassignment, whereas activity gating marks conditions with unreliable LF/HF
+interpretation. Within this checklist, LF/HF is most informative when the
+measured respiratory component lies clearly within the HF band. Near
+0.15~Hz, nominal breathing rate alone is insufficient for classification.
+Under slow, boundary-adjacent, or unmonitored breathing, RMSSD becomes the
+more defensible primary metric when paired with respiratory monitoring.
 
 % ============================================================
 \section{Limitations}
 
 This study included only one participant. The reported LF/HF range,
-coupling strength, and phase estimates therefore describe within-subject
-behavior and should not be interpreted as normative values. The IMU measured
-thoracic motion, not airflow, and IMU--HR coupling was weaker during fast,
-shallow breathing. Respiratory peaks were estimated from per-condition
-spectral windows, so within-condition drift was not assessed.
+IMU--HR coupling strength, and phase estimates therefore describe
+within-subject behavior and should not be interpreted as normative values.
+The IMU measured thoracic motion rather than airflow, and IMU--HR coupling
+was weaker during fast, shallow breathing. Respiratory peaks were estimated
+from per-condition spectral windows, so within-condition respiratory drift
+was not assessed.
 
-Near-boundary classification depends on spectral resolution and the
-predefined integration rule, as the 9/min condition shows: under the
-canonical fusion PSD the RR-PSD argmax fell one Welch bin above 0.15~Hz,
-so the case was treated as a boundary and no LF reassignment was applied.
-This decision does not affect the main conclusion, which rests on the
-unambiguous 6, 5, and 3/min conditions: when the respiratory component
-moved into LF, LF/HF lost standalone autonomic interpretability while
-RMSSD remained stable. Future studies should predefine the boundary rule,
-report spectral resolution, and test the method in a larger sample.
+Near-boundary classification also depends on spectral resolution and the
+predefined integration rule. The 9/min condition illustrates this issue:
+under the canonical fusion PSD, the RR-PSD maximum fell one Welch bin above
+0.15~Hz, so the respiratory component was retained in HF rather than
+reassigned to LF. This boundary decision does not affect the main
+conclusion, which rests on the unambiguous 6, 5, and 3/min conditions. In
+those conditions, the respiratory component moved into LF, LF/HF lost
+standalone autonomic interpretability, and RMSSD remained stable. Future
+studies should predefine boundary rules, report spectral resolution, and
+test the method in a larger sample.
 
 % ============================================================
 \section{Conclusion}
 
 This within-subject study shows that LF/HF can lose its intended autonomic
-interpretation in short-term wearable ECG when the respiratory component
-crosses fixed spectral-band boundaries. During slow paced breathing, LF/HF
-varied over an 80-fold range (0.22--17.46) within a single seated posture,
-while RMSSD remained stable. A synchronous IMU confirmed that the RR spectral
+interpretation in short-term wearable ECG when respiratory power crosses
+fixed spectral-band boundaries. During slow paced breathing, LF/HF varied
+over an 80-fold range (0.22--17.46) within a single seated posture, while
+RMSSD remained stable. A synchronous IMU confirmed that the RR spectral
 component followed respiratory motion. IMU-anchored reassignment compressed
-the LF/HF swing into a narrower ratio range (0.22--1.04, $\leq 1.05$),
-indicating that much of the apparent LF inflation reflected migrated RSA.
+the LF/HF swing to 0.22--1.04 ($\leq 1.05$), indicating that much of the
+apparent LF inflation reflected migrated RSA.
 
-The same IMU also helped identify motion-limited HRV during walking. Step
-motion overlapped the cardiac band and could not be isolated for
-reassignment, so walking-phase fine-scale HRV was flagged as unsuitable for
-LF/HF interpretation. Together, the paced-breathing and walking analyses
-show that cross-channel sensing can support respiratory attribution in one
-context and motion-based invalidation in another.
+The same IMU also identified motion-limited HRV during walking. Step motion
+overlapped the cardiac band and could not be isolated for reassignment, so
+walking-phase fine-scale HRV was flagged as motion-limited rather than used
+for LF/HF interpretation. Together, the paced-breathing and walking analyses
+show that cross-channel sensing can support two complementary decisions:
+respiratory attribution when a coherent respiratory component is present,
+and motion-based invalidation when cardiac and activity signals overlap.
 
-These single-subject observations suggest that LF/HF is most appropriate as
-an autonomic-balance metric when the measured respiratory component lies
-clearly within the HF band. Near the 0.15-Hz boundary, classification should
-rely on the RR spectral peak within a respiratory-sensor-anchored window.
-Under slow, boundary-adjacent, or unmonitored breathing conditions, RMSSD
-interpreted with respiratory monitoring provides a more defensible primary
-description of cardiac vagal modulation.
+These observations support a context-aware use of LF/HF. LF/HF is most
+defensible as an autonomic-balance metric when the measured respiratory
+component lies clearly within the HF band. Near the 0.15-Hz boundary,
+classification should be based on the RR spectral peak within a
+respiratory-sensor-anchored window. Under slow, boundary-adjacent, or
+unmonitored breathing, RMSSD becomes the more defensible primary metric when
+paired with respiratory monitoring.
 
 % ============================================================
 \begin{thebibliography}{9}

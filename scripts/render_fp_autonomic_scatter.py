@@ -84,10 +84,10 @@ def _apply_style() -> None:
     plt.rcParams.update({
         "font.family": "serif",
         "font.serif": ["Times New Roman", "DejaVu Serif"],
-        "font.size": 9,
-        "axes.labelsize": 10,
-        "xtick.labelsize": 8.5,
-        "ytick.labelsize": 8.5,
+        "font.size": 10.5,
+        "axes.labelsize": 11.5,
+        "xtick.labelsize": 10,
+        "ytick.labelsize": 10,
         "axes.spines.top": False,
         "axes.spines.right": False,
         "pdf.fonttype": 42,
@@ -116,7 +116,7 @@ def _build_steady_map_df() -> pd.DataFrame:
 
 def render_autonomic_scatter(map_df: pd.DataFrame) -> plt.Figure:
     """Panel (a) only from notebooks/06_integration.ipynb Fig. 5.1."""
-    fig, ax = plt.subplots(figsize=(4.6, 3.9))
+    fig, ax = plt.subplots(figsize=(6.2, 3.9))
 
     posture_data = map_df[map_df["Condition"].isin(POSTURE_ORDER)]
     ax.plot(
@@ -132,27 +132,26 @@ def render_autonomic_scatter(map_df: pd.DataFrame) -> plt.Figure:
     if len(paced_data) >= 3:
         pts = paced_data[["Mean HR (bpm)", "RMSSD (ms)"]].values
         hull = ConvexHull(pts)
+        hull_xy = pts[hull.vertices]
         poly = Polygon(
-            pts[hull.vertices],
+            hull_xy,
             facecolor="#F29A3A",
             alpha=0.10,
-            edgecolor="#F29A3A",
-            linewidth=1.0,
-            linestyle="--",
+            edgecolor="none",
+            linewidth=0,
             zorder=0,
         )
         ax.add_patch(poly)
-
-    paced_sorted = paced_data.set_index("Condition").loc[PACED_ORDER].reset_index()
-    ax.plot(
-        paced_sorted["Mean HR (bpm)"],
-        paced_sorted["RMSSD (ms)"],
-        color="#C7772E",
-        linewidth=1.1,
-        alpha=0.65,
-        linestyle="--",
-        zorder=1,
-    )
+        hull_closed = np.vstack([hull_xy, hull_xy[0]])
+        ax.plot(
+            hull_closed[:, 0],
+            hull_closed[:, 1],
+            color="#C7772E",
+            linewidth=1.1,
+            alpha=0.65,
+            linestyle="--",
+            zorder=1,
+        )
 
     for _, row in map_df.iterrows():
         key = row["Condition"]
@@ -176,7 +175,7 @@ def render_autonomic_scatter(map_df: pd.DataFrame) -> plt.Figure:
             textcoords="offset points",
             ha=adj["ha"],
             va=adj["va"],
-            fontsize=8.5,
+            fontsize=10,
             bbox=dict(
                 boxstyle="round,pad=0.15",
                 facecolor="white",
@@ -192,17 +191,16 @@ def render_autonomic_scatter(map_df: pd.DataFrame) -> plt.Figure:
     ax.set_xlim(map_df["Mean HR (bpm)"].min() - 1.3, map_df["Mean HR (bpm)"].max() + 1.3)
     ax.set_ylim(map_df["RMSSD (ms)"].min() - 5, map_df["RMSSD (ms)"].max() + 4)
 
+    # Legend encodes marker shape only; per-point colors vary within each series.
+    _leg_marker = dict(
+        markerfacecolor="white",
+        markeredgecolor="black",
+        markeredgewidth=0.55,
+        markersize=7,
+    )
     legend_handles = [
-        Line2D(
-            [0], [0], marker="o", color="none",
-            markerfacecolor="#5FA65A", markeredgecolor="black",
-            label="Posture manipulation", markersize=6,
-        ),
-        Line2D(
-            [0], [0], marker="s", color="none",
-            markerfacecolor="#F29A3A", markeredgecolor="black",
-            label="Paced breathing", markersize=6,
-        ),
+        Line2D([0], [0], marker="o", color="none", label="Posture manipulation", **_leg_marker),
+        Line2D([0], [0], marker="s", color="none", label="Paced breathing", **_leg_marker),
     ]
     ax.legend(
         handles=legend_handles,
@@ -212,7 +210,7 @@ def render_autonomic_scatter(map_df: pd.DataFrame) -> plt.Figure:
         edgecolor="0.75",
         facecolor="white",
         framealpha=0.95,
-        fontsize=8.5,
+        fontsize=11.5,
     )
 
     fig.tight_layout(pad=0.8)
